@@ -34,9 +34,38 @@ function ProDashboard() {
                         
 
                     </div>
+
                     <div className={styles['pro-dash-contenedor2']}>
+                        <div className={styles['pro-dash-contenedor2-contenido']}>
+
+                            <div className={styles['pro-dash-contenedor2-contenedor-de-boton-de-publicar']}>
+                                <button className={styles['pro-dash-contenedor2-boton-dropdown-de-publicacion']}>Crear Publicacion</button>
+                                <div className={styles['pro-dash-contenedor2-contenedor-de-publicacion']}>
+                                    <input className={styles['pro-dash-contenedor2-contenedor-de-publicacion-input']} placeholder='Escribe lo que piensas'/>
+                                </div>
+
+                            </div>
+
+                            <div className={styles['pro-dash-contenedor2-contenedor-de-boton-de-servicios']}>
+                                <button className={styles['pro-dash-contenedor2-boton-dropdown-de-servicios']}>Crear Publicacion</button>
+                                <div className={styles['pro-dash-contenedor2-contenedor-de-servicios']}>
+                                    <input className={styles['pro-dash-contenedor2-contenedor-de-servicios-input']} placeholder='Escribe lo que piensas'/>
+                                </div>
+
+                            </div>
+
+                            <div className={styles['pro-dash-contenedor2-contenedor-de-boton-de-productos']}>
+                                <button className={styles['pro-dash-contenedor2-boton-dropdown-de-productos']}>Crear Publicacion</button>
+                                <div className={styles['pro-dash-contenedor2-contenedor-de-productos']}>
+                                    <input className={styles['pro-dash-contenedor2-contenedor-de-productos-input']} placeholder='Escribe lo que piensas'/>
+                                </div>
+
+                            </div>
+
+                        </div>
 
                     </div>
+
                     <div className={styles['pro-dash-contenedor3']}>
 
                     </div>
