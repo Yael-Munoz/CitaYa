@@ -1,8 +1,8 @@
-import styles from './Source.module.css';
+import styles from './Welcome.module.css';
 import { useState, useEffect } from 'react';
 
 
-function Source() {
+function Welcome() {
 
     const [currentSlide, setSlide] = useState(1);
     const slides = [<div className={`${styles['source-slide1']} ${styles['source-slides']}`}></div>,
@@ -12,7 +12,7 @@ function Source() {
     useEffect(() => {
         const interval = setInterval(() => {
             setSlide((prev) => (prev + 1) % slides.length);
-        }, 1000);
+        }, 6000);
 
         return () => clearInterval(interval);
     }, [slides.length]);
@@ -24,6 +24,8 @@ function Source() {
 
     return(
         <>
+
+        <div className={styles['source-fondo']}>
 
             <div className={styles['source-contenedor-de-pagina-completa']}>
                 <div className={styles['source-bloque1']}>
@@ -57,6 +59,8 @@ function Source() {
                     
                 </div>
             </div>
+
+        </div>
         
         </>
     );
@@ -64,6 +68,6 @@ function Source() {
 
 
 
-export default Source;
+export default Welcome;
 
 
