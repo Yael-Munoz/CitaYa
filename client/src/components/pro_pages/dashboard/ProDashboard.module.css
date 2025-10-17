@@ -63,6 +63,51 @@
   background-color: rgb(13, 0, 255);
   width: 50%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.pro-dash-contenedor2-contenido{
+    background-color: beige;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 80%;
+}
+
+.pro-dash-contenedor2-contenedor-de-boton-de-publicar{
+    width: 100%;
+}
+
+.pro-dash-contenedor2-boton-dropdown-de-publicacion{
+    width: 100%;
+}
+.pro-dash-contenedor2-contenedor-de-publicacion-input{
+    width: 97.8%;
+}
+
+.pro-dash-contenedor2-contenedor-de-boton-de-servicios{
+    width: 100%;
+}
+
+.pro-dash-contenedor2-boton-dropdown-de-servicios{
+    width: 100%;
+}
+.pro-dash-contenedor2-contenedor-de-servicios-input{
+    width: 97.8%;
+}
+
+.pro-dash-contenedor2-contenedor-de-boton-de-productos{
+    width: 100%;
+}
+
+.pro-dash-contenedor2-boton-dropdown-de-productos{
+    width: 100%;
+}
+.pro-dash-contenedor2-contenedor-de-productos-input{
+    width: 97.8%;
 }
 
 .pro-dash-contenedor3{
