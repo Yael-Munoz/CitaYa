@@ -224,7 +224,6 @@
     flex-direction: column;
     margin-top: 30rem;
     gap: 1.5rem;
-    border: 10px solid black;
   }
 
   .source-slides-inactive,
