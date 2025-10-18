@@ -1,0 +1,13 @@
+.header-contenedor{
+    background-color: aqua;
+    height: 6rem;
+    width: 100vw;
+}
+
+.header-nav-links{
+    background-color: bisque;
+    font-family: Montserrat;
+    height: 3em;
+    display: flex;
+    justify-content: space-between;
+}
