@@ -1,10 +1,10 @@
 .header-contenedor{
     height: 4rem;
-    width: 100vw;
+    width: 100%;
 }
 
 .header-nav-links{
-    background-color: bisque;
+    background-color: #b5b66d;
     font-family: Montserrat;
     height: 100%;
     display: flex;
@@ -83,7 +83,10 @@
 
 
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
+    .header-contenedor{
+        width: 100%;
+    }
     .header-nav-links a{
         display: none;
     }
