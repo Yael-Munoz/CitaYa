@@ -1,8 +1,11 @@
 import styles from './Welcome.module.css';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'
 
 
 function Welcome() {
+
+    const navigate = useNavigate();
 
     const [currentSlide, setSlide] = useState(1);
     const slides = [<div className={`${styles['source-slide1']} ${styles['source-slides']}`}></div>,
@@ -45,7 +48,7 @@ function Welcome() {
                         <h1 className={styles['source-texto-de-bienvenido']}>Bienvenido!</h1>
                         <button className={styles['source-boton-de-inicio-de-sesion']}>Iniciar Sesion</button>
                         <p className={styles['source-texto-de-cuenta-nueva']}>No tienes cuenta?</p>
-                        <button className={styles['source-boton-de-crear-cuenta']}>Crear cuenta</button>
+                        <button className={styles['source-boton-de-crear-cuenta']} onClick={() => navigate('/register')}>Crear cuenta</button>
                     </div>
                 </div>
                 <div className={styles['source-bloque2']}>

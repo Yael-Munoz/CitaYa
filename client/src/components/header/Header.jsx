@@ -1,5 +1,6 @@
 import styles from './Header.module.css'
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 
 
 function Header() {
@@ -16,9 +17,9 @@ function Header() {
 
             <nav className={styles['header-nav-links']}>
                 <div className={styles['header-logo']}>CitaYa</div>
-                <a className={styles['header-texto']} href='/dashboard'>Dashboard</a>
-                <a className={styles['header-texto']} href='/book-appointment'>Calendario</a>
-                <a className={styles['header-texto']} href='/profile'>Perfil</a>
+                <Link className={styles['header-texto']} to='/dashboard'>Dashboard</Link>
+                <Link className={styles['header-texto']} to='/book-appointment'>Calendario</Link>
+                <Link className={styles['header-texto']} to='/profile'>Perfil</Link>
                 <div className={styles['header-menu']} onClick={() => setMenuDisplay(!menuDisplay)}></div>
             </nav>
 
@@ -30,10 +31,10 @@ function Header() {
         ${menuDisplay ? styles['menu-abierto'] : ''}`}>
             <div className={styles['menu-logo']}>Logo</div>
             <button className={styles['boton-cerrar-menu']} onClick={() => setMenuDisplay(false)}>X</button>
-            <a href='#'>Contactanos</a>
-            <a href='/profile'>Profile</a>
-            <a href='/dashboard'>Dashboard</a>
-            <a href='/book-appointment'>Citas</a>
+            <Link href='#'>Contactanos</Link>
+            <Link to='/profile'>Profile</Link>
+            <Link to='/dashboard'>Dashboard</Link>
+            <Link to='/book-appointment'>Citas</Link>
         </div>
 
 

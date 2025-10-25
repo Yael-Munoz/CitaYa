@@ -1,32 +1,33 @@
-.header-contenedor{
-    height: 4rem;
-    width: 100%;
+.header-contenedor {
+  height: 4rem;
+  width: 100vw;
 }
 
-.header-nav-links{
-    background-color: #b5b66d;
-    font-family: Montserrat;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: .5em 2em;
+.header-nav-links {
+  background-color: #b5b66d;
+  font-family: Montserrat;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 2em;
+  gap: 1em;
 }
 
-.header-texto{
-    font-family: Montserrat;
-    text-decoration: none;
-    color: black;
+.header-texto {
+  font-family: Montserrat;
+  text-decoration: none;
+  color: black;
 }
 
-.header-menu{
-    background-color: rgb(243, 90, 90);
-    width: 2em;
-    height: 2em;
-    display: none;
+.header-menu {
+  background-color: rgb(243, 90, 90);
+  width: 2em;
+  height: 2em;
+  display: none;
 }
 
-.menu-desplegable{
+.menu-desplegable {
   position: fixed;
   top: 0;
   right: -100%;
@@ -45,21 +46,21 @@
   box-shadow: 3px 3px black;
 }
 
-.menu-desplegable a{
-    color: white;
-    text-decoration: none;
-    font-size: 1.2rem;
+.menu-desplegable a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
 }
 
-.menu-desplegable a:hover{
-    color: #b5b66d;
+.menu-desplegable a:hover {
+  color: #b5b66d;
 }
 
 .menu-abierto {
   right: 0;
 }
 
-.boton-cerrar-menu{
+.boton-cerrar-menu {
   position: absolute;
   top: 1rem;
   right: 1.2rem;
@@ -70,27 +71,27 @@
   cursor: pointer;
 }
 
-.menu-logo{
-    position: absolute;
-    top: 1rem;
-    left: 2rem;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 100%;
-    background-color: black;
-    text-align: center;
+.menu-logo {
+  position: absolute;
+  top: 1rem;
+  left: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100%;
+  background-color: black;
+  text-align: center;
 }
 
-
-
 @media (max-width: 450px) {
-    .header-contenedor{
-        width: 100%;
-    }
-    .header-nav-links a{
-        display: none;
-    }
-    .header-menu{
-        display: inline-block;
-    }
+  .header-contenedor {
+    width: 100%;
+  }
+
+  .header-texto {
+    display: none;
+  }
+
+  .header-menu {
+    display: inline-block;
+  }
 }

@@ -1,0 +1,116 @@
+.register-contenedor-de-pagina {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Montserrat;
+  flex-direction: column;
+}
+
+.pregunta-base {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.6s ease;
+}
+
+.pregunta-moved {
+  transform: translateY(-3em) scale(0.98);
+  opacity: 0.85;
+}
+
+.register-pregunta-de-cuenta {
+  color: aliceblue;
+  font-size: 2.3em;
+  text-align: center;
+  text-shadow: 1px 1px 20px rgba(158, 158, 158, 0.479);
+}
+
+.contenedor-de-botones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-cuenta-botones {
+  background-color: rgb(246, 255, 196);
+  color: black;
+  padding: 0.3em;
+  font-size: 1.7em;
+  margin: 0.5em 1em;
+  border: none;
+  border-radius: .3em;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.register-cuenta-botones:hover {
+  transform: scale(1.05);
+  background-color: rgb(255, 240, 150);
+}
+
+.register-patient-form,
+.register-professional-form {
+  background-color: white;
+  border-radius: .5em;
+  padding: .7em;
+  animation: fadeInUp 0.6s ease forwards;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 15em;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(2em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.contenedor-de-formas{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+}
+
+.register-label {
+  font-size: 1.1em;
+}
+
+.register-input {
+  border-bottom: 1px black solid;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+}
+
+.register-input:focus{
+    outline: none;
+    background-color: rgba(229, 229, 229, 0.836);
+
+}
+
+.submit-boton{
+    font-family: Montserrat;
+    border: none;
+    font-size: 1.7em;
+    width: 100%;
+    border-radius: .1em;
+    padding: .2em;
+    color: white;
+    font-weight: 600;
+    background-color: rgb(73, 73, 188);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.submit-boton:active{
+    color: rgb(198, 198, 198);
+    background-color: rgb(51, 44, 179);
+
+}
