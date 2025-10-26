@@ -1,17 +1,15 @@
-/* ===== Contenedor de la página ===== */
+
 .contenedor-pagina {
   width: 100vw;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f9f9f9;
   box-sizing: border-box;
   overflow-x: hidden;
   font-family: Montserrat, sans-serif;
 }
 
-/* ===== Sección del calendario ===== */
 .seccion-calendario {
   display: flex;
   flex-direction: column;
@@ -22,20 +20,21 @@
   box-sizing: border-box;
 }
 
-/* ===== Título ===== */
+
 .titulo-calendario {
   font-size: 2.5rem;
   font-weight: 600;
-  color: #222;
+  color: #e0e0e0;
   text-align: center;
   margin-bottom: 1rem;
+  text-shadow: 1px 1px 5px rgb(68, 68, 68);
 }
 
-/* ===== Contenedor del calendario ===== */
+
 .contenedor-calendario {
   width: 100%;
   max-width: 100%;
-  background: #fff;
+  background: #494949;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   padding: 0.5rem;
@@ -45,12 +44,12 @@
   box-sizing: border-box;
 }
 
-/* ===== Sticky toolbar (titulo + botones) ===== */
+
 .contenedor-calendario :global(.fc-header-toolbar) {
   position: sticky;
   top: 0;
   z-index: 2;
-  background: #fff;
+  background: #9a9a9a;
   padding-bottom: 0.5rem;
   display: flex;
   flex-wrap: wrap;
@@ -59,30 +58,27 @@
   text-align: center;
 }
 
-/* ===== Grid desplazable horizontalmente ===== */
 .contenedor-calendario :global(.fc-view-harness) {
   overflow-x: auto !important;
   overflow-y: hidden;
   width: 100%;
   height: 75vh;
+  color: #252525;
 }
 
-/* Ampliar grid para scroll horizontal */
 .contenedor-calendario :global(.fc-scrollgrid) {
   min-width: 1200px;
 }
 
-/* ===== FullCalendar ===== */
 .contenedor-calendario :global(.fc) {
   width: 100%;
   height: 70vh;
-  font-family: 'Inter', system-ui, sans-serif;
-  background-color: #fff;
+  font-family: Montserrat;
+  background-color: #afafaf;
 }
 
-/* ===== Botones ===== */
 .contenedor-calendario :global(.fc-button) {
-  background: #007bff;
+  background: #737577;
   border: none;
   color: white;
   border-radius: 6px;
@@ -90,9 +86,8 @@
   padding: 0.3rem 0.6rem;
 }
 
-/* ===== Eventos ===== */
 .contenedor-calendario :global(.fc-event) {
-  background-color: #007bff;
+  background-color: #5c5c5c;
   border: none;
   border-radius: 4px;
   color: #fff;
@@ -101,18 +96,17 @@
 
 /* Hover de eventos */
 .contenedor-calendario :global(.fc-event:hover) {
-  background-color: #0056b3 !important;
+  background-color: #858585 !important;
   color: #797979 !important;
   cursor: pointer;
 }
 
-/* ===== Modal ===== */
 .modal {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #fff;
+  background: #858585;
   padding: 1.5rem;
   border-radius: 10px;
   max-width: 400px;
@@ -141,17 +135,15 @@
   text-align: center;
 }
 
-/* ===== Inputs y textarea ===== */
 .input-evento {
   padding: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid #b3b3b3;
   border-radius: 6px;
   width: 100%;
   box-sizing: border-box;
   font-family: Montserrat;
 }
 
-/* Textarea de descripción del evento */
 .descripcion-evento {
   font-family: Montserrat;
   font-size: 0.95rem;
@@ -159,13 +151,12 @@
   padding: 0.5rem;
   border: 1px solid #eee;
   border-radius: 6px;
-  background-color: #f9f9f9;
+  background-color: #a9a9a9;
   min-height: 50px;
   max-height: 150px;
   overflow-y: auto;
 }
 
-/* ===== Botones del modal ===== */
 .botones-modal {
   display: flex;
   justify-content: space-between;
@@ -174,7 +165,7 @@
 
 .boton-agregar {
   flex: 1;
-  background-color: #007bff;
+  background-color: #9d9d9d;
   color: #fff;
   border: none;
   padding: 0.5rem;
@@ -194,7 +185,6 @@
   font-family: Montserrat;
 }
 
-/* ===== Ajustes Mobile ===== */
 @media (max-width: 768px) {
   .seccion-calendario {
     padding: 0.5rem;

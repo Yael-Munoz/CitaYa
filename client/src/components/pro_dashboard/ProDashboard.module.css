@@ -1,0 +1,129 @@
+.pro-dashboard-container {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+  padding: 2em 1.5em;
+  box-sizing: border-box;
+}
+
+.pro-dashboard-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1.5em;
+}
+
+.pro-dashboard-header h2 {
+  font-size: 1.6em;
+  color: #ffffff;
+  text-shadow: 1px 1px 5px rgb(0, 0, 0);
+}
+
+.pro-dashboard-header p {
+  color: #939393;
+  font-size: 1em;
+  text-shadow: 1px 1px 10px white;
+}
+
+.pro-dashboard-section {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 1em;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  padding: 1em 1.2em;
+  margin-bottom: 1.5em;
+}
+
+.pro-dashboard-section h3 {
+  color: #333;
+  margin-bottom: 0.8em;
+}
+
+.pro-appointment-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pro-appointment-list li {
+  background-color: #eef3fa;
+  margin-bottom: 0.6em;
+  border-radius: 0.5em;
+  padding: 0.8em;
+  font-size: 0.95em;
+  color: #444;
+}
+
+.pro-button-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-bottom: 1.5em;
+}
+
+.pro-dashboard-btn {
+  width: 100%;
+  background-color: #e4d165;
+  color: white;
+  border: none;
+  border-radius: 0.8em;
+  padding: 1em;
+  font-size: 1.05em;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.pro-dashboard-btn:hover {
+    cursor: pointer;
+}
+
+.pro-dashboard-btn:active {
+  transform: scale(0.97);
+  background-color: #facd46;
+}
+
+.pro-dashboard-btn-alt {
+  width: 100%;
+  background-color: #62c4a0;
+  color: white;
+  border: none;
+  border-radius: 0.8em;
+  padding: 1em;
+  font-size: 1.05em;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.pro-dashboard-btn-alt:hover {
+    cursor: pointer;
+}
+
+.pro-dashboard-btn-alt:active {
+  transform: scale(0.97);
+  background-color: #27a876;
+}
+
+.pro-logout-btn {
+  background-color: #ff4c4c;
+  color: white;
+  margin-top: 2em;
+  border: none;
+  border-radius: 0.8em;
+  padding: 0.9em 1.2em;
+  font-size: 1em;
+  font-weight: 600;
+  width: 100%;
+  transition: 0.3s ease;
+}
+
+.pro-logout-btn:hover {
+    cursor: pointer;
+}
+
+.pro-logout-btn:active {
+  transform: scale(0.97);
+  background-color: #e63636;
+}

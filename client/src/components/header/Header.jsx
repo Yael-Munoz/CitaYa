@@ -19,7 +19,6 @@ function Header() {
                 <div className={styles['header-logo']}>CitaYa</div>
                 <Link className={styles['header-texto']} to='/dashboard'>Dashboard</Link>
                 <Link className={styles['header-texto']} to='/book-appointment'>Calendario</Link>
-                <Link className={styles['header-texto']} to='/profile'>Perfil</Link>
                 <div className={styles['header-menu']} onClick={() => setMenuDisplay(!menuDisplay)}></div>
             </nav>
 
@@ -32,9 +31,8 @@ function Header() {
             <div className={styles['menu-logo']}>Logo</div>
             <button className={styles['boton-cerrar-menu']} onClick={() => setMenuDisplay(false)}>X</button>
             <Link href='#'>Contactanos</Link>
-            <Link to='/profile'>Profile</Link>
             <Link to='/dashboard'>Dashboard</Link>
-            <Link to='/book-appointment'>Citas</Link>
+            <Link to='/book-appointment'>Calendario</Link>
         </div>
 
 

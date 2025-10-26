@@ -46,7 +46,7 @@ function Welcome() {
                     </div>
                     <div className={styles['source-contenedor-de-bienvenido']}>
                         <h1 className={styles['source-texto-de-bienvenido']}>Bienvenido!</h1>
-                        <button className={styles['source-boton-de-inicio-de-sesion']}>Iniciar Sesion</button>
+                        <button className={styles['source-boton-de-inicio-de-sesion']} onClick={() => navigate('/login')}>Iniciar Sesion</button>
                         <p className={styles['source-texto-de-cuenta-nueva']}>No tienes cuenta?</p>
                         <button className={styles['source-boton-de-crear-cuenta']} onClick={() => navigate('/register')}>Crear cuenta</button>
                     </div>

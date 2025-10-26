@@ -4,7 +4,7 @@
 }
 
 .header-nav-links {
-  background-color: #b5b66d;
+  background-color: #dbdbdb;
   font-family: Montserrat;
   height: 100%;
   display: flex;
@@ -53,7 +53,7 @@
 }
 
 .menu-desplegable a:hover {
-  color: #b5b66d;
+  color: #c4c4c4;
 }
 
 .menu-abierto {
