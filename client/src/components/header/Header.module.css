@@ -4,7 +4,7 @@
 }
 
 .header-nav-links {
-  background-color: #dbdbdb;
+  background-color: var(--primary-color);
   font-family: Montserrat;
   height: 100%;
   display: flex;
@@ -21,10 +21,17 @@
 }
 
 .header-menu {
-  background-color: rgb(243, 90, 90);
-  width: 2em;
-  height: 2em;
-  display: none;
+  background-color: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: none; /* solo se activa en móvil */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+  border-radius: 0.3rem;
 }
 
 .menu-desplegable {
@@ -82,6 +89,7 @@
   text-align: center;
 }
 
+
 @media (max-width: 450px) {
   .header-contenedor {
     width: 100%;
@@ -92,6 +100,9 @@
   }
 
   .header-menu {
-    display: inline-block;
+    display: flex; /* mostrar el botón solo en móvil */
   }
+
+
+
 }

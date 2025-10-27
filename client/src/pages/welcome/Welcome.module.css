@@ -17,7 +17,7 @@
 }
 
 .source-contenedor-barra-nav {
-  background-color: #dbdbdb;
+  background-color: var(--primary-color);
   color: #0a0a0a;
   display: flex;
   justify-content: space-between;
@@ -45,7 +45,8 @@
 }
 
 .source-contenedor-nav-bar-centro-texto {
-  font-size: 1.5rem;
+  font-family: var(--subtle-text);
+  font-size: var(--font-size-medium);
   cursor: pointer;
   color: #ffffff;
   transition: color 0.3s ease;
@@ -56,11 +57,19 @@
 }
 
 .source-boton-menu-desplegable {
-  background-color: #ffffff;
+  background-color: none;
   height: 30px;
   width: 30px;
   border-radius: 4px;
   cursor: pointer;
+}
+.source-boton-menu-desplegable i {
+  color: #000000;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  border-radius: 30px;
+  margin-top: 3px;
 }
 
 .source-contenedor-de-bienvenido {
@@ -80,14 +89,27 @@
 
 
 .source-texto-de-bienvenido {
+  display: flex;
+  flex-direction: column;
   font-size: 4em;
   color: #ffffff;
   font-family: 'Montserrat', 'Lato', 'Segoe UI', sans-serif;
 }
 
+.source-texto-descripcion-de-bienvenido {
+  margin-bottom: 72px;
+  font-size: var(--font-size-medium);
+  color: #ffffff;
+  text-align: center;
+  background-color: rgb(0, 0, 0, 0.15);
+  padding: 15px;
+  border-radius: 15px;
+
+}
+
 .source-boton-de-inicio-de-sesion {
   color: #ffffff;
-  background-color: #727272;
+  background-color: var(--gray-color);
   font-size: 1.5em;
   font-family: 'Montserrat', 'Lato', 'Segoe UI', sans-serif;
   border: none;
@@ -106,7 +128,7 @@
   left: 0;
   width: 0%;
   height: 100%;
-  background-color: #494949;
+  background-color: var(--darker-primary);
   border-radius: 3px;
   z-index: -1;
   transition: width .4s ease;
@@ -124,7 +146,7 @@
 
 .source-boton-de-crear-cuenta {
   color: #ffffff;
-  background-color: #727272;
+  background-color: var(--gray-color);
   font-size: 1.5em;
   font-family: 'Montserrat', 'Lato', 'Segoe UI', sans-serif;
   border: none;
@@ -143,7 +165,7 @@
   left: 0;
   width: 0%;
   height: 100%;
-  background-color: #494949;
+  background-color: var(--darker-secondary);
   border-radius: 3px;
   z-index: -1;
   transition: width .4s ease;

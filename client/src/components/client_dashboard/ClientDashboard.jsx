@@ -24,7 +24,7 @@ function ClientDashboard() {
                 </section>
 
                 <section className={styles['options-section']}>
-                    <button className={styles['action-button']}><i class="fa-solid fa-calendar"></i> Agendar nueva cita</button>
+                    <button className={styles['action-button']}><i class="fa-solid fa-calendar"></i> Agendar cita</button>
                     <button className={styles['logout-button']}><i class="fa-solid fa-door-open"></i> Cerrar Sesion</button>
                 </section>
             </main>
