@@ -25,7 +25,9 @@ function ProDashboard() {
 
     <>
         <Header/>
-        <div className={styles['pro-dashboard-container']}>
+        <div className={styles['contenedor-de-hoja']}>
+
+          <div className={styles['pro-dashboard-container']}>
 
         <header className={styles['pro-dashboard-header']}>
             <h2>Panel Profesional</h2>
@@ -63,6 +65,9 @@ function ProDashboard() {
         </button>
 
         </div>
+
+        </div>
+        
     </>
     
   );
