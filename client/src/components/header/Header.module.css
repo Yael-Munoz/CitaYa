@@ -25,7 +25,6 @@
   width: 2.5rem;
   height: 2.5rem;
   display: none; /* solo se activa en móvil */
-  display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
