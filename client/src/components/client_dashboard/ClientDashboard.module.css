@@ -62,6 +62,8 @@
   border-radius: 8px;
   font-weight: 500;
   transition: background 0.3s ease;
+  width: 25%;
+  align-self: center;
 }
 
 .action-button:hover {
@@ -92,6 +94,8 @@
   border-radius: 8px;
   font-weight: 500;
   transition: background 0.3s ease;
+  width: 25%;
+  align-self: center;
 }
 
 .logout-button{
