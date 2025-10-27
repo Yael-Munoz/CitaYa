@@ -9,6 +9,7 @@ function Login(){
             <h1 className={styles['titulo']}>Iniciar Sesion</h1>
             <div className={styles['contenedor-de-login-y-boton']}>
                 <div className={styles['contenedor-de-login']}>
+
                     <form id='iniciar-sesion-forma' className={styles['iniciar-sesion-forma']}>
 
                         <label className={styles['label']}>Usuario</label>
@@ -20,7 +21,12 @@ function Login(){
 
                     </form>
 
-                    <button className={styles['submit-boton']} type='submit' form='iniciar-sesion-forma'>Iniciar Sesion</button>
+                    <button className={styles['submit-boton']} type='submit' form='iniciar-sesion-forma'><i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesion</button>
+
+                    <div className="login-register">
+                        <p className={styles['label']}>¿No tienes cuenta?</p>
+                        <button className={styles['register-button']}><i class="fa-solid fa-user-plus"></i> Crear cuenta</button>
+                    </div>
                     
             </div>
             </div>

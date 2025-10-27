@@ -24,18 +24,18 @@ function Register() {
 
                 <div className={styles[isMoved ? 'pregunta-initial' : 'pregunta-moved']}>
                     <div className={styles['contenedor-de-componente-pregunta']}>
-                        <h1 className={styles['register-pregunta-de-cuenta']}>Que tipo de cuenta necesitara?</h1>
+                        <h1 className={styles['register-pregunta-de-cuenta']}>¿Que desea realizar con su cuenta?</h1>
 
                         <div className={styles['contenedor-de-botones']}>
 
                             <button className={styles['register-cuenta-botones']} onClick={() => {
                                 setAccountType('patient')
                                 setIsMoved(false)
-                            }}>Paciente</button>
+                            }}><i class="fa-regular fa-calendar-days"></i> Solicitar citas</button>
                             <button className={styles['register-cuenta-botones']} onClick={() => {
                                 setAccountType('professional')
                                 setIsMoved(false)
-                            }}>Profesional</button>
+                            }}><i class="fa-solid fa-calendar-week"></i> Recibir citas</button>
                         </div>                        
                         
                         
@@ -59,7 +59,7 @@ function Register() {
 
                     </form>
 
-                    <button className={styles['submit-boton']} type='submit' form='patientForm'>Submit</button>
+                    <button className={styles['submit-boton']} type='submit' form='patientForm'><i class="fa-solid fa-paper-plane"></i> Registrar</button>
                     
                 </div>
                  : <div></div>}
@@ -84,7 +84,7 @@ function Register() {
 
                     </form>
 
-                    <button className={styles['submit-boton']} type='submit' form='professionalForm'>Submit</button>
+                    <button className={styles['submit-boton']} type='submit' form='professionalForm'><i class="fa-solid fa-paper-plane"></i> Registrar</button>
                     
                 </div>
                  : <div></div>}
