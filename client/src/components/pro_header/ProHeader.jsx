@@ -1,16 +1,18 @@
-import styles from './Header.module.css'
+import styles from './ProHeader.module.css'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 
 
-function Header() {
+function ProHeader() {
 
+    
     const [menuDisplay, setMenuDisplay] = useState(false);
 
 
-
     return(
+        
         <>
+
         
         <header className={styles['header-contenedor']}>
             
@@ -42,8 +44,6 @@ function Header() {
         
         </>
     );
-
 }
 
-
-export default Header
+export default ProHeader
