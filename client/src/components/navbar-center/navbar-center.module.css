@@ -1,0 +1,118 @@
+.source-contenedor-barra-nav {
+  background-color: var(--primary-color);
+  color: #0a0a0a;
+  padding: 1rem 1.5rem;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.source-contenedor-barra-nav-interno {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.source-contenedor-nav-bar-izquierdo {
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.source-contenedor-nav-bar-izquierdo-logo {
+  background-color: #ffffff;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.source-contenedor-nav-bar-izquierdo-texto {
+  font-size: 1.2rem;
+  color: white;
+  font-weight: bold;
+  margin: 0;
+}
+
+.source-contenedor-nav-bar-centro {
+  grid-column: 2;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.source-contenedor-nav-bar-centro-texto {
+  font-family: var(--subtle-text);
+  font-size: var(--font-size-medium);
+  cursor: pointer;
+  color: #ffffff;
+  transition: color 0.3s ease;
+  text-decoration: none;
+  margin-top: 15px;
+}
+
+.source-contenedor-nav-bar-centro-texto:hover {
+  color: #0a0a0a;
+}
+
+.source-boton-menu-desplegable {
+  grid-column: 3;
+  justify-self: end;
+  display: none;
+  height: 30px;
+  width: 30px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.source-boton-menu-desplegable i {
+  color: #ffffff;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Menú desplegable móvil */
+.source-menu-movil {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background-color: var(--primary-color);
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 1000;
+}
+
+.source-menu-movil a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .source-contenedor-nav-bar-centro {
+    display: none;
+  }
+
+  .source-boton-menu-desplegable {
+    display: block;
+    justify-self: end;
+  }
+
+  .source-contenedor-barra-nav {
+    padding: 1rem;
+    grid-template-columns: 1fr auto;
+    margin-right: 30px;
+  }
+}
