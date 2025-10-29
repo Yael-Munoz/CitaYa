@@ -37,9 +37,9 @@ function Welcome() {
                     <div className={styles['source-contenedor-de-bienvenido']}>
                         <h1 className={styles['source-texto-de-bienvenido']}>¡Bienvenido!</h1>
                         <p className={styles['source-texto-descripcion-de-bienvenido']}>Bienvenido a CitaYa, el portal donde puedes organizar el tiempo a tu antojo</p>
-                        <button className={styles['source-boton-de-inicio-de-sesion']} onClick={() => navigate('/login')}><i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesion</button>
+                        <button className={styles['source-boton-de-inicio-de-sesion']} onClick={() => navigate('/login')}><i className="fa-solid fa-right-to-bracket"></i> Iniciar Sesion</button>
                         <p className={styles['source-texto-de-cuenta-nueva']}>¿No tienes cuenta?</p>
-                        <button className={styles['source-boton-de-crear-cuenta']} onClick={() => navigate('/register')}><i class="fa-solid fa-user-plus"></i> Crear cuenta</button>
+                        <button className={styles['source-boton-de-crear-cuenta']} onClick={() => navigate('/register')}><i className="fa-solid fa-user-plus"></i> Crear cuenta</button>
                     </div>
                 </div>
                 <div className={styles['source-bloque2']}>

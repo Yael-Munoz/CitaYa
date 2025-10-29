@@ -1,24 +1,43 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# Entorno y configuración
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-node_modules
-dist
-dist-ssr
-*.local
+# Compilación y dependencias
+node_modules/
+build/
+coverage/
+tmp/
+.cache/
+*.tsbuildinfo
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+# Testing
+jest/
+__tests__/
+*.spec.js
+*.test.js
+
+# Snapshots
+*.snap
+
+# MongoDB dumps (si usas backups locales)
+dump/
+*.bson
+
+# Archivos de imagen temporales
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# Archivos de base de datos o exportaciones
+*.sqlite
+*.db
+*.csv
+
+# Seguridad
+*.pem
+*.key
+*.crt
