@@ -1,7 +1,10 @@
 import styles from './Login.module.css'
+import { useNavigate } from 'react-router-dom';
 
 function Login(){
 
+    const navigate = useNavigate();
+    
     return(
         <>
 
@@ -25,7 +28,7 @@ function Login(){
 
                     <div className="login-register">
                         <p className={styles['label']}>¿No tienes cuenta?</p>
-                        <button className={styles['register-button']}><i class="fa-solid fa-user-plus"></i> Crear cuenta</button>
+                        <button className={styles['register-button']} onClick={() => navigate('/register')}><i class="fa-solid fa-user-plus"></i> Crear cuenta</button>
                     </div>
                     
             </div>

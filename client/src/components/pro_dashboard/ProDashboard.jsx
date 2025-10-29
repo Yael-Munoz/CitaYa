@@ -1,5 +1,5 @@
 import styles from './ProDashboard.module.css';
-import Header from '../header/Header';
+import ProHeader from '../pro_header/ProHeader';
 import { useNavigate } from 'react-router-dom';
 
 function ProDashboard() {
@@ -8,11 +8,7 @@ function ProDashboard() {
 
   const handleLogout = () => {
     console.log('Cerrando sesión...');
-    
-  };
-
-  const handleAddAppointment = () => {
-    console.log('Agendar nueva cita para un cliente');
+    navigate('/');
     
   };
 
@@ -24,8 +20,10 @@ function ProDashboard() {
   return (
 
     <>
-        <Header/>
-        <div className={styles['pro-dashboard-container']}>
+        <ProHeader/>
+        <div className={styles['contenedor-de-hoja']}>
+
+          <div className={styles['pro-dashboard-container']}>
 
         <header className={styles['pro-dashboard-header']}>
             <h2>Panel Profesional</h2>
@@ -63,6 +61,9 @@ function ProDashboard() {
         </button>
 
         </div>
+
+        </div>
+        
     </>
     
   );

@@ -1,5 +1,5 @@
 import styles from './BookAppointment.module.css';
-import Header from '../../components/header/Header';
+import ProHeader from '../../components/pro_header/ProHeader';
 import { useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import esLocale from '@fullcalendar/core/locales/es';
@@ -9,7 +9,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import Modal from 'react-modal';
 
-Modal.setAppElement('#root'); // Para accesibilidad
+Modal.setAppElement('#root');
 
 function BookAppointment() {
   const [events, setEvents] = useState([]);
@@ -70,7 +70,7 @@ function BookAppointment() {
 
   return (
     <div className={styles['contenedor-pagina']}>
-      <Header />
+      <ProHeader />
 
       <section className={styles['seccion-calendario']}>
         <p className={styles['titulo-calendario']}>Mi Calendario</p>

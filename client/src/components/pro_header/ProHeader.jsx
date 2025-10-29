@@ -1,16 +1,18 @@
-import styles from './Header.module.css'
+import styles from './ProHeader.module.css'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 
 
-function Header() {
+function ProHeader() {
 
+    
     const [menuDisplay, setMenuDisplay] = useState(false);
 
 
-
     return(
+        
         <>
+
         
         <header className={styles['header-contenedor']}>
             
@@ -19,7 +21,9 @@ function Header() {
                 <div className={styles['header-logo']}>CitaYa</div>
                 <Link className={styles['header-texto']} to='/dashboard'>Dashboard</Link>
                 <Link className={styles['header-texto']} to='/book-appointment'>Calendario</Link>
-                <div className={styles['header-menu']} onClick={() => setMenuDisplay(!menuDisplay)}></div>
+                <div className={styles['header-menu']}onClick={() => setMenuDisplay(!menuDisplay)}>
+                    {menuDisplay ? (<i className="fa-solid fa-xmark"></i>) : (<i className="fa-solid fa-bars"></i>)}
+                </div>
             </nav>
 
             
@@ -40,8 +44,6 @@ function Header() {
         
         </>
     );
-
 }
 
-
-export default Header
+export default ProHeader

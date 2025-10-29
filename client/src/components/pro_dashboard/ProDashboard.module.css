@@ -1,5 +1,13 @@
-.pro-dashboard-container {
+.contenedor-de-hoja{
   width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.pro-dashboard-container {
+  width: 100%;
+  max-width: 1000px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,9 +30,9 @@
 }
 
 .pro-dashboard-header p {
-  color: #939393;
+  color: #e3e3e3;
   font-size: 1em;
-  text-shadow: 1px 1px 10px white;
+  text-shadow: 1px 1px 10px rgb(0, 0, 0);
 }
 
 .pro-dashboard-section {
