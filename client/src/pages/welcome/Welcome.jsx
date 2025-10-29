@@ -1,6 +1,8 @@
 import styles from './Welcome.module.css';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import NavCenter from '../../components/navbar-center/navbar-center.jsx';
 
 
 function Welcome() {
@@ -29,21 +31,9 @@ function Welcome() {
         <>
 
         <div className={styles['source-fondo']}>
-
             <div className={styles['source-contenedor-de-pagina-completa']}>
-                <div className={styles['source-bloque1']}>
-                    <div className={styles['source-contenedor-barra-nav']}>
-                        <div className={styles['source-contenedor-nav-bar-izquierdo']}>
-                            <div className={styles['source-contenedor-nav-bar-izquierdo-logo']}></div>
-                            <p className={styles['source-contenedor-nav-bar-izquierdo-texto']}>CitaYa</p>
-                        </div>
-                        
-                        <div className={styles['source-contenedor-nav-bar-centro']}>
-                            <p className={styles['source-contenedor-nav-bar-centro-texto']}>Quienes somos?</p>
-                            <p className={styles['source-contenedor-nav-bar-centro-texto']}>Contactanos</p>
-                        </div>
-                        <div className={styles['source-boton-menu-desplegable']}></div>
-                    </div>
+            <NavCenter />
+                <div className={styles['source-bloque1']}>           
                     <div className={styles['source-contenedor-de-bienvenido']}>
                         <h1 className={styles['source-texto-de-bienvenido']}>Bienvenido!</h1>
                         <button className={styles['source-boton-de-inicio-de-sesion']} onClick={() => navigate('/login')}><i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesion</button>

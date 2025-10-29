@@ -1,0 +1,24 @@
+/*Import de fuentes*/
+@import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Condensed+One&display=swap');
+
+
+
+
+/*Variables globales para todos los componentes y/o paginas*/
+:root{
+/*COLORES*/
+--primary-color: #369ee4;
+--secondary-color: #e4d165;
+--gray-color: rgb(99, 99, 99);
+--light-primary: rgb(191, 191, 255);
+--light-secundary: rgb(255, 228, 178);
+--darker-primary: #2565ac;
+--darker-secondary: #bfae3c;
+
+/*TEXTOS*/
+--subtle-text: 'Special Gothic Condensed One', sans-serif;
+--font-size-small: 16px;
+--font-size-medium: 20px;
+--font-size-large: 24px;
+--font-size-xlarge: 42px;
+}
