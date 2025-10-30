@@ -22,6 +22,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  text-decoration: none;
 }
 
 .source-contenedor-nav-bar-izquierdo-logo {

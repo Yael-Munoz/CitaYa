@@ -9,10 +9,10 @@ function NavCenter() {
     <div className={styles['source-contenedor-barra-nav']}>
       <div className={styles['source-contenedor-barra-nav-interno']}>
         {/* Logo + Nombre */}
-        <div className={styles['source-contenedor-nav-bar-izquierdo']}>
+        <Link to="/" className={styles['source-contenedor-nav-bar-izquierdo']}>
           <div className={styles['source-contenedor-nav-bar-izquierdo-logo']}></div>
           <p className={styles['source-contenedor-nav-bar-izquierdo-texto']}>CitaYa</p>
-        </div>
+        </Link>
 
         {/* Enlaces normales (solo en escritorio) */}
         <div className={styles['source-contenedor-nav-bar-centro']}>
