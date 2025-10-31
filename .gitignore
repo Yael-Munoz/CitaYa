@@ -22,7 +22,7 @@ __tests__/
 # Snapshots
 *.snap
 
-# MongoDB dumps (si usas backups locales)
+# MongoDB dumps
 dump/
 *.bson
 
