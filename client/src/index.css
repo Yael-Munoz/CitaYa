@@ -8,17 +8,17 @@
 :root{
 /*COLORES*/
 --primary-color: #369ee4;
---secondary-color: #e4d165;
+--secondary-color: #ffe23b;
 --gray-color: rgb(99, 99, 99);
---light-primary: rgb(191, 191, 255);
---light-secundary: rgb(255, 228, 178);
---darker-primary: #2565ac;
---darker-secondary: #bfae3c;
+--light-primary: rgb(215, 221, 255);
+--light-secundary: rgb(230, 255, 160);
+--darker-primary: #10427a;
+--darker-secondary: #595a00;
 
 /*TEXTOS*/
 --subtle-text: 'Special Gothic Condensed One', sans-serif;
 --font-size-small: 16px;
 --font-size-medium: 20px;
---font-size-large: 24px;
---font-size-xlarge: 42px;
+--font-size-large: 36px;
+--font-size-xl: 64px;
 }
