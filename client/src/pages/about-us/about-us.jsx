@@ -12,7 +12,7 @@ function AboutUs() {
       <div className={styles['source-contenedor-de-pagina-completa']}>
         <NavCenter />
         <section className={styles['about-section']}>
-          <div className={styles ["about-us"]}>
+          <div className={styles ["about-us"]} data-aos="slide-right">
               <div className={styles ["about-text"]}>
                 <h1 className={styles['titulo']}>Sobre Nosotros</h1>
                 <p className={styles['descripcion']}>
@@ -27,7 +27,7 @@ function AboutUs() {
           </div>
 
 
-          <div className={styles['more-info-container']}>         
+          <div className={styles['more-info-container']} data-aos="slide-left">         
             <div className={styles['more-info-image']}>
               <img src ={check} alt="more-info"/>
             </div>
@@ -40,7 +40,7 @@ function AboutUs() {
                 </p>
               </div>
 
-              <div className={styles['vision']}>
+              <div className={styles['vision']} >
                 <h2>Visión</h2>
                 <p>Convertirnos en una de las plataformas educativas más confiables y accesibles del mundo hispano. Planemos que nuestra plataforma
                   sea reconocida por su facilidad de uso, eficiencia y capacidad para mejorar la gestión del tiempo de nuestros usuarios. De esta manera,
@@ -56,12 +56,13 @@ function AboutUs() {
 
           </div>
 
-          <button 
-            className={styles['btn-volver']} 
-            onClick={() => navigate('/')}
-          >
-            Volver al inicio
-          </button>
+          <div className={styles['contenedor-botones']}>
+            <button 
+              className={styles['btn-volver']} 
+              onClick={() => navigate('/')}
+            > Volver
+            </button>
+          </div>
         </section>
       </div>
     </div>

@@ -16,6 +16,7 @@
     "@fullcalendar/list": "^6.1.19",
     "@fullcalendar/react": "^6.1.19",
     "@fullcalendar/timegrid": "^6.1.19",
+    "aos": "^2.3.4",
     "date-fns": "^4.1.0",
     "font-awesome": "^4.7.0",
     "react": "^19.1.1",

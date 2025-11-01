@@ -10,10 +10,10 @@
 --primary-color: #369ee4;
 --secondary-color: #ffe23b;
 --gray-color: rgb(99, 99, 99);
---light-primary: rgb(215, 221, 255);
---light-secundary: rgb(230, 255, 160);
---darker-primary: #10427a;
---darker-secondary: #595a00;
+--light-primary: rgb(168, 181, 255);
+--light-secondary: rgb(230, 255, 160);
+--dark-primary: #10427a;
+--dark-secondary: #ffd000;
 
 /*TEXTOS*/
 --subtle-text: 'Special Gothic Condensed One', sans-serif;
