@@ -28,6 +28,7 @@ function Register() {
     const handleSubmitClient = (e) => {
         e.preventDefault();
 
+
         setErrors(['', '', '', '']);
 
         
@@ -35,7 +36,8 @@ function Register() {
         const password = passwordRef.current.value;
         const confirmPassword = confirmPasswordRef.current.value;
 
-        const data = {
+
+        const formData = {
             role: 'client',
             username,
             password,
@@ -53,7 +55,7 @@ function Register() {
         fetch('http://localhost:3000/register', {
             method: 'POST',
             headers: {'Content-Type' : 'application/json'},
-            body: JSON.stringify(data)
+            body: JSON.stringify(formData)
         })
         .then(res => {
             if(!res.ok) {
@@ -70,10 +72,13 @@ function Register() {
         .catch(error => {
             console.log('Error: ' + error);
         });
+
     }
 
         const handleSubmitPro = (e) => {
         e.preventDefault();
+
+        setErrors(['', '', '', '']);
 
         if(passwordRef !== confirmPasswordRef) {
             console.log('Passwords do not match');
