@@ -108,6 +108,34 @@
   text-align: center;
 }
 
+/*Botones styles*/
+
+.about-section .contenedor-botones{
+  text-align: center;
+  align-items: center;
+  align-content: center;
+}
+
+
+.btn-volver{
+  background-color: var(--light-secondary);
+  border: 3px solid var(--light-secondary);
+  transition: 0.3s;
+  cursor: pointer;
+  margin: 0;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  padding: 12px 24px;
+  font-size: var(--font-size-medium);
+  font-weight: bolder;
+}
+.btn-volver:hover{
+  background-color: var(--secondary-color);
+  color: white;
+  box-shadow: 32px;
+  border: 2px solid rgb(219, 219, 219);
+}
+
 
 
 

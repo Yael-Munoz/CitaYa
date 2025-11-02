@@ -16,13 +16,27 @@ function NavCenter() {
 
         {/* Enlaces normales (solo en escritorio) */}
         <div className={styles['source-contenedor-nav-bar-centro']}>
+          <Link to="/services" className={styles['source-contenedor-nav-bar-centro-texto']}>
+            Servicios
+          </Link>
           <Link to="/about-us" className={styles['source-contenedor-nav-bar-centro-texto']}>
             ¿Quiénes somos?
           </Link>
           <Link to="/contact" className={styles['source-contenedor-nav-bar-centro-texto']}>
             Contáctanos
           </Link>
+          
         </div>
+
+        <div className={styles['contenedor-botones-login-register']}>
+            <Link to="/login" className={styles['source-boton-login']}>
+            <i class="fa-solid fa-arrow-right-to-bracket"></i> Iniciar sesión
+          </Link>
+          <Link to="/register" className={styles['source-boton-register']}>
+              <i class="fa-solid fa-user-plus"></i> Registrate
+          </Link>
+        </div>
+        
 
         {/* Botón hamburguesa (solo en móvil) */}
         <div
@@ -38,6 +52,7 @@ function NavCenter() {
       {/* Menú desplegable (solo en móvil) */}
       {menuDisplay && (
         <div className={styles['source-menu-movil']}>
+          <Link to="/services">Servicios</Link>
           <Link to="/about-us">¿Quiénes somos?</Link>
           <Link to="/contact">Contáctanos</Link>
         </div>

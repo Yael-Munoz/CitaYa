@@ -7,10 +7,22 @@ import Login from "./pages/login/Login";
 import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
 import AboutUs from "./pages/about-us/about-us";
+import Services from "./pages/services/services";
+import Contact from "./pages/contact/contact";
 import { AuthProvider } from "./context/AuthContext";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 
 function App() {
-  return (
+  useEffect(() => {
+    AOS.init({
+      duration: 600, // duración de la animación
+      once: true,     // solo se anima una vez
+    });
+  }, []);
+  
+  return (   
     
     <AuthProvider>
       <Routes>
@@ -21,6 +33,8 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/register" element={<Register />} />
         <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/contact" element={<Services />} />
       </Routes>
     </AuthProvider>
   );
