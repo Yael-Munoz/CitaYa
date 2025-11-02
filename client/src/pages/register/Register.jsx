@@ -5,59 +5,80 @@ function Register() {
 
     const [accountType, setAccountType] = useState('');
     const [isMoved, setIsMoved] = useState(true);
+    const [errors, setErrors] = useState(['', '', '', '']);
 
     const nameRef = useRef(null);
+    const phoneRef = useRef(null);
     const emailRef = useRef(null);
     const userRef = useRef(null);
     const passwordRef = useRef(null);
     const confirmPasswordRef = useRef(null);
+
+    function setErrorAtIndex(index, message) {
+        setErrors(prev => {
+            const copy = [...prev];
+            copy[index]= message;
+            return copy;
+        });
+    };
     
 
     
 
-    const handleSubmitPatient = (e) => {
+    const handleSubmitClient = (e) => {
         e.preventDefault();
 
-        const user = userRef.current.value;
+
+        setErrors(['', '', '', '']);
+
+        
+        const username = userRef.current.value;
         const password = passwordRef.current.value;
         const confirmPassword = confirmPasswordRef.current.value;
 
 
-        if(password !== confirmPassword) {
-            console.log('Passwords do not match');
-            return;
-        }
-
-        const PatientData = {
-            role: 'patient',
-            user,
+        const formData = {
+            role: 'client',
+            username,
             password,
             confirmPassword     
         }
 
-        fetch('http://localhost:3000/', {
-            method: 'GET',
+        if(!username || username.length < 4 || username.length > 16) {
+            setErrorAtIndex(0, 'El usuario es obligatorio y tiene que ser de 4 a 16 caracteres')
+        }
+        if( !password || !confirmPassword || password !== confirmPassword) {
+            setErrorAtIndex(1, "Las contraseñas son obligatorias y deben coincidir")
+            return;
+        }
+
+        fetch('http://localhost:3000/register', {
+            method: 'POST',
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify(formData)
         })
         .then(res => {
             if(!res.ok) {
-                console.log('Something went wrong');
+                return res.json().then(data => {
+                    setErrors(data.errors || ['Registration failed']);
+                    throw new Error('Validation Error');
+                });
             }
             else{
                 return res.json();
             }
         })
-        .then(data => console.log(data))
-        .catch(err => {
-            console.log('Error: ' + err);
+        .then(data => console.log('Server response: ', data))
+        .catch(error => {
+            console.log('Error: ' + error);
         });
-
-
-        console.log('Se registro con cuenta de paciente');
 
     }
 
         const handleSubmitPro = (e) => {
         e.preventDefault();
+
+        setErrors(['', '', '', '']);
 
         if(passwordRef !== confirmPasswordRef) {
             console.log('Passwords do not match');
@@ -67,6 +88,7 @@ function Register() {
         const ProData = {
             role: 'pro',
             nameRef,
+            phoneRef,
             emailRef,
             userRef,
             passwordRef,
@@ -88,7 +110,7 @@ function Register() {
                         <div className={styles['contenedor-de-botones']}>
 
                             <button className={styles['register-cuenta-botones']} onClick={() => {
-                                setAccountType('patient')
+                                setAccountType('client')
                                 setIsMoved(false)
                             }}><i className="fa-regular fa-calendar-days"></i> Solicitar citas</button>
                             <button className={styles['register-cuenta-botones']} onClick={() => {
@@ -103,22 +125,26 @@ function Register() {
                 </div>
 
 
-                {accountType === 'patient' ? 
+                {accountType === 'client' ? 
                 <div className={styles['contenedor-de-formas']}>
-                    <form id='patientForm' className={styles['register-patient-form']} onSubmit={handleSubmitPatient}>
+                    <form id='clientForm' className={styles['register-client-form']} onSubmit={handleSubmitClient}>
 
                         <label className={styles['register-label']}>Usuario</label>
+                        <span className={`${!errors[0] ? styles['register-errors-message-inactive'] : styles['register-errors-message-active']}`}>{errors[0]}</span>
                         <input className={styles['register-input']} type='text' ref={userRef} placeholder='Ingrese el usuario que desea tener'></input>
 
                         <label className={styles['register-label']}>Contraseña</label>
+                        <span className={`${!errors[1] ? styles['register-errors-message-inactive'] : styles['register-errors-message-active']}`}>{errors[1]}</span>
                         <input className={styles['register-input']} type='password' ref={passwordRef} placeholder='Ingrese su contraseña'></input>
 
                         <label className={styles['register-label']}>Re-ingrese contraseña</label>
+                        <span className={`${!errors[1] ? styles['register-errors-message-inactive'] : styles['register-errors-message-active']}`}>{errors[1]}</span>
+
                         <input className={styles['register-input']} type='password' ref={confirmPasswordRef} placeholder='Re-ingrese su contraseña'></input>
 
                     </form>
 
-                    <button className={styles['submit-boton']} type='submit' form='patientForm'><i className="fa-solid fa-paper-plane"></i> Registrar</button>
+                    <button className={styles['submit-boton']} type='submit' form='clientForm'><i className="fa-solid fa-paper-plane"></i> Registrar</button>
                     
                 </div>
                  : <div></div>}
@@ -127,19 +153,22 @@ function Register() {
                 <div className={styles['contenedor-de-formas']}>
                     <form id='professionalForm' className={styles['register-professional-form']} onSubmit={handleSubmitPro}>
                         <label className={styles['register-label']}>Nombre completo</label>
-                        <input className={styles['register-input']} type='text' ref={nameRef} placeholder='Ingrese su nombre completo'></input>
+                        <input className={styles['register-input']} type='text' ref={nameRef} placeholder='Ingrese su nombre completo'/>
+
+                        <label className={styles['register-label']}>Numero telefonico</label>
+                        <input className={styles['register-input']} type='text' ref={phoneRef} placeholder='Ingrese su numero telefonico'/>
 
                         <label className={styles['register-label']}>Correo</label>
-                        <input className={styles['register-input']} type='text' ref={emailRef} placeholder='Ingrese su correo electronico'></input>
+                        <input className={styles['register-input']} type='text' ref={emailRef} placeholder='Ingrese su correo electronico'/>
 
                         <label className={styles['register-label']}>Usuario</label>
-                        <input className={styles['register-input']} type='text' ref={userRef} placeholder='Ingrese el usuario que desea tener'></input>
+                        <input className={styles['register-input']} type='text' ref={userRef} placeholder='Ingrese el usuario que desea tener'/>
 
                         <label className={styles['register-label']}>Contraseña</label>
-                        <input className={styles['register-input']} type='password' ref={passwordRef} placeholder='Ingrese su contraseña'></input>
+                        <input className={styles['register-input']} type='password' ref={passwordRef} placeholder='Ingrese su contraseña'/>
 
-                        <label className={styles['register-label']}>Re-ingrese contraseña</label>
-                        <input className={styles['register-input']} type='password' ref={passwordRef} placeholder='Re-ingrese su contraseña'></input>
+                        <label className={styles['register-label']}>Reingrese contraseña</label>
+                        <input className={styles['register-input']} type='password' ref={passwordRef} placeholder='Reingrese su contraseña'/>
 
                     </form>
 

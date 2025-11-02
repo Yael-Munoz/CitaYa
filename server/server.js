@@ -1,17 +1,28 @@
 const express = require('express');
 const server = express();
 const cors = require('cors');
+const connectDB = require('./config/db');
+const registerRoute = require('./routes/register');
+const clientRoute = require('./routes/clientRoutes');
+const proRoute = require('./routes/proRoutes');
+const cookieParser = require('cookie-parser');
+
+require('dotenv').config();
+
+connectDB();
 
 server.use(cors({
-    origin: 'http://localhost:5173'
+    origin: process.env.CLIENT_URL,
+    credentials: true
 }));
 
+server.use(express.json());
+server.use(cookieParser());
 
+server.use('/register', registerRoute);
+server.use('/client', clientRoute);
+server.use('/pro', proRoute);
 
 server.listen(3000, () => {
     console.log('Server is listening on http://localhost:3000/');
-})
-
-server.get('/', (req, res) => {
-    res.status(200).json({message: 'Everything is working properly'});
 });
