@@ -1,0 +1,11 @@
+.source-contenedor-de-pagina-completa{ 
+    height: 100vh; 
+    width: 100vw; 
+    overflow-x: hidden; 
+    overflow-y: scroll; 
+    font-family: Montserrat; 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    background-color: white;
+}
