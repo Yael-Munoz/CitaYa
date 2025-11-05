@@ -1,8 +1,10 @@
 import styles from './Login.module.css'
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 function Login(){
 
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
     
     return(
@@ -19,8 +21,21 @@ function Login(){
                         <input className={styles['input']} type='text' placeholder='Ingrese el usuario que desea tener'></input>
 
 
-                        <label className={styles['label']}>Contraseña</label>
-                        <input className={styles['input']} type='password' placeholder='Ingrese su contraseña'></input>
+                        <div className={styles['password-wrapper']}>
+                        <input
+                            className={styles['input']}
+                            type={showPassword ? 'text' : 'password'}
+                            placeholder='Ingrese su contraseña'
+                            id='password'
+                        />
+                        <button
+                            type='button'
+                            className={styles['show-pass']}
+                            onClick={() => setShowPassword(!showPassword)}
+                        >
+                            <i className={`fa-solid ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+                        </button>
+                        </div>
 
                     </form>
 
