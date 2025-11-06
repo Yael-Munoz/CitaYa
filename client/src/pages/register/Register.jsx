@@ -60,8 +60,7 @@ function Register() {
         .then(res => {
             if(!res.ok) {
                 return res.json().then(data => {
-                    setErrors(data.errors || ['Registration failed']);
-                    throw new Error('Validation Error');
+                    throw data;
                 });
             }
             else{
@@ -70,7 +69,8 @@ function Register() {
         })
         .then(data => console.log('Server response: ', data))
         .catch(error => {
-            console.log('Error: ' + error);
+            console.log(error);
+            setErrors(['Registration failed']);
         });
 
     }
