@@ -3,13 +3,12 @@
 
 
 .source-contenedor-de-pagina-completa{ 
-    height: 100vh; 
-    width: 100vw; 
-    overflow-x: hidden; 
-    overflow-y: scroll; 
+    width: 100%;
+    max-width: 100vw;
     font-family: Montserrat; 
     margin: 0; 
     padding: 0; 
+    overflow-x: hidden;
     box-sizing: border-box; 
     background: linear-gradient(-45deg, #a4dbff, #ebebff, #a2d3ff, #c6caff);
     background-size: 400% 400%;
@@ -117,6 +116,24 @@
   display: flex;
 }
 
+.cta-pro{
+  background-color: #000000;
+  color: white;
+  gap: 2rem;
+  max-width: 80%;
+  margin-left: 10%;
+  border-radius: 22px;
+  display: flex;
+  margin-top: 24px;
+}
+
+.servicio-img-pro{
+  width: 256px;
+  height: auto;
+  align-self: flex-end;
+}
+
+
 
 /*Styles para imagenes*/
 .servicio-img{
@@ -128,4 +145,94 @@
   object-fit: cover;
   display: block;
   margin: 0 auto 1rem;
+}
+
+/*Styles de bottones*/
+.cta-button-cli{
+  background-color: white;
+  padding: 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 24px;
+  transition: 0.3s ease;
+  font-weight: bolder;
+  font-size: var(--font-size-small);
+}
+
+.cta-button-cli:hover{
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.cta-button-pro{
+  background-color: white;
+  padding: 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 24px;
+  transition: 0.3s ease;
+  font-weight: bolder;
+  font-size: var(--font-size-small);
+}
+
+.cta-button-pro:hover{
+  background-color: var(--secondary-color);
+}
+
+
+/*Diseño responsivo en celulares*/
+@media screen and (max-width: 768px) {
+  .titulo {
+    font-size: 2em;
+    margin-top: 1.5rem;
+  }
+
+  .descripcion {
+    font-size: 1em;
+    margin: 1rem;
+  }
+
+  .servicios-grid {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+
+  .servicio-card-doctor,
+  .servicio-card-dentista,
+  .servicio-card-barbero,
+  .servicio-card-nutriologo {
+    padding: 1rem;
+  }
+
+  .cta-cli,
+  .cta-pro {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem;
+    margin: 2rem auto;
+    max-width: 90%;
+  }
+
+  .servicio-img-pro,
+  .servicio-img-cli {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+
+  .cta-button-cli,
+  .cta-button-pro {
+    width: 100%;
+    max-width: 280px;
+    font-size: 1em;
+    padding: 0.75rem;
+  }
+
+  .cta-pro-contenido,
+  .cta-cli-contenido {
+    padding: 0;
+  }
 }
