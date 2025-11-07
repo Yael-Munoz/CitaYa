@@ -8,8 +8,11 @@
   align-items: center;
   font-family: Montserrat;
   flex-direction: column;
-  padding: 3em 0em;
+  padding: 5em 0 0 0;
+  margin: 0;
+  overflow: hidden;
 }
+
 
 .pregunta-base {
   transform: translateY(0) scale(1);
@@ -58,7 +61,7 @@
   height: 0;
   margin: 0;
   overflow: hidden;
-  pointer-events: none;         /* prevents hidden element from interfering with clicks */
+  pointer-events: none;
 }
 
 

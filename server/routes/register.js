@@ -5,122 +5,84 @@ const Pro = require('../models/Pro');
 
 router.post('/', async (req, res) => {
     const data = req.body;
-
     const messages = [];
 
-    if(!data.role) {messages.push('Role is required'); return res.status(400).json({message: 'An account cannot be created without a role'});}
-
+    if (!data.role) {
+        return res.status(400).json({ message: 'An account cannot be created without a role' });
+    }
     const role = data.role;
 
-    if (!data.username 
-        || data.username.length < 4
-        || data.username.length > 16) 
-        {messages.push('Username is required and must be between 4 and 16 characters');}
-
-    if (!data.password
-        || !data.confirmPassword 
-        || data.password 
-        !== data.confirmPassword) 
-        {messages.push('Password is required and must match the confirmation password');}
-
-    const username = data.username;
-    const password = data.password;
-
-    if (role === 'client'){
-
-        try {
-
-            console.log('Client role reached');
-
-            const existingClient = await Client.findOne({ username: username});
-            if (existingClient) {
-                console.log('Existing username was found in database');
-                return res.status(400).json({message: 'Username already exists'});
-            }
-
-            const client = await Client.create({role, username, password});
-            console.log('Client registered: ', client);
-
-            return res.status(200).json({message: 'Client registered successfully'});
-
-        } catch (error) {
-            console.log(error);
-            res.status(500).send({message: 'Internal Server Error'});
-        }
-
-        
-
-    
-
-        
+    if (!data.username || data.username.length < 3 || data.username.length > 16) {
+        messages.push('Username is required and must be between 3 and 16 characters');
     }
-    else if (role === 'pro') {
 
-        if (!data.name
-            || (typeof data.name === 'string' && 
-            (data.name.length < 6
-            || data.name.length > 25
-        ))
+    if (!data.password || !data.confirmPassword || data.password !== data.confirmPassword) {
+        messages.push('Password is required and must match the confirmation password');
+    }
 
-        ) {
-        messages.push('Name is nonexistent or invalid');
+    if (role === 'pro') {
+
+        if (!data.name || data.name.length < 3 || data.name.length > 25) {
+            messages.push('Name must be between 3 and 25 characters');
         }
 
-        if (!data.number 
-            || (typeof data.number === 'string' && data.number.length !== 10)
-            || (typeof data.number === 'number' && data.number.toString().length !== 10)
-        ) {
-        messages.push('Number is invalid');
+        if (!data.phone || typeof data.phone !== 'string' || data.phone.length !== 13) {
+            messages.push('Phone number is invalid');
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!data.email 
-            || !emailRegex.test(data.email)
-        ) {
-        messages.push('Email is invalid');
+        if (!data.email || !emailRegex.test(data.email)) {
+            messages.push('Email is invalid');
         }
 
         if (messages.length > 0) {
-            console.log('Messages were returned: ' + messages);
-            return res.status(400).json({message: messages});
+            return res.status(400).json({ message: messages });
         }
 
-        const name = data.name;
-        const number = data.number;
-        const email = data.number;
+        try {
+            const existingPro = await Pro.findOne({ username: data.username });
+            if (existingPro) {
+                return res.status(400).json({ message: 'Username already exists' });
+            }
 
-        console.log();
+            const pro = await Pro.create({
+                role,
+                name: data.name,
+                phone: data.phone,
+                email: data.email,
+                username: data.username,
+                password: data.password
+            });
+            console.log('Professional registered: ', pro);
 
+            return res.status(200).json({ message: 'Pro registered successfully', pro });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Internal Server Error' });
+        }
     }
-    else {
-        messages.push('This role is undefined');
-        return res.status(400).json({message: messages})
+    else if (role === 'client') {
+       
+        if (messages.length > 0) {
+            return res.status(400).json({ message: messages });
+        }
+
+        try {
+            const existingClient = await Client.findOne({ username: data.username });
+            if (existingClient) {
+                return res.status(400).json({ message: 'Username already exists' });
+            }
+
+            const client = await Client.create({ role, username: data.username, password: data.password });
+            console.log('Client registered successfully', client);
+            return res.status(200).json({ message: 'Client registered successfully', client });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Internal Server Error' });
+        }
+    } else {
+        return res.status(400).json({ message: 'This role is undefined' });
     }
-
-    
-
-
-
-
-    if(messages.length > 0) {
-        console.log('Error(s) were captured: ' + messages);
-        return res.status(400).json({message: messages});
-    }
-
-
-    
-
-    
-
-
-
 });
-
-
-
-
-
-
 
 module.exports = router;

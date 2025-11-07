@@ -1,11 +1,17 @@
-import styles from './Register.module.css'
-import { useRef, useState } from 'react'
+import styles from './Register.module.css';
+import { useRef, useState } from 'react';
+import 'react-phone-input-2/lib/style.css';
+import PhoneInput from 'react-phone-input-2';
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
+
 
 function Register() {
 
     const [accountType, setAccountType] = useState('');
     const [isMoved, setIsMoved] = useState(true);
-    const [errors, setErrors] = useState(['', '', '', '']);
+    const [errors, setErrors] = useState(['', '', '', '', '']);
+
+    const [phone,setPhone] = useState(null);
 
     const nameRef = useRef(null);
     const phoneRef = useRef(null);
@@ -29,7 +35,7 @@ function Register() {
         e.preventDefault();
 
 
-        setErrors(['', '', '', '']);
+        setErrors(['', '', '', '', '']);
 
         
         const username = userRef.current.value;
@@ -37,15 +43,15 @@ function Register() {
         const confirmPassword = confirmPasswordRef.current.value;
 
 
-        const formData = {
+        const ClientData = {
             role: 'client',
             username,
             password,
             confirmPassword     
         }
 
-        if(!username || username.length < 4 || username.length > 16) {
-            setErrorAtIndex(0, 'El usuario es obligatorio y tiene que ser de 4 a 16 caracteres')
+        if(!username || username.length < 3 || username.length > 16) {
+            setErrorAtIndex(0, 'El usuario es obligatorio y tiene que ser de 3 a 16 caracteres')
         }
         if( !password || !confirmPassword || password !== confirmPassword) {
             setErrorAtIndex(1, "Las contraseñas son obligatorias y deben coincidir")
@@ -55,7 +61,7 @@ function Register() {
         fetch('http://localhost:3000/register', {
             method: 'POST',
             headers: {'Content-Type' : 'application/json'},
-            body: JSON.stringify(formData)
+            body: JSON.stringify(ClientData)
         })
         .then(res => {
             if(!res.ok) {
@@ -75,29 +81,77 @@ function Register() {
 
     }
 
-        const handleSubmitPro = (e) => {
-        e.preventDefault();
-
-        setErrors(['', '', '', '']);
-
-        if(passwordRef !== confirmPasswordRef) {
-            console.log('Passwords do not match');
-            return;
-        }
-
-        const ProData = {
-            role: 'pro',
-            nameRef,
-            phoneRef,
-            emailRef,
-            userRef,
-            passwordRef,
-            confirmPasswordRef
-        }
+    const handleSubmitPro = (e) => {
+    e.preventDefault();
 
 
-        console.log('Se registro con cuenta de profesional');
+    setErrors(['', '', '', '', '']);
+    
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const name = nameRef.current.value;
+    const email = emailRef.current.value;
+    const username = userRef.current.value;
+    const password = passwordRef.current.value;
+    const confirmPassword = confirmPasswordRef.current.value;
+
+    const parsedPhone = parsePhoneNumberFromString(`+${phone}`);
+
+    if (!name || name.length < 3 || name.length > 25) {
+        setErrorAtIndex(0, 'El nombre debe tener entre 3 y 25 caracteres');
     }
+
+    if (!parsedPhone || !parsedPhone.isValid()) {
+        setErrorAtIndex(1, 'Ingrese un número telefónico válido');
+    }
+
+    if (!email || !emailRegex.test(email)) {
+        setErrorAtIndex(2, 'Ingrese un correo válido');
+    }
+
+    if (!username || username.length < 3 || username.length > 16) {
+        setErrorAtIndex(3, 'El usuario debe tener entre 3 y 16 caracteres');
+    }
+
+    if (!password || !confirmPassword || password !== confirmPassword) {
+        setErrorAtIndex(4, 'Las contraseñas deben coincidir');
+        return;
+    }
+
+    const ProData = {
+        role: 'pro',
+        name,
+        phone: parsedPhone.number,
+        email,
+        username,
+        password,
+        confirmPassword,
+    };
+
+    fetch('http://localhost:3000/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(ProData),
+    })
+        .then((res) => {
+        if (!res.ok) {
+            return res.json().then((data) => {
+            throw data; 
+            });
+        } else {
+            return res.json();
+        }
+        })
+        .then((data) => {
+        console.log('Server response:', data);
+        })
+        .catch((error) => {
+        console.error('Error:', error);
+        setErrors(['Error al registrar el profesional']);
+        });
+    };
+
 
 	return (
 		<>
@@ -153,22 +207,35 @@ function Register() {
                 <div className={styles['contenedor-de-formas']}>
                     <form id='professionalForm' className={styles['register-professional-form']} onSubmit={handleSubmitPro}>
                         <label className={styles['register-label']}>Nombre completo</label>
+                        <span className={`${!errors[0] ? styles['register-errors-message-inactive'] : styles['register-errors-message-active']}`}>{errors[0]}</span>
                         <input className={styles['register-input']} type='text' ref={nameRef} placeholder='Ingrese su nombre completo'/>
 
+                        <span className={`${!errors[1] ? styles['register-errors-message-inactive'] : styles['register-errors-message-active']}`}>{errors[1]}</span>
                         <label className={styles['register-label']}>Numero telefonico</label>
-                        <input className={styles['register-input']} type='text' ref={phoneRef} placeholder='Ingrese su numero telefonico'/>
+                        <PhoneInput
+                        country={'mx'}              
+                        value={phone}
+                        onChange={setPhone}
+                        enableSearch={true}       
+                        placeholder="Ingrese su numero telefonico"
+                        searchPlaceholder='Buscar'
+                        inputStyle={{ width: '100%' }}/>
 
-                        <label className={styles['register-label']}>Correo</label>
+                        <label className={styles['register-label']}>Correo Electronico</label>
+                        <span className={`${!errors[2] ? styles['register-errors-message-inactive'] : styles['register-errors-message-active']}`}>{errors[2]}</span>
                         <input className={styles['register-input']} type='text' ref={emailRef} placeholder='Ingrese su correo electronico'/>
 
                         <label className={styles['register-label']}>Usuario</label>
+                        <span className={`${!errors[3] ? styles['register-errors-message-inactive'] : styles['register-errors-message-active']}`}>{errors[3]}</span>
                         <input className={styles['register-input']} type='text' ref={userRef} placeholder='Ingrese el usuario que desea tener'/>
 
                         <label className={styles['register-label']}>Contraseña</label>
+                        <span className={`${!errors[4] ? styles['register-errors-message-inactive'] : styles['register-errors-message-active']}`}>{errors[4]}</span>
                         <input className={styles['register-input']} type='password' ref={passwordRef} placeholder='Ingrese su contraseña'/>
 
                         <label className={styles['register-label']}>Reingrese contraseña</label>
-                        <input className={styles['register-input']} type='password' ref={passwordRef} placeholder='Reingrese su contraseña'/>
+                        <span className={`${!errors[4] ? styles['register-errors-message-inactive'] : styles['register-errors-message-active']}`}>{errors[4]}</span>
+                        <input className={styles['register-input']} type='password' ref={confirmPasswordRef} placeholder='Reingrese su contraseña'/>
 
                     </form>
 
