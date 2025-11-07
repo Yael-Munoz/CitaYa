@@ -34,7 +34,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/contact" element={<Services />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </AuthProvider>
   );
