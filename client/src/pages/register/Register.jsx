@@ -10,7 +10,7 @@ function Register() {
 
     const [accountType, setAccountType] = useState('');
     const [isMoved, setIsMoved] = useState(true);
-    const [errors, setErrors] = useState(['', '', '', '', '']);
+    const [errors, setErrors] = useState(['', '', '', '', '', '']);
 
     const [phone,setPhone] = useState(null);
 
@@ -36,7 +36,7 @@ function Register() {
         e.preventDefault();
 
 
-        setErrors(['', '', '', '', '']);
+        setErrors(['', '', '', '', '', '']);
 
         
         const username = userRef.current.value;
@@ -52,12 +52,14 @@ function Register() {
         }
 
         if(!username || username.length < 3 || username.length > 16) {
-            setErrorAtIndex(0, 'El usuario es obligatorio y tiene que ser de 3 a 16 caracteres')
-        }
-        if( !password || !confirmPassword || password !== confirmPassword) {
-            setErrorAtIndex(1, "Las contraseñas son obligatorias y deben coincidir")
+            setErrorAtIndex(0, 'El usuario es obligatorio y tiene que ser de 3 a 16 caracteres');
             return;
         }
+        if( !password || !confirmPassword || password !== confirmPassword) {
+            setErrorAtIndex(1, "Las contraseñas son obligatorias y deben coincidir");
+            return;
+        }
+        
 
         fetch('http://localhost:3000/register', {
             method: 'POST',
@@ -77,7 +79,7 @@ function Register() {
         .then(data => console.log('Server response: ', data))
         .catch(error => {
             console.log(error);
-            setErrors(['Registration failed']);
+            setErrors(['Usuario ya existe!']);
         });
 
     }
@@ -86,7 +88,7 @@ function Register() {
     e.preventDefault();
 
 
-    setErrors(['', '', '', '', '']);
+    setErrors(['', '', '', '', '', '']);
     
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -101,18 +103,22 @@ function Register() {
 
     if (!name || name.length < 3 || name.length > 25) {
         setErrorAtIndex(0, 'El nombre debe tener entre 3 y 25 caracteres');
+        return;
     }
 
     if (!parsedPhone || !parsedPhone.isValid()) {
         setErrorAtIndex(1, 'Ingrese un número telefónico válido');
+        return;
     }
 
     if (!email || !emailRegex.test(email)) {
         setErrorAtIndex(2, 'Ingrese un correo válido');
+        return;
     }
 
     if (!username || username.length < 3 || username.length > 16) {
         setErrorAtIndex(3, 'El usuario debe tener entre 3 y 16 caracteres');
+        return;
     }
 
     if (!password || !confirmPassword || password !== confirmPassword) {
@@ -149,7 +155,9 @@ function Register() {
         })
         .catch((error) => {
         console.error('Error:', error);
-        setErrors(['Error al registrar el profesional']);
+        if(error.message.includes('Username already exists')){
+            setErrorAtIndex(5, 'Usuario ya existe!');
+        }        
         });
     };
 
@@ -230,6 +238,7 @@ function Register() {
                         <input className={styles['register-input']} type='text' ref={emailRef} placeholder='Ingrese su correo electronico'/>
 
                         <label className={styles['register-label']}>Usuario</label>
+                        <span className={`${!errors[5] ? styles['register-errors-message-inactiv'] : styles['register-errors-message-active']}`}>{errors[5]}</span>
                         <span className={`${!errors[3] ? styles['register-errors-message-inactive'] : styles['register-errors-message-active']}`}>{errors[3]}</span>
                         <input className={styles['register-input']} type='text' ref={userRef} placeholder='Ingrese el usuario que desea tener'/>
 
