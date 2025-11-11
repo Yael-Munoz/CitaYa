@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './navbar-center.module.css';
 import { useState } from 'react';
+import logoCalendario from "../../assets/navbar-center/logo-calendario.png"
 
 function NavCenter() {
   const [menuDisplay, setMenuDisplay] = useState(false);
@@ -10,7 +11,7 @@ function NavCenter() {
       <div className={styles['source-contenedor-barra-nav-interno']}>
         {/* Logo + Nombre */}
         <Link to="/" className={styles['source-contenedor-nav-bar-izquierdo']}>
-          <div className={styles['source-contenedor-nav-bar-izquierdo-logo']}></div>
+          <img src={logoCalendario} alt="logoCalendario" className={styles['img-logo-calendario']} />
           <p className={styles['source-contenedor-nav-bar-izquierdo-texto']}>CitaYa</p>
         </Link>
 

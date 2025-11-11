@@ -1,6 +1,7 @@
 import styles from './Login.module.css'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import Logo from '../../assets/logo-transparente.png'
 
 function Login(){
 
@@ -11,16 +12,17 @@ function Login(){
         <>
 
         <div className={styles['contenedor-de-hoja']}>
-            <h1 className={styles['titulo']}>Iniciar Sesion</h1>
+            <img src ={Logo} alt="Logo"/> 
+            <h1 className={styles['titulo']}>Iniciar Sesión</h1>
             <div className={styles['contenedor-de-login-y-boton']}>
                 <div className={styles['contenedor-de-login']}>
 
                     <form id='iniciar-sesion-forma' className={styles['iniciar-sesion-forma']}>
 
-                        <label className={styles['label']}>Usuario</label>
+                        <label className={styles['label']}>Usuario:</label>
                         <input className={styles['input']} type='text' placeholder='Ingrese el usuario que desea tener'></input>
 
-
+                        <label className={styles['label']}>Contraseña:</label>
                         <div className={styles['password-wrapper']}>
                         <input
                             className={styles['input']}

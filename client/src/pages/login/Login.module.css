@@ -131,6 +131,14 @@
   color: rgb(48, 48, 48);
 }
 
+img{
+  width: 24rem;
+  height: auto;
+  margin-bottom: 1rem;
+  background-color: rgb(255,255,255);
+  border-radius: 48px;
+}
+
 
 
 

@@ -84,6 +84,12 @@
   z-index: 0;
 }
 
+.contenedor-botones{
+  align-items: center;
+  text-align: center;
+}
+
+
 .source-boton-de-inicio-de-sesion::before {
   content: '';
   position: absolute;
@@ -184,6 +190,13 @@
   transition: all 0.5s ease;
 }
 
+.logo-img{
+  background-color: rgba(255,255,255);
+  border-radius: 32px;
+  margin-bottom: 22px;
+
+}
+
 @media (max-width: 1024px) {
   .source-contenedor-de-bienvenido {
     width: 50%;
@@ -226,6 +239,15 @@
   .source-boton-de-crear-cuenta {
     font-size: 1em;
   }
+
+  .source-contenedor-de-bienvenido {
+    width: 100%;
+  }
+
+  .logo-img {
+    width: 80%;
+  }
+
 }
 
 ::-webkit-scrollbar {

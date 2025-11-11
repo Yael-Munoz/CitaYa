@@ -25,6 +25,8 @@
   align-items: center;
   justify-content: flex-start;
   text-decoration: none;
+  transition: transform 0.3s ease;
+  width: 32px;
 }
 
 .source-contenedor-nav-bar-izquierdo-logo {
@@ -151,6 +153,17 @@
   font-size: 1rem;
 }
 
+.source-contenedor-nav-bar-izquierdo:hover{
+  transform: translateY(-2.5px);
+}
+
+/*Estilos de imagenes*/
+.img-logo-calendario{
+  width: 32px;
+  height: auto;
+  margin-top: 6px;
+}
+
 /* Media Queries */
 @media (max-width: 768px) {
   .source-contenedor-nav-bar-centro {
@@ -160,6 +173,7 @@
   .source-boton-menu-desplegable {
     display: block;
     justify-self: end;
+    flex-direction: flex-end;
   }
 
   .source-contenedor-barra-nav {
@@ -169,21 +183,38 @@
   }
 
   .contenedor-botones-login-register{
-    margin-left: 0.1rem;
+    margin-left: 1rem;
     gap: 0.5rem;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
 
   }
   .contenedor-botones-login-register .source-boton-register{
-    font-size: var(--font-size-small);
+    font-size: 11px;
     padding: 4px;
     white-space: nowrap;
   }
   .contenedor-botones-login-register .source-boton-login{
-    font-size: var(--font-size-small);
+    font-size: 11px;
     padding: 4px;
     white-space: nowrap;
+  }
+
+  .source-contenedor-nav-bar-izquierdo{
+    width: 32px;
+    height: auto;
+  }
+
+  .source-menu-movil{
+    background-color: white;
+    align-items: center;
+
+  }
+
+  .source-menu-movil a{
+    color: black;
+    font-size: 12px;
+    border-bottom: 1px solid rgb(226, 226, 226);
   }
 }
