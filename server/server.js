@@ -5,7 +5,9 @@ const connectDB = require('./config/db');
 const registerRoute = require('./routes/register');
 const clientRoute = require('./routes/clientRoutes');
 const proRoute = require('./routes/proRoutes');
+const authRoute = require('./routes/auth');
 const cookieParser = require('cookie-parser');
+
 
 require('dotenv').config();
 
@@ -20,6 +22,7 @@ server.use(express.json());
 server.use(cookieParser());
 
 server.use('/register', registerRoute);
+server.use('/auth', authRoute);
 server.use('/client', clientRoute);
 server.use('/pro', proRoute);
 
