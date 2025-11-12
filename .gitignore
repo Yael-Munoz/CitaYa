@@ -26,11 +26,6 @@ __tests__/
 dump/
 *.bson
 
-# Archivos de imagen temporales
-*.png
-*.jpg
-*.jpeg
-*.gif
 
 # Archivos de base de datos o exportaciones
 *.sqlite
