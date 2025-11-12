@@ -161,6 +161,7 @@
   width: 32px;
   height: auto;
   margin-top: 6px;
+  background-color: transparent;
 }
 
 /* Media Queries */
