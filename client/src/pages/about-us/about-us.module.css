@@ -55,6 +55,7 @@
   border-radius: 12px;
   object-fit: cover;
   flex-direction: column;
+  background-color: transparent;
 }
 
 /*More info container styles*/
@@ -102,6 +103,7 @@
   border-radius: 12px;
   object-fit: cover;
   flex-direction: column;
+  background-color: transparent;
 }
 
 .more-info-container .centrado{
