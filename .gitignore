@@ -26,7 +26,6 @@ __tests__/
 dump/
 *.bson
 
-# Archivos de imagenes temporales
 
 # Archivos de base de datos o exportaciones
 *.sqlite
