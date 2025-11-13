@@ -178,7 +178,7 @@ function Register() {
                             <button className={styles['register-cuenta-botones']} onClick={() => {
                                 setAccountType('client')
                                 setIsMoved(false)
-                            }}><i className="fa-regular fa-calendar-days"></i> Solicitar citas</button>
+                            }}><i className={styles["fa-regular fa-calendar-days"]}></i> Solicitar citas</button>
                             <button className={styles['register-cuenta-botones']} onClick={() => {
                                 setAccountType('professional')
                                 setIsMoved(false)
