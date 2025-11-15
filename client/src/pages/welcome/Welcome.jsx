@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import NavCenter from '../../components/navbar-center/navbar-center.jsx';
 import Logo from '../../assets/welcome-page/logo-transparente.png'
+import Footer from '../../components/footer/Footer.jsx'
 
 
 function Welcome() {
@@ -33,7 +34,7 @@ function Welcome() {
 
         <div className={styles['source-fondo']}>
             <div className={styles['source-contenedor-de-pagina-completa']}>
-            <NavCenter />
+                <NavCenter />
                 <div className={styles['source-bloque1']}>           
                     <div className={styles['source-contenedor-de-bienvenido']}>
                         <img src={Logo} alt="Logo" className={styles['logo-img']} data-aos="fade-down"/>
@@ -55,11 +56,14 @@ function Welcome() {
                     </div>
                     
                 </div>
+
             </div>
 
         </div>
-        
+        <Footer />
+
         </>
+        
     );
 }
 
