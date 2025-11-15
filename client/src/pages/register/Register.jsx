@@ -1,12 +1,27 @@
 import styles from './Register.module.css';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import 'react-phone-input-2/lib/style.css';
 import PhoneInput from 'react-phone-input-2';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import Logo from '../../assets/logo-transparente.png'
+import { useLocation } from 'react-router-dom';
 
 
 function Register() {
+
+    /*Inicia codigo para redireccionamiento segun la selección de services.jsx*/
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    const typeFromURL = params.get("type");
+
+    useEffect(() => {
+        if (typeFromURL) {
+            setAccountType(typeFromURL);
+            setIsMoved(false);
+        }
+    }, [typeFromURL]);
+
+    /*Termina redireccionamiento*/
 
     const [accountType, setAccountType] = useState('');
     const [isMoved, setIsMoved] = useState(true);

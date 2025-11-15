@@ -1,13 +1,13 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100vh;
   display: block;
   width: 100%;
-  height: auto;
   background: linear-gradient(270deg, #242424, #5f5f5f, #242424);
   background-size: 600% 600%;
   animation: fondoDesplazado 10s ease infinite;
+  height: 100vh;
+  overflow-x: hidden;
 }
 
 *,

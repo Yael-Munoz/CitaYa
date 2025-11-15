@@ -4,9 +4,7 @@
 } */
 
 .source-contenedor-de-pagina-completa {
-  height: 100vh;
   width: 100vw;
-  overflow-x: hidden;
   font-family: Montserrat;
   margin: 0;
   padding: 0;
@@ -149,6 +147,7 @@
   height: 22rem;
   position: relative;
   top: 10rem;
+  margin-bottom: 14rem;
   padding-top: 1rem;
   display: flex;
   justify-content: center;
