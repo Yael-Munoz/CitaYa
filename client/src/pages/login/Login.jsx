@@ -1,12 +1,47 @@
 import styles from './Login.module.css'
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Logo from '../../assets/logo-transparente.png'
 
 function Login(){
 
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
+
+    const usernameRef = useRef(null);
+    const passwordRef = useRef(null);
+
+    const [errors, setErrors] = useState(['', '']);
+
+    function setErrorAtIndex(index, message) {
+            setErrors(prev => {
+                const copy = [...prev];
+                copy[index] = message;
+                return copy;
+            })
+    }
+
+
+
+    function handleSubmitLogin(e) {
+        e.preventDefault();
+
+        setErrors(['', '']);
+
+        const username = usernameRef.current.value;
+        const password = passwordRef.current.value;
+
+        console.log(username, password);
+
+        if(!username) {
+            setErrorAtIndex(0, 'El usuario es inexistente!');
+            return;
+        }
+        if(!password) {
+            setErrorAtIndex(1, 'Revisa la contraseña!');
+        }
+
+    }
     
     return(
         <>
@@ -17,14 +52,19 @@ function Login(){
             <div className={styles['contenedor-de-login-y-boton']}>
                 <div className={styles['contenedor-de-login']}>
 
-                    <form id='iniciar-sesion-forma' className={styles['iniciar-sesion-forma']}>
+                    <form id='iniciar-sesion-forma' className={styles['iniciar-sesion-forma']} onSubmit={handleSubmitLogin}>
 
                         <label className={styles['label']}>Usuario:</label>
-                        <input className={styles['input']} type='text' placeholder='Ingrese el usuario que desea tener'></input>
+                        <input 
+                            ref={usernameRef} 
+                            className={styles['input']} 
+                            type='text' 
+                            placeholder='Ingrese el usuario que desea tener'/>
 
                         <label className={styles['label']}>Contraseña:</label>
                         <div className={styles['password-wrapper']}>
                         <input
+                            ref={passwordRef}
                             className={styles['input']}
                             type={showPassword ? 'text' : 'password'}
                             placeholder='Ingrese su contraseña'
