@@ -31,10 +31,10 @@ function NavCenter() {
 
         <div className={styles['contenedor-botones-login-register']}>
             <Link to="/login" className={styles['source-boton-login']}>
-            <i class="fa-solid fa-arrow-right-to-bracket"></i> Iniciar sesión
+            <i className={styles["fa-solid fa-arrow-right-to-bracket"]}></i> Iniciar sesión
           </Link>
           <Link to="/register" className={styles['source-boton-register']}>
-              <i class="fa-solid fa-user-plus"></i> Registrate
+              <i className={styles["fa-solid fa-user-plus"]}></i> Registrate
           </Link>
         </div>
         
@@ -44,7 +44,7 @@ function NavCenter() {
           className={styles['source-boton-menu-desplegable']}
           onClick={() => setMenuDisplay(!menuDisplay)}
           >
-          <i className="fa-solid fa-bars"></i>
+          <i className={styles["fa-solid fa-bars"]}></i>
         </div>
 
       </div>

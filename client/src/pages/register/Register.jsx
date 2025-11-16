@@ -5,9 +5,12 @@ import PhoneInput from 'react-phone-input-2';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import Logo from '../../assets/logo-transparente.png'
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 function Register() {
+
+    const navigate = useNavigate();
 
     /*Inicia codigo para redireccionamiento segun la selección de services.jsx*/
     const location = useLocation();
@@ -91,7 +94,11 @@ function Register() {
                 return res.json();
             }
         })
-        .then(data => console.log('Server response: ', data))
+        .then(data => {
+            console.log('Server response: ', data);
+            navigate('/');
+        })
+        
         .catch(error => {
             console.log(error);
             setErrors(['Usuario ya existe!']);
@@ -167,6 +174,7 @@ function Register() {
         })
         .then((data) => {
         console.log('Server response:', data);
+        navigate('/');        
         })
         .catch((error) => {
         console.error('Error:', error);

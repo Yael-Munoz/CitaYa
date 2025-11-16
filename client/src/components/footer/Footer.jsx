@@ -9,7 +9,7 @@ function Footer(){
                 <div className={styles["logo-contact"]}>
                     <div className={styles["logo-section"]}>
                         <img src={Logo} alt="Logo" /> 
-                        <div className={["address-text"]}>
+                        <div className={styles["address-text"]}>
                             <ul>
                                 <li>Tijuana, Baja California, México</li>
                                 <li>Phone: 6641764482</li>

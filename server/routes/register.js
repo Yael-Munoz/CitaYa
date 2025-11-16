@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
                 return res.status(400).json({ message: 'Username already exists' });
             }
 
-            const hashedPassword = await bcrypt.hash(data.password, 10);
+            const hashedPassword = await bcrypt.hash(data.password, 12);
 
             const pro = await Pro.create({
                 role,
@@ -78,7 +78,7 @@ router.post('/', async (req, res) => {
                 return res.status(400).json({ message: 'Username already exists' });
             }
 
-            const hashedPassword = await bcrypt.hash(data.password, 10);
+            const hashedPassword = await bcrypt.hash(data.password, 12);
 
             const client = await Client.create({
                 role, 
