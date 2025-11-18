@@ -33,15 +33,42 @@ function Login(){
 
         console.log(username, password);
 
-        if(!username) {
+        if(!username || '') {
             setErrorAtIndex(0, 'El usuario es inexistente!');
             return;
         }
-        if(!password) {
+        if(!password || '') {
             setErrorAtIndex(1, 'Revisa la contraseña!');
+            return;
         }
 
+        const userData = {
+            username,
+            password
+        }
+
+        fetch('http://localhost:3000/login', {
+            method: 'POST',
+            headers: { 'Content-type' : 'application/json'},
+            credentials: 'include',
+            body: JSON.stringify(userData)
+        })
+        .then(async (res) => {
+            const data = await res.json();
+            if(!res.ok) {
+                console.log('Login Failed: ', data);
+                return;
+            }
+            else {
+                console.log('Login Successful', data);
+                navigate('/dashboard');
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
     }
+
     
     return(
         <>
@@ -55,6 +82,7 @@ function Login(){
                     <form id='iniciar-sesion-forma' className={styles['iniciar-sesion-forma']} onSubmit={handleSubmitLogin}>
 
                         <label className={styles['label']}>Usuario:</label>
+                        <span className={`${!errors[0] ? styles['register-errors-message-inactive'] : styles['register-errors-message-active']}`}>{errors[0]}</span>
                         <input 
                             ref={usernameRef} 
                             className={styles['input']} 
@@ -62,6 +90,7 @@ function Login(){
                             placeholder='Ingrese el usuario que desea tener'/>
 
                         <label className={styles['label']}>Contraseña:</label>
+                        <span className={`${!errors[1] ? styles['register-errors-message-inactive'] : styles['register-errors-message-active']}`}>{errors[1]}</span>
                         <div className={styles['password-wrapper']}>
                         <input
                             ref={passwordRef}
