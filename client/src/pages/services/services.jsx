@@ -10,6 +10,7 @@ import barbero from "../../assets/services-page/barbero.jpg"
 import nutriologo from "../../assets/services-page/nutriologo.jpg"
 import cli from "../../assets/services-page/cli.png"
 import pro from "../../assets/services-page/pro.png"
+import Footer from '../../components/footer/Footer.jsx'
 
 function Services() {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ function Services() {
   }, []);
 
   return (
+    <>
     <div className={styles['source-fondo']}>
       <div className={styles['source-contenedor-de-pagina-completa']}>
         <NavCenter />
@@ -89,6 +91,10 @@ function Services() {
         </section>
       </div>
     </div>
+
+    <Footer />
+
+    </>
   );
 }
 
