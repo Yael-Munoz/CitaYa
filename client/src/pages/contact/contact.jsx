@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import NavCenter from '../../components/navbar-center/navbar-center.jsx';
 import styles from './contact.module.css';
 import SupportImg from '../../assets/contact-page/support-img.png'
+import Footer from '../../components/footer/Footer.jsx'
 
 
 function Contact() {
@@ -44,6 +45,8 @@ function Contact() {
 
                 </div>
             </div>
+
+            <Footer/>
         </>
 
     );

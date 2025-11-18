@@ -3,11 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import NavCenter from '../../components/navbar-center/navbar-center.jsx';
 import teamwork from '../../assets/about-us-page/teamwork.png';
 import check from '../../assets/about-us-page/check.png';
+import Footer from '../../components/footer/Footer.jsx'
 
 function AboutUs() {
   const navigate = useNavigate();
 
   return (
+
+    <>
+
     <div className={styles ["source-fondo"]}>
       <div className={styles['source-contenedor-de-pagina-completa']}>
         <NavCenter />
@@ -64,8 +68,10 @@ function AboutUs() {
             </button>
           </div>
         </section>
-      </div>
+      </div>  
     </div>
+    <Footer />
+    </>
   );
 }
 
