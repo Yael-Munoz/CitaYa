@@ -11,9 +11,9 @@ function Footer(){
                         <img src={Logo} alt="Logo" /> 
                         <div className={styles["address-text"]}>
                             <ul>
-                                <li><i class="fa-solid fa-map-location-dot"></i>  Tijuana, Baja California, México</li>
-                                <li><i class="fa-solid fa-phone"></i> Phone: 6641764482</li>
-                                <li><i class="fa-solid fa-envelope"></i> Mail: citaya@outlook.com</li>
+                                <li><i className={styles["fa-solid fa-map-location-dot"]}></i>  Tijuana, Baja California, México</li>
+                                <li><i className={styles["fa-solid fa-phone"]}></i> Phone: 6641764482</li>
+                                <li><i className={styles["fa-solid fa-envelope"]}></i> Mail: citaya@outlook.com</li>
                             </ul>
                         </div>
                     </div>

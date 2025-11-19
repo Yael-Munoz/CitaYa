@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-router.post('/login', async (req, res) => {
+router.post('/', async (req, res) => {
 
     const data = req.body;
 
@@ -21,20 +21,54 @@ router.post('/login', async (req, res) => {
     const password = data.password;
 
     try {
-        const existingClient = await Client.findOne({ username: username});
-        const existingPro = await Pro.findOne({ username: username});
-        const hashedPassword = data.password;
-
-        if(existingClient) {
-            
+        const existingUser = await (Client.findOne({ username: username}) || await Pro.findOne( { username: username}));
+        if(!existingUser) {
+            console.log('User credentials login attempt: ', data);
+            return res.status(404).json({ message: 'User not found'});
         }
-        if(existingPro) {
+        else {
 
+            
+            const isClientMatch = await bcrypt.compare(password, existingUser.password);
+            const isProMatch = await bcrypt.compare(password, existingUser.password);
+
+            if(isClientMatch || isProMatch) {
+
+                const user = {
+                    _id: existingUser._id,
+                    role: existingUser.role,
+                    username: existingUser.username
+                }
+
+                const accessToken = jwt.sign(user, process.env.JWT_TOKEN);
+                const refreshToken = jwt.sign(user, process.env.JWT_REFRESH_TOKEN);
+
+                res.cookie('accessToken', accessToken, {
+                    httpOnly: true,
+                    sameSite: 'strict',
+                    maxAge: 15 * 60 * 1000
+                });
+
+                res.cookie('refreshToken', refreshToken, {
+                    httpOnly: true,
+                    sameSite: 'strict',
+                    maxAge: 60 * 60 * 1000
+                });
+
+                console.log('User logged in!');
+                return res.status(200).json({ message: 'User found & JWT assigned'});
+            }
+            else {
+                return res.status(401).json({ message: "Credentials don't match"});
+            }
+            
         }
     }
 
     catch(error) {
-
+        return res.status(500).json({ message: 'error'});
     }
 
 });
+
+module.exports = router;
