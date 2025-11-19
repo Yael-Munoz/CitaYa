@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import ClientHeader from '../client_header/ClientHeader';
 import styles from './ClientDashboard.module.css';
 import Modal from 'react-modal';
@@ -13,11 +13,27 @@ function ClientDashboard() {
   const navigate = useNavigate();
 
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
+  
+  const [errors, setErrors] = useState(['', '', '']);
+
+  function setErrorAtIndex(index, message) {
+    setErrors(prev => {
+    const copy = [...prev];
+    copy[index] = message;
+    return copy;
+    });
+  }
+
+  const proUsernameRef = useRef(null);
+  const clientPhoneRef = useRef(null);
+  const [selectedDate, setSelectedDate] = useState('');
+  const eventDescriptionRef = useRef('No se incluyó descripcion');
+
+
 
   function handleLogout() {
 
-    fetch('http://localhost:3000/client', {
+    fetch('http://localhost:3000/client/log-out', {
       method: 'POST',
       credentials: 'include'
     })
@@ -41,8 +57,50 @@ function ClientDashboard() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    setErrors(['', '', '']);
     console.log('Datos del formulario:');
     console.log('Fecha seleccionada:', selectedDate);
+
+
+    const userForm = {
+      proUsername: proUsernameRef.current.value,
+      clientPhone: clientPhoneRef.current.value,
+      selectedDate: selectedDate,
+      eventDescription: eventDescriptionRef.current.value
+    }
+
+    if(!userForm.proUsername) {
+      setErrorAtIndex(0, 'El usuario del profesional es obligatorio!');
+      return;
+    }
+
+    if(!userForm.clientPhone || userForm.clientPhone.length < 10 || userForm.clientPhone.length > 12) {
+      setErrorAtIndex(1, 'Tu número de telefono es obligatorio y tiene que ser valido!');
+      return;
+    }
+    
+    if(!(selectedDate instanceof Date)) {
+      setErrorAtIndex(2, 'Selecciona una fecha valida del calendario!');
+    }
+
+    fetch('http://localhost:3000/client/confirmar-cita', {
+      method: 'POST',
+      headers: {'Content-Type' : 'application/json'},
+      credentials: 'include',
+      body: JSON.stringify({userForm})
+    })
+    .then(async (res) => {
+      const data = await res.json();
+      if(!res.ok) {
+        throw new Error('Could not confirm event');
+      }
+      console.log('Event successfully sent');
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
     setModalOpen(false);
   };
 
@@ -89,11 +147,17 @@ function ClientDashboard() {
       >
         <form onSubmit={handleSubmit} className={styles['contenedor-dentro-de-modal']}>
           <h2 className={styles['titulo-modal']}>Agendar Cita</h2>
-
-          <input placeholder="Usuario del profesionista" required />
-          <input placeholder="Número Telefónico" required />
-
+          <span className={`${!errors[0] ? styles['client-dashboard-errors-message-inactive'] : styles['client-dashboard-errors-message-active']}`}>{errors[0]}</span>
+          <input ref={proUsernameRef} placeholder="Usuario del profesionista"/>
+          
+          
+          <span className={`${!errors[1] ? styles['client-dashboard-errors-message-inactive'] : styles['client-dashboard-errors-message-active']}`}>{errors[1]}</span>
+          <input ref={clientPhoneRef} placeholder="Mi Número Telefónico (XXX-XXX-XXXX)"/>
+          
+          
+          
           <label htmlFor="fecha" className={styles['date-label']}>Selecciona día y hora</label>
+          <span className={`${!errors[2] ? styles['client-dashboard-errors-message-inactive'] : styles['client-dashboard-errors-message-active']}`}>{errors[2]}</span>
           <DatePicker            
             id="fecha"
             selected={selectedDate}
