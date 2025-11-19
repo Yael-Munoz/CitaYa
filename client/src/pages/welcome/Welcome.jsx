@@ -19,7 +19,7 @@ function Welcome() {
     useEffect(() => {
         const interval = setInterval(() => {
             setSlide((prev) => (prev + 1) % slides.length);
-        }, 6000);
+        }, 2500);
 
         return () => clearInterval(interval);
     }, [slides.length]);

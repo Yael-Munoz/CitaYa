@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
     const password = data.password;
 
     try {
-        const existingUser = await (Client.findOne({ username: username}) || await Pro.findOne( { username: username}));
+        const existingUser = (await Client.findOne({ username: username}) || await Pro.findOne({ username: username}));
         if(!existingUser) {
             console.log('User credentials login attempt: ', data);
             return res.status(404).json({ message: 'User not found'});

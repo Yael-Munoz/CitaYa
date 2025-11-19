@@ -16,8 +16,27 @@ function ClientDashboard() {
   const [selectedDate, setSelectedDate] = useState(null);
 
   function handleLogout() {
-    console.log('Cerrando Sesion');
+
+    fetch('http://localhost:3000/client', {
+      method: 'POST',
+      credentials: 'include'
+    })
+    .then(async (res) => {
+      if(!res.ok) {
+        const data = await res.json();
+        console.log(data);
+        throw new Error('We had trouble signing you out');
+      }
+      console.log('Log out successful');
+      navigate('/');
+
+    })
+    .catch(error => {
+      console.log(error);
+    });
+    console.log('Cerrando sesión...');
     navigate('/');
+    
   }
 
   const handleSubmit = (e) => {
