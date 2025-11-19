@@ -21,44 +21,46 @@ function Footer(){
                 </div>
 
 
-                <div className={styles["support-section"]}>
-                    <div className={styles["support-section-title"]}>
-                    <h2>Support</h2>
-                    </div>
-                    <div className={styles["support-section-list"]}>
-                        <ul>
-                            <li> Contact</li>
-                            <li> FAQ's</li>
-                            <li> Sitemap</li>                
-                        </ul>
-                    </div>
-                </div>
 
-                <div className={styles["links-section"]}>
-                    <div className={styles["links-title"]}>
-                    <h2>Quick Links</h2>
+                    <div className={styles["support-section"]}>
+                        <div className={styles["support-section-title"]}>
+                        <h2>Support</h2>
+                        </div>
+                        <div className={styles["support-section-list"]}>
+                            <ul>
+                                <li> Contact</li>
+                                <li> FAQ's</li>
+                                <li> Sitemap</li>                
+                            </ul>
+                        </div>
                     </div>
-                    <div className={styles["links-list"]}>
-                        <ul>
-                            <li> Videos</li>
-                            <li> Tutorials</li>
-                            <li> Gallery</li>                
-                        </ul>
-                    </div>
-                </div>
 
-                <div className={styles["socials-section"]}>
-                    <div className={styles["links-title"]}>
-                    <h2>Socials</h2>
+                    <div className={styles["links-section"]}>
+                        <div className={styles["links-title"]}>
+                        <h2>Quick Links</h2>
+                        </div>
+                        <div className={styles["links-list"]}>
+                            <ul>
+                                <li> Videos</li>
+                                <li> Tutorials</li>
+                                <li> Gallery</li>                
+                            </ul>
+                        </div>
                     </div>
-                    <div className={styles["socials-list"]}>
-                        <ul>
-                            <li> IG</li>
-                            <li> FB</li>
-                            <li> X</li>                
-                        </ul>
+
+                    <div className={styles["socials-section"]}>
+                        <div className={styles["links-title"]}>
+                        <h2>Socials</h2>
+                        </div>
+                        <div className={styles["socials-list"]}>
+                            <ul>
+                                <li><i class="fa-brands fa-instagram"></i> Instagram</li>
+                                <li><i class="fa-brands fa-facebook"></i> Facebook</li>
+                                <li><i class="fa-brands fa-x-twitter"></i> X</li>                
+                            </ul>
+                        </div>
                     </div>
-                </div>
+
 
             </div>
             

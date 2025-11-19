@@ -14,7 +14,7 @@ function Contact() {
             <div className={styles["source-fondo"]}>
                 <div className={styles["contenedor-pagina-completa"]}>
                     <NavCenter />
-                    <div className={styles["hero-section"]}>
+                    <div className={styles["hero-section"]} data-aos="fade-in">
                         <div className={styles["hero-text"]}>
                             <h2>Ponte en contacto con nosotros</h2>
                             <p>Siempre trataremos de atenderte a la brevedad posible, abajo te dejamos nuestros medios
@@ -29,7 +29,7 @@ function Contact() {
 
                     </div>
 
-                    <div className={styles["contact-section"]}>
+                    <div className={styles["contact-section"]}data-aos="fade-in" data-aos-delay="100">
                         <h3>¿Tienes dudas o sugerencias?</h3>
                         <p>Escríbenos a <a href="mailto:soporte@tusitio.com">citaya@outlook.com</a> o envíanos un mensaje directo por WhatsApp.</p>
 

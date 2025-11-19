@@ -4,6 +4,7 @@
     height: 20vh;
     background-color: var(--dark-secondary);
     display: flex;
+    gap: 10rem;
 }
 
 .logo-contacto{
@@ -42,20 +43,91 @@ ul{
     font-style: italic;
 }
 
-.support-section{
-    margin-left: 12rem;
+.support-section,
+.links-section,
+.socials-section {
+    margin-left: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    color: white;
+    font-family: 'Arial', sans-serif;
 }
 
-h2{
-    font-family:'Arial';
+.support-section h2,
+.links-section h2,
+.socials-section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 0.3rem;
+    letter-spacing: 0.05rem;
 }
 
-.links-section{
-    margin-left: 12rem;
+.support-section ul,
+.links-section ul,
+.socials-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-style: normal;
+    color: #8a8a8a;
 }
 
-.socials-section{
-    margin-left: 12rem;
+.support-section ul li,
+.links-section ul li,
+.socials-section ul li {
+    margin-bottom: 0.4rem;
+    transition: color 0.3s ease;
+    cursor: pointer;
 }
+
+.support-section ul li:hover,
+.links-section ul li:hover,
+.socials-section ul li:hover {
+    color: #000000; 
+}
+
+
+/*Vista en celular*/
+@media (max-width: 768px) {
+  .footer-section {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 1rem 0.5rem;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .support-section,
+  .links-section,
+  .socials-section {
+    margin-left: 0;
+    align-items: center;
+  }
+
+  .support-section h2,
+  .links-section h2,
+  .socials-section h2 {
+    font-size: 1.1rem;
+  }
+
+  .support-section ul,
+  .links-section ul,
+  .socials-section ul {
+    padding: 0;
+    font-size: 0.95rem;
+  }
+
+  .support-section ul li,
+  .links-section ul li,
+  .socials-section ul li {
+    margin-bottom: 0.3rem;
+  }
+}
+
+
 
 
