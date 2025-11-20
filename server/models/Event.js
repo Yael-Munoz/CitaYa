@@ -4,7 +4,6 @@ const EventSchema = new mongoose.Schema({
     clientId: {type: String, required: true},
     proId: {type: String, required: true},
     date: {type: Date, required: true},
-    time: {type: String, required: true},
     description: {type: String}
 });
 

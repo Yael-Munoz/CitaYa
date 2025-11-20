@@ -62,13 +62,13 @@ function ClientDashboard() {
     console.log('Datos del formulario:');
     console.log('Fecha seleccionada:', selectedDate);
 
-
     const userForm = {
-      proUsername: proUsernameRef.current.value,
-      clientPhone: clientPhoneRef.current.value,
-      selectedDate: selectedDate,
-      eventDescription: eventDescriptionRef.current.value
-    }
+        proUsername: proUsernameRef.current.value,
+        clientPhone: clientPhoneRef.current.value,
+        selectedDate: selectedDate,
+        eventDescription: eventDescriptionRef.current.value
+        }
+
 
     if(!userForm.proUsername) {
       setErrorAtIndex(0, 'El usuario del profesional es obligatorio!');
@@ -88,14 +88,20 @@ function ClientDashboard() {
       method: 'POST',
       headers: {'Content-Type' : 'application/json'},
       credentials: 'include',
-      body: JSON.stringify({userForm})
+      body: JSON.stringify({
+        proUsername: proUsernameRef.current.value,
+        clientPhone: clientPhoneRef.current.value,
+        selectedDate: selectedDate,
+        eventDescription: eventDescriptionRef.current.value
+        })
     })
     .then(async (res) => {
       const data = await res.json();
       if(!res.ok) {
         throw new Error('Could not confirm event');
       }
-      console.log('Event successfully sent');
+      console.log('Event successfully sent', data);
+      console.log(data);
     })
     .catch(error => {
       console.log(error);
