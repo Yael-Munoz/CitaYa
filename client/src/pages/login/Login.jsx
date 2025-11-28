@@ -57,6 +57,7 @@ function Login(){
             const data = await res.json();
             if(!res.ok) {
                 console.log('Login Failed: ', data);
+                setErrorAtIndex(1, data.message);
                 return;
             }
             else {

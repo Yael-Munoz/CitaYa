@@ -120,6 +120,18 @@ function BookAppointment() {
       ));
       setSelectedEvent(null);
       setEventDetailModalOpen(false);
+
+      apiFetch('http://localhost:3000/dashboard', {
+        method: 'DELETE',
+        headers: {'Content-Type' : 'application/json'},
+        credentials: 'include'
+      }).
+      then(res => {
+        const data = res.body;
+      })
+      .catch(error => {
+        console.log(error);
+      });
     }
   };
 

@@ -137,12 +137,7 @@ function ProDashboard() {
             </button>
           </div>
 
-          <section className={styles['pro-dashboard-section']}>
-            <h3>Resumen semanal</h3>
-            <p><strong>Total citas:</strong> {events.length}</p>
-            <p><strong>Canceladas:</strong> 2</p>
-            <p><strong>Confirmadas:</strong> {events.length - 2}</p>
-          </section>
+          
 
           <button className={styles['pro-logout-btn']} onClick={handleLogout}>
             Cerrar sesión

@@ -59,7 +59,7 @@ router.post('/', async (req, res) => {
                 return res.status(200).json({ message: 'User found & JWT assigned'});
             }
             else {
-                return res.status(401).json({ message: "Credentials don't match"});
+                return res.status(401).json({ message: "Revisa la contraseña!"});
             }
             
         }
