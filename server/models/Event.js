@@ -1,10 +1,16 @@
 const mongoose = require('mongoose');
 
 const EventSchema = new mongoose.Schema({
-    clientId: {type: String, required: true},
-    proId: {type: String, required: true},
-    date: {type: Date, required: true},
-    description: {type: String}
+    title: {type: String},
+    clientId: {type: mongoose.Schema.Types.ObjectId, ref: 'Client',required: true},
+    proId: {type: mongoose.Schema.Types.ObjectId, ref: 'Professional',required: true},
+    start: {type: Date, required: true},
+    end: {type: Date, 
+        default: function() {
+            return new Date(this.start.getTime() + 30 * 60000);
+        }
+    },
+    description: {type: String, default: 'No se agrego una descripcion'}
 });
 
 
