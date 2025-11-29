@@ -22,11 +22,11 @@ function BookAppointment() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [clientUser, setClientUser] = useState('');
+  const [clientPhone, setClientPhone] = useState('');
 
   const isMobile = window.innerWidth < 768;
   const initialView = isMobile ? 'timeGridWeek' : 'dayGridMonth';
 
-  // Load existing events from backend
   useEffect(() => {
     apiFetch('http://localhost:3000/pro/events', {
       method: 'GET',
@@ -37,27 +37,28 @@ function BookAppointment() {
         if (!res.ok) throw new Error('Unauthorized');
         const data = await res.json();
 
-        // Map backend events to FullCalendar format
         const formatted = data.map(event => ({
           id: event._id,
           title: event.clientId?.username || 'Cita',
           start: event.start,
           end: event.end,
-          extendedProps: { description: event.description }
+          extendedProps: { 
+            description: event.description,
+            clientPhone: event.clientPhone || 'N/A'
+          }
         }));
 
         setEvents(formatted);
       })
-      .catch(error => {
-        //console.log(error);
-      });
+      .catch(error => {});
   }, []);
 
-  // Crear evento
   const handleDateSelect = (selectInfo) => {
     setSelectedInfo(selectInfo);
     setTitle('');
     setDescription('');
+    setClientUser('');
+    setClientPhone('');
     setModalOpen(true);
   };
 
@@ -66,6 +67,7 @@ function BookAppointment() {
       const newEvent = {
         title,
         clientUsername: clientUser,
+        clientPhone,
         start: selectedInfo.start.toISOString(),
         end: selectedInfo.end ? selectedInfo.end.toISOString() : null,
         description
@@ -86,16 +88,18 @@ function BookAppointment() {
         }
 
         if (!res.ok) {
-          throw new Error('Failed to save event')
-        };
-        //console.log(data);
+          throw new Error('Failed to save event');
+        }
 
         setEvents([...events, {
           id: data._id,
           title: clientUser,
           start: data.start,
           end: data.end,
-          extendedProps: { description: data.description } 
+          extendedProps: { 
+            description: data.description,
+            clientPhone: data.clientPhone || 'N/A'
+          }
         }]);
 
         setModalOpen(false);
@@ -103,46 +107,37 @@ function BookAppointment() {
         setTitle('');
         setDescription('');
         setClientUser('');
+        setClientPhone('');
         setClientError('');
-      } catch (error) {
-        //console.error(error);
-      }
+      } catch (error) {}
     }
   };
 
-  // Mostrar detalles del evento
   const handleEventClick = (clickInfo) => {
     setSelectedEvent(clickInfo.event);
     setEventDetailModalOpen(true);
   };
 
-  // Eliminar evento
-    const handleDeleteEvent = () => {
+  const handleDeleteEvent = () => {
     if (selectedEvent) {
       apiFetch('http://localhost:3000/dashboard/delete-event', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: selectedEvent.id })
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: selectedEvent.id })
       })
       .then(async (res) => {
         const data = await res.json();
-        if (!res.ok) {
-          throw new Error(data.message);
-        }
+        if (!res.ok) throw new Error(data.message);
 
-        // Update local state after successful deletion
         setEvents(events.filter(e => e.id !== selectedEvent.id));
         selectedEvent.remove();
         setSelectedEvent(null);
         setEventDetailModalOpen(false);
-
-        //console.log(data);
       })
-      .catch(error => {
-        //console.log(error);
-      });
-  }
-};
+      .catch(error => {});
+    }
+  };
+
   return (
     <div className={styles['contenedor-pagina']}>
       <ProHeader />
@@ -173,7 +168,6 @@ function BookAppointment() {
             eventClick={handleEventClick}
           />
 
-          {/* Modal Crear Evento */}
           <Modal
             isOpen={modalOpen}
             onRequestClose={() => setModalOpen(false)}
@@ -182,6 +176,7 @@ function BookAppointment() {
             overlayClassName={styles['overlay']}
           >
             <h2 className={styles['titulo-modal']}>Agregar Evento</h2>
+
             <input
               type="text"
               placeholder="Nombre del evento"
@@ -189,15 +184,18 @@ function BookAppointment() {
               onChange={(e) => setTitle(e.target.value)}
               className={styles['input-evento']}
             />
-
-            <span className={styles['error-message']}>
-              {clientError}
-            </span>
             <input
               type="text"
               placeholder="Usuario del cliente"
               value={clientUser}
               onChange={(e) => setClientUser(e.target.value)}
+              className={styles['input-evento']}
+            />
+            <input
+              type="text"
+              placeholder="Teléfono del cliente"
+              value={clientPhone}
+              onChange={(e) => setClientPhone(e.target.value)}
               className={styles['input-evento']}
             />
 
@@ -208,6 +206,9 @@ function BookAppointment() {
               className={styles['input-evento']}
               rows={3}
             />
+
+            <span className={styles['error-message']}>{clientError}</span>
+
             <div className={styles['botones-modal']}>
               <button onClick={handleEventAdd} className={styles['boton-agregar']}>
                 Agregar
@@ -218,7 +219,6 @@ function BookAppointment() {
             </div>
           </Modal>
 
-          {/* Modal Detalles del Evento */}
           <Modal
             isOpen={eventDetailModalOpen}
             onRequestClose={() => setEventDetailModalOpen(false)}
@@ -230,6 +230,10 @@ function BookAppointment() {
             <p className={styles['descripcion-evento']}>
               {selectedEvent?.extendedProps.description || ''}
             </p>
+            <p className={styles['descripcion-evento']}>
+              Teléfono del cliente: {selectedEvent?.extendedProps.clientPhone || 'N/A'}
+            </p>
+
             <div className={styles['botones-modal']}>
               <button onClick={handleDeleteEvent} className={styles['boton-agregar']}>
                 Eliminar

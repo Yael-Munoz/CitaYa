@@ -35,9 +35,7 @@ function ClientDashboard() {
         const data = await res.json();
         setClientName(data.name || data.username || 'Cliente');
       })
-      .catch(error => {
-      //  console.log(error)
-      });
+      .catch(error => {});
   }, []);
 
   // Load client events
@@ -52,9 +50,7 @@ function ClientDashboard() {
         const data = await res.json();
         setEvents(data);
       })
-      .catch(error => {
-        // console.log(error)
-      });
+      .catch(error => {});
   }, []);
 
   function setErrorAtIndex(index, message) {
@@ -71,19 +67,12 @@ function ClientDashboard() {
       credentials: 'include'
     })
       .then(async (res) => {
-        if (!res.ok) {
-          const data = await res.json();
-          // console.log(data);
-          throw new Error('We had trouble signing you out');
-        }
-        // console.log('Log out successful');
+        if (!res.ok) throw new Error('We had trouble signing you out');
         navigate('/');
       })
       .catch(error => {
-        // console.log(error);
+        navigate('/');
       });
-    // console.log('Cerrando sesión...');
-    navigate('/');
   }
 
   const handleDeleteEvent = async (id) => {
@@ -94,21 +83,10 @@ function ClientDashboard() {
         credentials: 'include',
         body: JSON.stringify({ id })
       });
-
       const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.message);
-      }
-
-      // Remove event locally
+      if (!res.ok) throw new Error(data.message);
       setEvents((prev) => prev.filter((ev) => ev._id !== id));
-
-      // console.log('Event deleted:', data);
-
-    } catch (err) {
-      // console.error(err);
-    }
+    } catch (err) {}
   };
 
   const handleSubmit = (e) => {
@@ -149,18 +127,12 @@ function ClientDashboard() {
         if (res.status === 404) {
           setErrorAtIndex(0, data.message);
         }
-        if (!res.ok) {
-          // console.log(data);
-          throw new Error('Could not confirm event');
-        }
-        // console.log('Event successfully sent', data);
+        if (!res.ok) throw new Error('Could not confirm event');
 
         setEvents([...events, data]);
         setModalOpen(false);
       })
-      .catch(error => {
-        // console.log(error);
-      });
+      .catch(error => {});
   };
 
   return (
@@ -208,8 +180,8 @@ function ClientDashboard() {
                   </div>
                   <p><strong>Fecha:</strong> {start.toLocaleDateString('es-ES')}</p>
                   <p><strong>Hora:</strong> {timeDisplay}</p>
-                  <p><strong>Profesional:</strong> {event.proId?.username || 'N/A'}</p>
-                  <p><strong>Numero telefonico:</strong></p>
+                  <p><strong>Profesional:</strong> {event.proUsername || 'N/A'}</p>
+                  <p><strong>Numero telefonico:</strong> {event.proPhone || 'N/A'}</p>
                   <p><strong>Descripción:</strong> {event.description}</p>
                 </div>
               );

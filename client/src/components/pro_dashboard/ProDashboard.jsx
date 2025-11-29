@@ -10,7 +10,6 @@ function ProDashboard() {
   const [proName, setProName] = useState('');
 
   useEffect(() => {
-    // Load professional's profile
     apiFetch('http://localhost:3000/dashboard', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
@@ -21,13 +20,10 @@ function ProDashboard() {
         const data = await res.json();
         setProName(data.name || data.username || 'Profesional');
       })
-      .catch(error => {
-        //console.error(error)
-      });
+      .catch(error => {});
   }, []);
 
   useEffect(() => {
-    // Load events
     apiFetch('http://localhost:3000/pro/events', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
@@ -38,9 +34,7 @@ function ProDashboard() {
         const data = await res.json();
         setEvents(data);
       })
-      .catch(error => {
-        //console.log(error)
-        });
+      .catch(error => {});
   }, []);
 
   const handleLogout = () => {
@@ -51,22 +45,15 @@ function ProDashboard() {
       .then(async (res) => {
         if (!res.ok) {
           const data = await res.json();
-          //console.log(data);
           throw new Error('We had trouble signing you out');
         }
-        //console.log('Log out successful');
         navigate('/');
       })
-      .catch(error => {
-        //console.log(error);
-      });
-    //console.log('Cerrando sesión...');
+      .catch(error => {});
     navigate('/');
   };
 
-  const handleViewClients = () => {
-    //console.log('Ver lista de clientes');
-  };
+  const handleViewClients = () => {};
 
   return (
     <>
@@ -117,7 +104,8 @@ function ProDashboard() {
                         day: 'numeric',
                         month: 'short'
                       })}{' '}
-                      - {timeDisplay} con {event.clientId?.username || 'Cliente'}
+                      - {timeDisplay} con {event.clientId?.username || 'Cliente'}{' '}
+                      {event.clientId?.phone ? `(${event.clientId.phone})` : ''}
                     </li>
                   );
                 })
@@ -140,8 +128,6 @@ function ProDashboard() {
               Ver clientes
             </button>
           </div>
-
-          
 
           <button className={styles['pro-logout-btn']} onClick={handleLogout}>
             Cerrar sesión
