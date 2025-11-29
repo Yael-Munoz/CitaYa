@@ -39,16 +39,17 @@ function BookAppointment() {
 
         // Map backend events to FullCalendar format
         const formatted = data.map(event => ({
+          id: event._id,
           title: event.clientId?.username || 'Cita',
           start: event.start,
           end: event.end,
-          description: event.description
+          extendedProps: { description: event.description }
         }));
 
         setEvents(formatted);
       })
       .catch(error => {
-        console.log(error);
+        //console.log(error);
       });
   }, []);
 
@@ -84,13 +85,17 @@ function BookAppointment() {
           return;
         }
 
-        if (!res.ok) throw new Error('Failed to save event');
+        if (!res.ok) {
+          throw new Error('Failed to save event')
+        };
+        //console.log(data);
 
         setEvents([...events, {
+          id: data._id,
           title: clientUser,
           start: data.start,
           end: data.end,
-          description: data.description
+          extendedProps: { description: data.description } 
         }]);
 
         setModalOpen(false);
@@ -99,8 +104,8 @@ function BookAppointment() {
         setDescription('');
         setClientUser('');
         setClientError('');
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        //console.error(error);
       }
     }
   };
@@ -112,29 +117,32 @@ function BookAppointment() {
   };
 
   // Eliminar evento
-  const handleDeleteEvent = () => {
+    const handleDeleteEvent = () => {
     if (selectedEvent) {
-      selectedEvent.remove();
-      setEvents(events.filter(
-        e => !(new Date(e.start).getTime() === selectedEvent.start.getTime() && e.title === selectedEvent.title)
-      ));
-      setSelectedEvent(null);
-      setEventDetailModalOpen(false);
+      apiFetch('http://localhost:3000/dashboard/delete-event', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: selectedEvent.id })
+      })
+      .then(async (res) => {
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.message);
+        }
 
-      apiFetch('http://localhost:3000/dashboard', {
-        method: 'DELETE',
-        headers: {'Content-Type' : 'application/json'},
-        credentials: 'include'
-      }).
-      then(res => {
-        const data = res.body;
+        // Update local state after successful deletion
+        setEvents(events.filter(e => e.id !== selectedEvent.id));
+        selectedEvent.remove();
+        setSelectedEvent(null);
+        setEventDetailModalOpen(false);
+
+        //console.log(data);
       })
       .catch(error => {
-        console.log(error);
+        //console.log(error);
       });
-    }
-  };
-
+  }
+};
   return (
     <div className={styles['contenedor-pagina']}>
       <ProHeader />

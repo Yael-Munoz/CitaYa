@@ -43,6 +43,31 @@
   overflow: auto;
 }
 
+.contenedor-boton-para-eliminar {
+  position: relative;
+}
+
+.boton-para-eliminar {
+  position: absolute;
+  top: 8px;      
+  right: 8px;    
+  width: 24px;   
+  height: 24px;
+  border: none;
+  border-radius: 50%; 
+  background-color: #e74c3c;
+  color: #fff;  
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.boton-para-eliminar:hover {
+  background-color: #c0392b; 
+}
+
 .appointment-card {
   background: #a5a5a5;
   padding: 1rem;

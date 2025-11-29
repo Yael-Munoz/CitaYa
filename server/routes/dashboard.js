@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Client = require('../models/Client');
 const Pro = require('../models/Pro');
+const Event = require('../models/Event');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -36,41 +37,27 @@ router.get('/', (req, res) => {
     
 });
 
-router.delete('/delete-event', (req, res) => {
-    const token = req.cookies.accessToken;
-    const event = req.body;
-    if(!token) {
-        return res.status(401).json({ message: 'No token provided'});
-    }
-    if(!event) {
-        return res.status(401).json({message: 'No event received'});
-    }
-    
-        try {
-            
-            if(!jwt.verify(token, process.env.JWT_TOKEN)) {
-                throw new Error('Token is invalid');
-            };
+router.delete('/delete-event', async (req, res) => {
+  const token = req.cookies.accessToken;
+  const { id } = req.body;
 
-            console.log(event);
+  if (!token) return res.status(401).json({ message: 'No token provided' });
+  if (!id) return res.status(400).json({ message: 'No event id received' });
 
-            
-            
-        }
-        catch(error) {
-                return res.status(403).json({ error: error});
-        }
-        
+  try {
     
+    jwt.verify(token, process.env.JWT_TOKEN);
+
+    const deletedEvent = await Event.findByIdAndDelete(id);
+    if (!deletedEvent) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+
+    return res.status(200).json({ message: 'Event deleted successfully' });
+  } catch (error) {
+    return res.status(403).json({ message: 'Invalid or expired token' });
+  }
 });
-
-
-
-
-
-
-
-
 
 
 module.exports = router;

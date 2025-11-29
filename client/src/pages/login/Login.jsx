@@ -31,7 +31,7 @@ function Login(){
         const username = usernameRef.current.value;
         const password = passwordRef.current.value;
 
-        console.log(username, password);
+        //console.log(username, password);
 
         if(!username || '') {
             setErrorAtIndex(0, 'El usuario es inexistente!');
@@ -56,17 +56,17 @@ function Login(){
         .then(async (res) => {
             const data = await res.json();
             if(!res.ok) {
-                console.log('Login Failed: ', data);
+                //console.log('Login Failed: ', data);
                 setErrorAtIndex(1, data.message);
                 return;
             }
             else {
-                console.log('Login Successful', data);
+                //console.log('Login Successful', data);
                 navigate('/dashboard');
             }
         })
         .catch(error => {
-            console.log(error);
+            //console.log(error);
         });
     }
 

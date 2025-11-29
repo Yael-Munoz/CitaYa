@@ -21,7 +21,9 @@ function ProDashboard() {
         const data = await res.json();
         setProName(data.name || data.username || 'Profesional');
       })
-      .catch(err => console.error(err));
+      .catch(error => {
+        //console.error(error)
+      });
   }, []);
 
   useEffect(() => {
@@ -36,7 +38,9 @@ function ProDashboard() {
         const data = await res.json();
         setEvents(data);
       })
-      .catch(err => console.error(err));
+      .catch(error => {
+        //console.log(error)
+        });
   }, []);
 
   const handleLogout = () => {
@@ -47,21 +51,21 @@ function ProDashboard() {
       .then(async (res) => {
         if (!res.ok) {
           const data = await res.json();
-          console.log(data);
+          //console.log(data);
           throw new Error('We had trouble signing you out');
         }
-        console.log('Log out successful');
+        //console.log('Log out successful');
         navigate('/');
       })
       .catch(error => {
-        console.log(error);
+        //console.log(error);
       });
-    console.log('Cerrando sesión...');
+    //console.log('Cerrando sesión...');
     navigate('/');
   };
 
   const handleViewClients = () => {
-    console.log('Ver lista de clientes');
+    //console.log('Ver lista de clientes');
   };
 
   return (

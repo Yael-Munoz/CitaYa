@@ -95,12 +95,12 @@ function Register() {
             }
         })
         .then(data => {
-            console.log('Server response: ', data);
+            //console.log('Server response: ', data);
             navigate('/');
         })
         
         .catch(error => {
-            console.log(error);
+            //console.log(error);
             setErrors(['Usuario ya existe!']);
         });
 
@@ -173,11 +173,11 @@ function Register() {
         }
         })
         .then((data) => {
-        console.log('Server response:', data);
+        //console.log('Server response:', data);
         navigate('/');        
         })
         .catch((error) => {
-        console.error('Error:', error);
+        //console.error('Error:', error);
         if(error.message.includes('Username already exists')){
             setErrorAtIndex(5, 'Usuario ya existe!');
         }        

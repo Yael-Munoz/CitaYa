@@ -23,8 +23,8 @@ function ClientDashboard() {
   const [startDate, setStartDate] = useState('');
   const eventDescriptionRef = useRef('No se incluyó descripcion');
 
+  // Load client profile
   useEffect(() => {
-    // Load client profile
     apiFetch('http://localhost:3000/dashboard', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
@@ -35,11 +35,13 @@ function ClientDashboard() {
         const data = await res.json();
         setClientName(data.name || data.username || 'Cliente');
       })
-      .catch(err => console.error(err));
+      .catch(error => {
+      //  console.log(error)
+      });
   }, []);
 
+  // Load client events
   useEffect(() => {
-    // Load client events
     apiFetch('http://localhost:3000/client/events', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
@@ -50,7 +52,9 @@ function ClientDashboard() {
         const data = await res.json();
         setEvents(data);
       })
-      .catch(err => console.error(err));
+      .catch(error => {
+        // console.log(error)
+      });
   }, []);
 
   function setErrorAtIndex(index, message) {
@@ -69,18 +73,43 @@ function ClientDashboard() {
       .then(async (res) => {
         if (!res.ok) {
           const data = await res.json();
-          console.log(data);
+          // console.log(data);
           throw new Error('We had trouble signing you out');
         }
-        console.log('Log out successful');
+        // console.log('Log out successful');
         navigate('/');
       })
       .catch(error => {
-        console.log(error);
+        // console.log(error);
       });
-    console.log('Cerrando sesión...');
+    // console.log('Cerrando sesión...');
     navigate('/');
   }
+
+  const handleDeleteEvent = async (id) => {
+    try {
+      const res = await apiFetch('http://localhost:3000/dashboard/delete-event', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ id })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message);
+      }
+
+      // Remove event locally
+      setEvents((prev) => prev.filter((ev) => ev._id !== id));
+
+      // console.log('Event deleted:', data);
+
+    } catch (err) {
+      // console.error(err);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -121,16 +150,16 @@ function ClientDashboard() {
           setErrorAtIndex(0, data.message);
         }
         if (!res.ok) {
-          console.log(data);
+          // console.log(data);
           throw new Error('Could not confirm event');
         }
-        console.log('Event successfully sent', data);
+        // console.log('Event successfully sent', data);
 
         setEvents([...events, data]);
         setModalOpen(false);
       })
       .catch(error => {
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -169,9 +198,18 @@ function ClientDashboard() {
 
               return (
                 <div key={idx} className={styles['appointment-card']}>
+                  <div className={styles['contenedor-boton-para-eliminar']}>
+                    <button
+                      className={styles['boton-para-eliminar']}
+                      onClick={() => handleDeleteEvent(event._id)}  
+                    >
+                      X
+                    </button>
+                  </div>
                   <p><strong>Fecha:</strong> {start.toLocaleDateString('es-ES')}</p>
                   <p><strong>Hora:</strong> {timeDisplay}</p>
                   <p><strong>Profesional:</strong> {event.proId?.username || 'N/A'}</p>
+                  <p><strong>Numero telefonico:</strong></p>
                   <p><strong>Descripción:</strong> {event.description}</p>
                 </div>
               );

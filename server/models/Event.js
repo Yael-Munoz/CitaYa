@@ -10,6 +10,8 @@ const EventSchema = new mongoose.Schema({
             return new Date(this.start.getTime() + 30 * 60000);
         }
     },
+    clientPhone: {type: String},
+    proPhone: {type: String},
     description: {type: String, default: 'No se agrego una descripcion'}
 });
 
