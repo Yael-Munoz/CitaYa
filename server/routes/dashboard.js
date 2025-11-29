@@ -36,6 +36,34 @@ router.get('/', (req, res) => {
     
 });
 
+router.delete('/delete-event', (req, res) => {
+    const token = req.cookies.accessToken;
+    const event = req.body;
+    if(!token) {
+        return res.status(401).json({ message: 'No token provided'});
+    }
+    if(!event) {
+        return res.status(401).json({message: 'No event received'});
+    }
+    
+        try {
+            
+            if(!jwt.verify(token, process.env.JWT_TOKEN)) {
+                throw new Error('Token is invalid');
+            };
+
+            console.log(event);
+
+            
+            
+        }
+        catch(error) {
+                return res.status(403).json({ error: error});
+        }
+        
+    
+});
+
 
 
 
