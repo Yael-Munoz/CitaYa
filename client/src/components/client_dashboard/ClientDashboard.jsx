@@ -17,6 +17,7 @@ function ClientDashboard() {
   const [errors, setErrors] = useState(['', '', '']);
   const [events, setEvents] = useState([]);
   const [clientName, setClientName] = useState('');
+  const [clientPhone, setClientPhone] = useState('');
 
   const proUsernameRef = useRef(null);
   const clientPhoneRef = useRef(null);
@@ -34,6 +35,7 @@ function ClientDashboard() {
         if (!res.ok) throw new Error('Unauthorized');
         const data = await res.json();
         setClientName(data.name || data.username || 'Cliente');
+        setClientPhone(data.phone || ''); // autofill phone
       })
       .catch(error => {});
   }, []);
@@ -95,7 +97,7 @@ function ClientDashboard() {
 
     const userForm = {
       proUsername: proUsernameRef.current.value,
-      clientPhone: clientPhoneRef.current.value,
+      clientPhone: clientPhone,
       startDate: startDate,
       eventDescription: eventDescriptionRef.current.value
     };
@@ -215,7 +217,12 @@ function ClientDashboard() {
           <input ref={proUsernameRef} placeholder="Usuario del profesionista" />
 
           <span className={`${!errors[1] ? styles['client-dashboard-errors-message-inactive'] : styles['client-dashboard-errors-message-active']}`}>{errors[1]}</span>
-          <input ref={clientPhoneRef} placeholder="Mi Número Telefónico (XXX-XXX-XXXX)" />
+          <input 
+            ref={clientPhoneRef} 
+            placeholder="Mi Número Telefónico (XXX-XXX-XXXX)" 
+            value={clientPhone} 
+            onChange={(e) => setClientPhone(e.target.value)}
+          />
 
           <label htmlFor="fecha" className={styles['date-label']}>Selecciona día y hora</label>
           <span className={`${!errors[2] ? styles['client-dashboard-errors-message-inactive'] : styles['client-dashboard-errors-message-active']}`}>{errors[2]}</span>
