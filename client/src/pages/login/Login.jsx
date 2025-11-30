@@ -2,6 +2,7 @@ import styles from './Login.module.css'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Logo from '../../assets/logo-transparente.png'
+import { Link } from 'react-router-dom'
 
 function Login(){
 
@@ -12,7 +13,7 @@ function Login(){
         <>
 
         <div className={styles['contenedor-de-hoja']}>
-            <img src ={Logo} alt="Logo"/> 
+            <Link to="/"><img src ={Logo} className={styles['contenedor-hoja-logo']} alt="Logo"/></Link>
             <h1 className={styles['titulo']}>Iniciar Sesión</h1>
             <div className={styles['contenedor-de-login-y-boton']}>
                 <div className={styles['contenedor-de-login']}>

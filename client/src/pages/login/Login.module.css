@@ -10,6 +10,11 @@
   flex-direction: column;
 }
 
+.contenedor-hoja-logo{
+  display: block;
+  margin: 0 auto 1rem auto;
+}
+
 .titulo{
   color: #e7e7e7;
   font-size: 2.3em;

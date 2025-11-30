@@ -9,6 +9,11 @@
   font-family: sans-serif;
 }
 
+.logo{
+  display: block;
+  margin: 0 auto 1rem auto;
+}
+
 
 .pregunta-base {
   transform: translateY(0) scale(1);
