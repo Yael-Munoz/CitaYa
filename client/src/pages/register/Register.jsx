@@ -128,7 +128,7 @@ function Register() {
         return;
     }
 
-    if (!parsedPhone) {
+    if (!parsedPhone || parsedPhone.length < 12 || parsedPhone.length > 13) {
         setErrorAtIndex(1, 'Ingrese un número telefónico válido');
         return;
     }

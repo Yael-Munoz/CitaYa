@@ -11,7 +11,6 @@ import Modal from 'react-modal';
 import { apiFetch } from '../../utils/apiFetch';
 import { API_BASE_URL } from '../../config/apiConfig';
 
-
 Modal.setAppElement('#root');
 
 function BookAppointment() {
@@ -24,7 +23,6 @@ function BookAppointment() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [clientUser, setClientUser] = useState('');
-  const [clientPhone, setClientPhone] = useState('');
 
   const isMobile = window.innerWidth < 768;
   const initialView = isMobile ? 'timeGridWeek' : 'dayGridMonth';
@@ -41,12 +39,13 @@ function BookAppointment() {
 
         const formatted = data.map(event => ({
           id: event._id,
-          title: event.clientId?.username || 'Cita',
+          title: event.title || 'Cita',
           start: event.start,
           end: event.end,
           extendedProps: { 
             description: event.description,
-            clientPhone: event.clientPhone || 'N/A'
+            clientPhone: event.clientPhone || 'N/A',
+            clientUsername: event.clientId?.username || 'Cliente'
           }
         }));
 
@@ -60,59 +59,61 @@ function BookAppointment() {
     setTitle('');
     setDescription('');
     setClientUser('');
-    setClientPhone('');
+    setClientError('');
     setModalOpen(true);
   };
 
   const handleEventAdd = async () => {
-    if (title && selectedInfo) {
-      const newEvent = {
-        title,
-        clientUsername: clientUser,
-        clientPhone,
-        start: selectedInfo.start.toISOString(),
-        end: selectedInfo.end ? selectedInfo.end.toISOString() : null,
-        description
-      };
-
-      try {
-        const res = await apiFetch(API_BASE_URL + '/pro/add-event', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(newEvent)
-        });
-
-        const data = await res.json();
-
-        if (res.status === 404) {
-          setClientError(data.message);
-          return;
-        }
-
-        if (!res.ok) {
-          throw new Error('Failed to save event');
-        }
-
-        setEvents([...events, {
-          id: data._id,
-          title: clientUser,
-          start: data.start,
-          end: data.end,
-          extendedProps: { 
-            description: data.description,
-            clientPhone: data.clientPhone || 'N/A'
-          }
-        }]);
-
-        setModalOpen(false);
-        setSelectedInfo(null);
-        setTitle('');
-        setDescription('');
-        setClientUser('');
-        setClientPhone('');
-        setClientError('');
-      } catch (error) {}
+    if (!clientUser || !selectedInfo) {
+      setClientError('Debe ingresar el usuario del cliente');
+      return;
     }
+
+    const newEvent = {
+      title,
+      clientUsername: clientUser,
+      start: selectedInfo.start.toISOString(),
+      end: selectedInfo.end ? selectedInfo.end.toISOString() : null,
+      description
+    };
+
+    try {
+      const res = await apiFetch(API_BASE_URL + '/pro/add-event', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newEvent)
+      });
+
+      const data = await res.json();
+
+      if (res.status === 404) {
+        setClientError(data.message);
+        return;
+      }
+
+      if (!res.ok) {
+        throw new Error('Failed to save event');
+      }
+
+      setEvents([...events, {
+        id: data._id,
+        title: data.title || 'Cita',
+        start: data.start,
+        end: data.end,
+        extendedProps: { 
+          description: data.description,
+          clientPhone: data.clientPhone || 'N/A',
+          clientUsername: data.clientId?.username || clientUser
+        }
+      }]);
+
+      setModalOpen(false);
+      setSelectedInfo(null);
+      setTitle('');
+      setDescription('');
+      setClientUser('');
+      setClientError('');
+    } catch (error) {}
   };
 
   const handleEventClick = (clickInfo) => {
@@ -181,7 +182,7 @@ function BookAppointment() {
 
             <input
               type="text"
-              placeholder="Nombre del evento"
+              placeholder="Nombre del evento (opcional)"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               className={styles['input-evento']}
@@ -192,14 +193,7 @@ function BookAppointment() {
               value={clientUser}
               onChange={(e) => setClientUser(e.target.value)}
               className={styles['input-evento']}
-            />
-            <input
-              type="text"
-              placeholder="Teléfono del cliente"
-              value={clientPhone}
-              onChange={(e) => setClientPhone(e.target.value)}
-              className={styles['input-evento']}
-            />
+            />            
 
             <textarea
               placeholder="Descripción del evento (opcional)"
@@ -228,12 +222,15 @@ function BookAppointment() {
             className={styles['modal']}
             overlayClassName={styles['overlay']}
           >
-            <h2 className={styles['titulo-modal']}>{selectedEvent?.title}</h2>
+            <h2 className={styles['titulo-modal']}>{selectedEvent?.title || 'Evento'}</h2>
             <p className={styles['descripcion-evento']}>
-              {selectedEvent?.extendedProps.description || ''}
+              Cliente: {selectedEvent?.extendedProps.clientUsername || 'N/A'}
             </p>
             <p className={styles['descripcion-evento']}>
               Teléfono del cliente: {selectedEvent?.extendedProps.clientPhone || 'N/A'}
+            </p>
+            <p className={styles['descripcion-evento']}>
+              Descripción: {selectedEvent?.extendedProps.description || ''}
             </p>
 
             <div className={styles['botones-modal']}>

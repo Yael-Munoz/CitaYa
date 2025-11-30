@@ -30,7 +30,6 @@ router.post('/add-event', async (req, res) => {
             return res.status(400).json({ message: 'Client username required' });
         }
 
-        // Find client by username
         const client = await Client.findOne({ username: clientUsername });
         if (!client) {
             return res.status(404).json({ message: 'No se encontro el cliente' });
@@ -43,11 +42,9 @@ router.post('/add-event', async (req, res) => {
             start: new Date(start),
             end: end ? new Date(end) : undefined,
             description: description || 'No se agregó descripción',
-            clientPhone: client.phone, // Save client phone
-            proPhone: decoded.phone || '' // Optionally save pro phone if you store it in JWT
+            clientPhone: client.phone || '', 
+            proPhone: decoded.phone || ''
         });
-
-        console.log(event);
 
         res.status(201).json(event);
     } catch (err) {
@@ -64,9 +61,15 @@ router.get('/events', async (req, res) => {
         const decoded = jwt.verify(token, process.env.JWT_TOKEN);
         const proId = decoded._id;
 
-        // Include phone when populating clientId
         const events = await Event.find({ proId }).populate('clientId', 'username phone');
-        res.status(200).json(events);
+
+        const formattedEvents = events.map(ev => ({
+            ...ev.toObject(),
+            clientUsername: ev.clientId?.username || 'Cliente',
+            clientPhone: ev.clientId?.phone || ''
+        }));
+
+        res.status(200).json(formattedEvents);
     } catch (err) {
         console.error(err);
         res.status(403).json({ message: 'Invalid token' });

@@ -5,14 +5,12 @@ const Pro = require('../models/Pro');
 const Event = require('../models/Event');
 const jwt = require('jsonwebtoken');
 
-// --- Log out ---
 router.post('/log-out', (req, res) => {
   res.clearCookie('accessToken');
   res.clearCookie('refreshToken');
   res.status(200).json({ message: 'Log out successful' });
 });
 
-// --- Confirmar cita ---
 router.post('/confirmar-cita', async (req, res) => {
   const token = req.cookies.accessToken;
   const data = req.body;
@@ -22,7 +20,6 @@ router.post('/confirmar-cita', async (req, res) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_TOKEN);
     const clientId = decoded._id;
-    const clientUsername = decoded.username;
     const { proUsername, clientPhone, startDate, eventDescription } = data;
 
     if (!proUsername) return res.status(400).json({ message: 'Pro username required' });
@@ -33,7 +30,9 @@ router.post('/confirmar-cita', async (req, res) => {
     if (isNaN(start.getTime())) return res.status(400).json({ message: 'Invalid start date' });
 
     const existingPro = await Pro.findOne({ username: proUsername });
-    if (!existingPro) return res.status(404).json({ message: 'Professional not found' });
+    if (!existingPro) return res.status(404).json({ message: 'No se encontro el profesional' });
+
+    await Client.findByIdAndUpdate(clientId, { phone: clientPhone });
 
     const event = await Event.create({
       clientId,
@@ -55,7 +54,6 @@ router.post('/confirmar-cita', async (req, res) => {
   }
 });
 
-// --- Get all events for logged-in client ---
 router.get('/events', async (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json({ message: 'Missing JWT' });
