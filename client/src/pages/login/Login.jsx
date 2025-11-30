@@ -1,13 +1,81 @@
 import styles from './Login.module.css'
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Logo from '../../assets/logo-transparente.png'
 import { Link } from 'react-router-dom'
+import { API_BASE_URL } from '../../config/apiConfig';
 
 function Login(){
 
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
+
+    const usernameRef = useRef(null);
+    const passwordRef = useRef(null);
+
+    const [errors, setErrors] = useState(['', '']);
+
+    function setErrorAtIndex(index, message) {
+            setErrors(prev => {
+                const copy = [...prev];
+                copy[index] = message;
+                return copy;
+            })
+    }
+
+
+
+    function handleSubmitLogin(e) {
+        e.preventDefault();
+
+        setErrors(['', '']);
+
+        const username = usernameRef.current.value;
+        const password = passwordRef.current.value;
+
+        //console.log(username, password);
+
+        if(!username || '') {
+            setErrorAtIndex(0, 'El usuario es inexistente!');
+            return;
+        }
+        if(!password || '') {
+            setErrorAtIndex(1, 'Revisa la contraseña!');
+            return;
+        }
+
+        const userData = {
+            username,
+            password
+        }
+
+        fetch(API_BASE_URL + '/login', {
+            method: 'POST',
+            headers: { 'Content-type' : 'application/json'},
+            credentials: 'include',
+            body: JSON.stringify(userData)
+        })
+        .then(async (res) => {
+            const data = await res.json();
+            if(!res.ok) {
+                //console.log('Login Failed: ', data);
+                if(data.message === 'User not found') {
+                    setErrorAtIndex(0, 'No se encontro ningun usuario');
+                    return;
+                }
+                setErrorAtIndex(1, data.message);
+                return;
+            }
+            else {
+                console.log('Login Successful', data);
+                navigate('/dashboard');
+            }
+        })
+        .catch(error => {
+            //console.log(error);
+        });
+    }
+
     
     return(
         <>
@@ -18,14 +86,21 @@ function Login(){
             <div className={styles['contenedor-de-login-y-boton']}>
                 <div className={styles['contenedor-de-login']}>
 
-                    <form id='iniciar-sesion-forma' className={styles['iniciar-sesion-forma']}>
+                    <form id='iniciar-sesion-forma' className={styles['iniciar-sesion-forma']} onSubmit={handleSubmitLogin}>
 
                         <label className={styles['label']}>Usuario:</label>
-                        <input className={styles['input']} type='text' placeholder='Ingrese el usuario que desea tener'></input>
+                        <span className={`${!errors[0] ? styles['register-errors-message-inactive'] : styles['register-errors-message-active']}`}>{errors[0]}</span>
+                        <input 
+                            ref={usernameRef} 
+                            className={styles['input']} 
+                            type='text' 
+                            placeholder='Ingrese el usuario que desea tener'/>
 
                         <label className={styles['label']}>Contraseña:</label>
+                        <span className={`${!errors[1] ? styles['register-errors-message-inactive'] : styles['register-errors-message-active']}`}>{errors[1]}</span>
                         <div className={styles['password-wrapper']}>
                         <input
+                            ref={passwordRef}
                             className={styles['input']}
                             type={showPassword ? 'text' : 'password'}
                             placeholder='Ingrese su contraseña'

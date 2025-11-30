@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Client = require('../models/Client');
 const Pro = require('../models/Pro');
+const bcrypt = require('bcrypt');
 
 router.post('/', async (req, res) => {
     const data = req.body;
@@ -26,7 +27,7 @@ router.post('/', async (req, res) => {
             messages.push('Name must be between 3 and 25 characters');
         }
 
-        if (!data.phone || typeof data.phone !== 'string' || data.phone.length !== 13) {
+        if (!data.phone || typeof data.phone !== 'string' || (data.phone.length !== 12 && data.phone.length !== 13)) {
             messages.push('Phone number is invalid');
         }
 
@@ -41,9 +42,12 @@ router.post('/', async (req, res) => {
 
         try {
             const existingPro = await Pro.findOne({ username: data.username });
-            if (existingPro) {
+            const existingClient = await Client.findOne({ username: data.username});
+            if (existingPro || existingClient) {
                 return res.status(400).json({ message: 'Username already exists' });
             }
+
+            const hashedPassword = await bcrypt.hash(data.password, 12);
 
             const pro = await Pro.create({
                 role,
@@ -51,7 +55,7 @@ router.post('/', async (req, res) => {
                 phone: data.phone,
                 email: data.email,
                 username: data.username,
-                password: data.password
+                password: hashedPassword
             });
             console.log('Professional registered: ', pro);
 
@@ -69,11 +73,17 @@ router.post('/', async (req, res) => {
 
         try {
             const existingClient = await Client.findOne({ username: data.username });
-            if (existingClient) {
+            const existingPro = await Pro.findOne({ username: data.username});
+            if (existingClient || existingPro) {
                 return res.status(400).json({ message: 'Username already exists' });
             }
 
-            const client = await Client.create({ role, username: data.username, password: data.password });
+            const hashedPassword = await bcrypt.hash(data.password, 12);
+
+            const client = await Client.create({
+                role, 
+                username: data.username, 
+                password: hashedPassword });
             console.log('Client registered successfully', client);
             return res.status(200).json({ message: 'Client registered successfully', client });
         } catch (error) {

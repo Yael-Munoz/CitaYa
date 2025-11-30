@@ -14,9 +14,9 @@ function Footer(){
                         <img src={Logo} alt="Logo" /> 
                         <div className={styles["address-text"]}>
                             <ul>
-                                <li><i class="fa-solid fa-map-location-dot"></i>  Tijuana, Baja California, México</li>
-                                <li><i class="fa-solid fa-phone"></i> Phone: 6641764482</li>
-                                <li><i class="fa-solid fa-envelope"></i> Mail: citaya@outlook.com</li>
+                                <li><i className={styles["fa-solid fa-map-location-dot"]}></i>  Tijuana, Baja California, México</li>
+                                <li><i className={styles["fa-solid fa-phone"]}></i> Phone: 6641764482</li>
+                                <li><i className={styles["fa-solid fa-envelope"]}></i> Email: citaya@outlook.com</li>
                             </ul>
                         </div>
                     </div>
@@ -57,9 +57,9 @@ function Footer(){
                         </div>
                         <div className={styles["socials-list"]}>
                             <ul>
-                                <li><i class="fa-brands fa-instagram"></i> Instagram</li>
-                                <li><i class="fa-brands fa-facebook"></i> Facebook</li>
-                                <li><i class="fa-brands fa-x-twitter"></i> X</li>                
+                                <li><i className={styles["fa-brands fa-instagram"]}></i> Instagram</li>
+                                <li><i className={styles["fa-brands fa-facebook"]}></i> Facebook</li>
+                                <li><i className={styles["fa-brands fa-x-twitter"]}></i> X</li>                
                             </ul>
                         </div>
                     </div>*/}

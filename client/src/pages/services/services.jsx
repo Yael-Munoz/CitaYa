@@ -71,7 +71,7 @@ function Services() {
               <h2>¿Buscas agendar citas?</h2>
               <p>Regístrate y empieza a agendar con tiempo tus pendientes desde nuestra plataforma</p>
               <button className={styles['cta-button-cli']} onClick={() => navigate('/register?type=client')}>
-              <i class="fa-solid fa-user"></i> Crear cuenta personal
+              <i className={styles["fa-solid fa-user"]}></i> Crear cuenta personal
               </button>
           </div>
         </section>
@@ -84,7 +84,7 @@ function Services() {
             <h2>¿Eres profesional?</h2>
             <p>Regístrate y gestiona tus horarios, clientes y citas desde nuestra plataforma.</p>
             <button className={styles['cta-button-pro']} onClick={() => navigate('/register?type=professional')}>
-              <i class="fa-solid fa-user-tie"></i> Crear cuenta profesional
+              <i className={styles["fa-solid fa-user-tie"]}></i> Crear cuenta profesional
             </button>
           </div>
           

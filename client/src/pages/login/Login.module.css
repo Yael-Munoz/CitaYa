@@ -157,3 +157,29 @@ img{
     transform: translateY(0);
   }
 }
+
+.register-errors-message-active {
+  position: relative;
+  text-align: left;
+  display: block;             
+  margin-top: 4px;             
+  color: #e63946;             
+  font-size: 0.8rem;           
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  width: 100%;
+  
+  
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.register-errors-message-inactive {
+  opacity: 0;
+  transform: translateY(-5px);
+  height: 0;
+  margin: 0;
+  overflow: hidden;
+  pointer-events: none;
+}

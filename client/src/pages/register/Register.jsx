@@ -4,11 +4,14 @@ import 'react-phone-input-2/lib/style.css';
 import PhoneInput from 'react-phone-input-2';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import Logo from '../../assets/logo-transparente.png'
-import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../config/apiConfig';
 
 
 function Register() {
+
+    const navigate = useNavigate();
 
     /*Inicia codigo para redireccionamiento segun la selección de services.jsx*/
     const location = useLocation();
@@ -92,9 +95,13 @@ function Register() {
                 return res.json();
             }
         })
-        .then(data => console.log('Server response: ', data))
+        .then(data => {
+            //console.log('Server response: ', data);
+            navigate('/');
+        })
+        
         .catch(error => {
-            console.log(error);
+            //console.log(error);
             setErrors(['Usuario ya existe!']);
         });
 
@@ -122,7 +129,7 @@ function Register() {
         return;
     }
 
-    if (!parsedPhone || !parsedPhone.isValid()) {
+    if (!parsedPhone || parsedPhone.length < 12 || parsedPhone.length > 13) {
         setErrorAtIndex(1, 'Ingrese un número telefónico válido');
         return;
     }
@@ -152,7 +159,7 @@ function Register() {
         confirmPassword,
     };
 
-    fetch('http://localhost:3000/register', {
+    fetch(API_BASE_URL + '/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(ProData),
@@ -167,9 +174,11 @@ function Register() {
         }
         })
         .then((data) => {
-        console.log('Server response:', data);
+        //console.log('Server response:', data);
+        navigate('/');        
         })
         .catch((error) => {
+            console.log(ProData);
         console.error('Error:', error);
         if(error.message.includes('Username already exists')){
             setErrorAtIndex(5, 'Usuario ya existe!');
@@ -194,7 +203,7 @@ function Register() {
                             <button className={styles['register-cuenta-botones']} onClick={() => {
                                 setAccountType('client')
                                 setIsMoved(false)
-                            }}><i className="fa-regular fa-calendar-days"></i> Solicitar citas</button>
+                            }}><i className={styles["fa-regular fa-calendar-days"]}></i> Solicitar citas</button>
                             <button className={styles['register-cuenta-botones']} onClick={() => {
                                 setAccountType('professional')
                                 setIsMoved(false)
@@ -238,8 +247,9 @@ function Register() {
                         <span className={`${!errors[0] ? styles['register-errors-message-inactive'] : styles['register-errors-message-active']}`}>{errors[0]}</span>
                         <input className={styles['register-input']} type='text' ref={nameRef} placeholder='Ingrese su nombre completo'/>
 
-                        <span className={`${!errors[1] ? styles['register-errors-message-inactive'] : styles['register-errors-message-active']}`}>{errors[1]}</span>
+                        
                         <label className={styles['register-label']}>Numero telefonico</label>
+                        <span className={`${!errors[1] ? styles['register-errors-message-inactive'] : styles['register-errors-message-active']}`}>{errors[1]}</span>
                         <PhoneInput
                         country={'mx'}              
                         value={phone}
