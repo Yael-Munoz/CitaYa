@@ -8,7 +8,24 @@
 
 .source-bloque1 {
   width: 100%;
-  padding-bottom: 2rem;
+  padding-bottom: 3rem;
+  
+}
+
+.source-boton-menu-desplegable {
+  background-color: none;
+  height: 30px;
+  width: 30px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.source-boton-menu-desplegable i {
+  color: #000000;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  border-radius: 30px;
+  margin-top: 3px;
 }
 
 .source-contenedor-de-bienvenido {
@@ -29,13 +46,13 @@
 .source-texto-de-bienvenido {
   display: flex;
   flex-direction: column;
-  font-size: 4em;
+  font-size: 4rem;
   color: #ffffff;
 }
 
 .source-texto-descripcion-de-bienvenido {
-  margin-bottom: 72px;
-  font-size: var(--font-size-medium);
+  margin-bottom: 3rem;
+  font-size: 2rem;
   color: #ffffff;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.15);
@@ -96,7 +113,7 @@
 .source-bloque2 {
   position: relative;
   top: 10rem;
-  margin-bottom: 14rem;
+  margin-bottom: 12rem;
   padding-top: 1rem;
   display: flex;
   justify-content: center;
@@ -149,8 +166,10 @@
 /* Logo */
 .logo-img {
   background-color: rgba(255,255,255);
-  border-radius: 32px;
-  margin-bottom: 22px;
+  border-radius: 1.25rem;
+  display: block;
+  margin: 0 auto 1rem auto;
+
 }
 
 /* 📱 Responsive adjustments */

@@ -4,6 +4,7 @@ import 'react-phone-input-2/lib/style.css';
 import PhoneInput from 'react-phone-input-2';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import Logo from '../../assets/logo-transparente.png'
+import { Link } from 'react-router-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../../config/apiConfig';
 
@@ -193,7 +194,7 @@ function Register() {
                 <div className={styles[isMoved ? 'pregunta-initial' : 'pregunta-moved']}>
                     <div className={styles['contenedor-de-componente-pregunta']}>
                         <div className={styles['img-wrapper']}>
-                            <img src ={Logo} alt="Logo"/>
+                            <Link to="/"><img src ={Logo} className={styles['logo']} alt="Logo"/></Link>
                         </div>
                         <h1 className={styles['register-pregunta-de-cuenta']}>¿Que desea realizar con su cuenta?</h1>
 

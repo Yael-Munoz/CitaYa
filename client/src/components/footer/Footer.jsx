@@ -1,5 +1,8 @@
 import styles from '../footer/Footer.module.css'
 import Logo from '../../assets/logo-transparente.png'
+import {Link} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 
 function Footer(){
@@ -24,13 +27,13 @@ function Footer(){
 
                     <div className={styles["support-section"]}>
                         <div className={styles["support-section-title"]}>
-                        <h2>Support</h2>
+                            <h2>Support</h2>
                         </div>
                         <div className={styles["support-section-list"]}>
                             <ul>
-                                <li> Contact</li>
-                                <li> FAQ's</li>
-                                <li> Sitemap</li>                
+                                <li className={styles['contact']}><Link to="/contact"> Contact</Link></li>
+                                <li> FAQ's {'(Work in progress)'}</li>
+                                <li> Sitemap {'(Work in progress)'}</li>                
                             </ul>
                         </div>
                     </div>
@@ -41,14 +44,14 @@ function Footer(){
                         </div>
                         <div className={styles["links-list"]}>
                             <ul>
-                                <li> Videos</li>
-                                <li> Tutorials</li>
-                                <li> Gallery</li>                
+                                <li> Videos {'(Work in progress)'}</li>
+                                <li> Tutorials {'(Work in progress)'}</li>
+                                <li> Gallery {'(Work in progress)'}</li>                
                             </ul>
                         </div>
                     </div>
 
-                    <div className={styles["socials-section"]}>
+                    {/*<div className={styles["socials-section"]}>
                         <div className={styles["links-title"]}>
                         <h2>Socials</h2>
                         </div>
@@ -59,7 +62,7 @@ function Footer(){
                                 <li><i className={styles["fa-brands fa-x-twitter"]}></i> X</li>                
                             </ul>
                         </div>
-                    </div>
+                    </div>*/}
 
 
             </div>
