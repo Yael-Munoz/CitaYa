@@ -8,6 +8,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import Modal from 'react-modal';
+import { useNavigate } from 'react-router-dom';
 import { apiFetch } from '../../utils/apiFetch';
 import { API_BASE_URL } from '../../config/apiConfig';
 
@@ -23,9 +24,12 @@ function BookAppointment() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [clientUser, setClientUser] = useState('');
+  const [role, setRole] = useState('');
 
   const isMobile = window.innerWidth < 768;
   const initialView = isMobile ? 'timeGridWeek' : 'dayGridMonth';
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     apiFetch(API_BASE_URL + '/pro/events', {
@@ -36,6 +40,12 @@ function BookAppointment() {
       .then(async (res) => {
         if (!res.ok) throw new Error('Unauthorized');
         const data = await res.json();
+
+        setRole(res.role);
+
+        if(role !== 'pro') {
+          throw new Error('Unauthorized');
+        }
 
         const formatted = data.map(event => ({
           id: event._id,
@@ -50,8 +60,13 @@ function BookAppointment() {
         }));
 
         setEvents(formatted);
+        setLoading(true);
       })
-      .catch(error => {});
+      .catch(error => {
+        navigate('/');
+        console.log(error);
+
+      });
   }, []);
 
   const handleDateSelect = (selectInfo) => {
@@ -142,109 +157,116 @@ function BookAppointment() {
   };
 
   return (
-    <div className={styles['contenedor-pagina']}>
-      <ProHeader />
+    <>
+      
+{     loading ? <div className={styles['contenedor-pagina']}>
+        <ProHeader />
 
-      <section className={styles['seccion-calendario']}>
-        <p className={styles['titulo-calendario']}>Mi Calendario</p>
+        <section className={styles['seccion-calendario']}>
+          <p className={styles['titulo-calendario']}>Mi Calendario</p>
 
-        <div className={styles['contenedor-calendario']}>
-          <FullCalendar
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
-            initialView={initialView}
-            headerToolbar={{
-              left: 'prev,next today',
-              center: 'title',
-              right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
-            }}
-            locale={esLocale}
-            events={events}
-            selectable={true}
-            select={handleDateSelect}
-            selectMirror={true}
-            dayMaxEvents={true}
-            editable={true}
-            slotDuration="00:30:00"
-            selectLongPressDelay={250}
-            slotLabelFormat={{ hour: 'numeric', minute: '2-digit', hour12: true }}
-            eventTimeFormat={{ hour: 'numeric', minute: '2-digit', hour12: true }}
-            eventClick={handleEventClick}
-          />
-
-          <Modal
-            isOpen={modalOpen}
-            onRequestClose={() => setModalOpen(false)}
-            contentLabel="Agregar Cita"
-            className={styles['modal']}
-            overlayClassName={styles['overlay']}
-          >
-            <h2 className={styles['titulo-modal']}>Agregar Evento</h2>
-
-            <input
-              type="text"
-              placeholder="Nombre del evento (opcional)"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className={styles['input-evento']}
-            />
-            <input
-              type="text"
-              placeholder="Usuario del cliente"
-              value={clientUser}
-              onChange={(e) => setClientUser(e.target.value)}
-              className={styles['input-evento']}
-            />            
-
-            <textarea
-              placeholder="Descripción del evento (opcional)"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className={styles['input-evento']}
-              rows={3}
+          <div className={styles['contenedor-calendario']}>
+            <FullCalendar
+              plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
+              initialView={initialView}
+              headerToolbar={{
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+              }}
+              locale={esLocale}
+              events={events}
+              selectable={true}
+              select={handleDateSelect}
+              selectMirror={true}
+              dayMaxEvents={true}
+              editable={true}
+              slotDuration="00:30:00"
+              selectLongPressDelay={250}
+              slotLabelFormat={{ hour: 'numeric', minute: '2-digit', hour12: true }}
+              eventTimeFormat={{ hour: 'numeric', minute: '2-digit', hour12: true }}
+              eventClick={handleEventClick}
             />
 
-            <span className={styles['error-message']}>{clientError}</span>
+            <Modal
+              isOpen={modalOpen}
+              onRequestClose={() => setModalOpen(false)}
+              contentLabel="Agregar Cita"
+              className={styles['modal']}
+              overlayClassName={styles['overlay']}
+            >
+              <h2 className={styles['titulo-modal']}>Agregar Evento</h2>
 
-            <div className={styles['botones-modal']}>
-              <button onClick={handleEventAdd} className={styles['boton-agregar']}>
-                Agregar
-              </button>
-              <button onClick={() => setModalOpen(false)} className={styles['boton-cancelar']}>
-                Cancelar
-              </button>
-            </div>
-          </Modal>
+              <input
+                type="text"
+                placeholder="Nombre del evento (opcional)"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className={styles['input-evento']}
+              />
+              <input
+                type="text"
+                placeholder="Usuario del cliente"
+                value={clientUser}
+                onChange={(e) => setClientUser(e.target.value)}
+                className={styles['input-evento']}
+              />            
 
-          <Modal
-            isOpen={eventDetailModalOpen}
-            onRequestClose={() => setEventDetailModalOpen(false)}
-            contentLabel="Detalles del Evento"
-            className={styles['modal']}
-            overlayClassName={styles['overlay']}
-          >
-            <h2 className={styles['titulo-modal']}>{selectedEvent?.title || 'Evento'}</h2>
-            <p className={styles['descripcion-evento']}>
-              Cliente: {selectedEvent?.extendedProps.clientUsername || 'N/A'}
-            </p>
-            <p className={styles['descripcion-evento']}>
-              Teléfono del cliente: {selectedEvent?.extendedProps.clientPhone || 'N/A'}
-            </p>
-            <p className={styles['descripcion-evento']}>
-              Descripción: {selectedEvent?.extendedProps.description || ''}
-            </p>
+              <textarea
+                placeholder="Descripción del evento (opcional)"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                className={styles['input-evento']}
+                rows={3}
+              />
 
-            <div className={styles['botones-modal']}>
-              <button onClick={handleDeleteEvent} className={styles['boton-agregar']}>
-                Eliminar
-              </button>
-              <button onClick={() => setEventDetailModalOpen(false)} className={styles['boton-cancelar']}>
-                Cerrar
-              </button>
-            </div>
-          </Modal>
-        </div>
-      </section>
-    </div>
+              <span className={styles['error-message']}>{clientError}</span>
+
+              <div className={styles['botones-modal']}>
+                <button onClick={handleEventAdd} className={styles['boton-agregar']}>
+                  Agregar
+                </button>
+                <button onClick={() => setModalOpen(false)} className={styles['boton-cancelar']}>
+                  Cancelar
+                </button>
+              </div>
+            </Modal>
+
+            <Modal
+              isOpen={eventDetailModalOpen}
+              onRequestClose={() => setEventDetailModalOpen(false)}
+              contentLabel="Detalles del Evento"
+              className={styles['modal']}
+              overlayClassName={styles['overlay']}
+            >
+              <h2 className={styles['titulo-modal']}>{selectedEvent?.title || 'Evento'}</h2>
+              <p className={styles['descripcion-evento']}>
+                Cliente: {selectedEvent?.extendedProps.clientUsername || 'N/A'}
+              </p>
+              <p className={styles['descripcion-evento']}>
+                Teléfono del cliente: {selectedEvent?.extendedProps.clientPhone || 'N/A'}
+              </p>
+              <p className={styles['descripcion-evento']}>
+                Descripción: {selectedEvent?.extendedProps.description || ''}
+              </p>
+
+              <div className={styles['botones-modal']}>
+                <button onClick={handleDeleteEvent} className={styles['boton-agregar']}>
+                  Eliminar
+                </button>
+                <button onClick={() => setEventDetailModalOpen(false)} className={styles['boton-cancelar']}>
+                  Cerrar
+                </button>
+              </div>
+            </Modal>
+          </div>
+        </section>
+      </div>
+      : <div></div>}
+
+
+
+    </>
   );
 }
 

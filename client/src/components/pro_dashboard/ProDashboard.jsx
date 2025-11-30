@@ -122,12 +122,12 @@ function ProDashboard() {
               Agendar nueva cita
             </button>
 
-            <button
+            {/*<button
               className={styles['pro-dashboard-btn-alt']}
               onClick={handleViewClients}
             >
               Ver clientes
-            </button>
+            </button>*/}
           </div>
 
           <button className={styles['pro-logout-btn']} onClick={handleLogout}>
