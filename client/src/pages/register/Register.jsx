@@ -4,8 +4,8 @@ import 'react-phone-input-2/lib/style.css';
 import PhoneInput from 'react-phone-input-2';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import Logo from '../../assets/logo-transparente.png'
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../config/apiConfig';
 
 
 function Register() {
@@ -128,7 +128,7 @@ function Register() {
         return;
     }
 
-    if (!parsedPhone || !parsedPhone.isValid()) {
+    if (!parsedPhone) {
         setErrorAtIndex(1, 'Ingrese un número telefónico válido');
         return;
     }
@@ -158,7 +158,7 @@ function Register() {
         confirmPassword,
     };
 
-    fetch('http://localhost:3000/register', {
+    fetch(API_BASE_URL + '/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(ProData),
@@ -177,7 +177,8 @@ function Register() {
         navigate('/');        
         })
         .catch((error) => {
-        //console.error('Error:', error);
+            console.log(ProData);
+        console.error('Error:', error);
         if(error.message.includes('Username already exists')){
             setErrorAtIndex(5, 'Usuario ya existe!');
         }        
@@ -245,8 +246,9 @@ function Register() {
                         <span className={`${!errors[0] ? styles['register-errors-message-inactive'] : styles['register-errors-message-active']}`}>{errors[0]}</span>
                         <input className={styles['register-input']} type='text' ref={nameRef} placeholder='Ingrese su nombre completo'/>
 
-                        <span className={`${!errors[1] ? styles['register-errors-message-inactive'] : styles['register-errors-message-active']}`}>{errors[1]}</span>
+                        
                         <label className={styles['register-label']}>Numero telefonico</label>
+                        <span className={`${!errors[1] ? styles['register-errors-message-inactive'] : styles['register-errors-message-active']}`}>{errors[1]}</span>
                         <PhoneInput
                         country={'mx'}              
                         value={phone}

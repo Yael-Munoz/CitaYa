@@ -2,6 +2,7 @@ import styles from './Login.module.css'
 import { useNavigate } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import Logo from '../../assets/logo-transparente.png'
+import { API_BASE_URL } from '../../config/apiConfig';
 
 function Login(){
 
@@ -47,7 +48,7 @@ function Login(){
             password
         }
 
-        fetch('http://localhost:3000/login', {
+        fetch(API_BASE_URL + '/login', {
             method: 'POST',
             headers: { 'Content-type' : 'application/json'},
             credentials: 'include',
@@ -57,11 +58,15 @@ function Login(){
             const data = await res.json();
             if(!res.ok) {
                 //console.log('Login Failed: ', data);
+                if(data.message === 'User not found') {
+                    setErrorAtIndex(0, 'No se encontro ningun usuario');
+                    return;
+                }
                 setErrorAtIndex(1, data.message);
                 return;
             }
             else {
-                //console.log('Login Successful', data);
+                console.log('Login Successful', data);
                 navigate('/dashboard');
             }
         })

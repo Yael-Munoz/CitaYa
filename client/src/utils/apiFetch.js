@@ -1,4 +1,4 @@
-
+import { API_BASE_URL } from "../config/apiConfig";
 
 export async function apiFetch(url, options = {}) {
     const res = await fetch(url, {
@@ -7,7 +7,7 @@ export async function apiFetch(url, options = {}) {
     });
 
     if(res.status === 401) {
-        const refreshRes = await fetch('http://localhost:3000/auth/refresh', {
+        const refreshRes = await fetch(API_BASE_URL + '/auth/refresh', {
             method: 'POST',
             credentials: 'include'
         });

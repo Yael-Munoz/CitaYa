@@ -3,6 +3,7 @@ import ProHeader from '../pro_header/ProHeader';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { apiFetch } from '../../utils/apiFetch';
+import { API_BASE_URL } from '../../config/apiConfig';
 
 function ProDashboard() {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ function ProDashboard() {
   const [proName, setProName] = useState('');
 
   useEffect(() => {
-    apiFetch('http://localhost:3000/dashboard', {
+    apiFetch(API_BASE_URL + '/dashboard', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include'
@@ -24,7 +25,7 @@ function ProDashboard() {
   }, []);
 
   useEffect(() => {
-    apiFetch('http://localhost:3000/pro/events', {
+    apiFetch(API_BASE_URL + '/pro/events', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include'
@@ -38,7 +39,7 @@ function ProDashboard() {
   }, []);
 
   const handleLogout = () => {
-    fetch('http://localhost:3000/dashboard', {
+    fetch(API_BASE_URL + '/dashboard', {
       method: 'POST',
       credentials: 'include'
     })

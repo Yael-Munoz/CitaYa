@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
             messages.push('Name must be between 3 and 25 characters');
         }
 
-        if (!data.phone || typeof data.phone !== 'string' || data.phone.length !== 13) {
+        if (!data.phone || typeof data.phone !== 'string' || (data.phone.length !== 12 && data.phone.length !== 13)) {
             messages.push('Phone number is invalid');
         }
 

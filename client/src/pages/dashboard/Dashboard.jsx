@@ -3,6 +3,7 @@ import ClientDashboard from '../../components/client_dashboard/ClientDashboard'
 import ProDashboard from '../../components/pro_dashboard/ProDashboard'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { API_BASE_URL } from '../../config/apiConfig'
 
 function Dashboard() {
 
@@ -15,7 +16,7 @@ function Dashboard() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://localhost:3000/dashboard', {
+        fetch(API_BASE_URL + '/dashboard', {
             method: 'GET',
             headers: { 'Content-Type' : 'application/json'},
             credentials: 'include'

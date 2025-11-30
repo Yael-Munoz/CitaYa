@@ -6,15 +6,40 @@ import NavCenter from '../../components/navbar-center/navbar-center.jsx';
 import Logo from '../../assets/welcome-page/logo-transparente.png'
 import Footer from '../../components/footer/Footer.jsx'
 
+import dominadasVideo from '../../assets/welcome-page/videos/dominadas-vertical.mp4';
+import squatVideo from '../../assets/welcome-page/videos/squat-vertical.mp4';
+import deadliftVideo from '../../assets/welcome-page/videos/pr-dl-vertical.mp4'
+
 
 function Welcome() {
 
     const navigate = useNavigate();
 
     const [currentSlide, setSlide] = useState(1);
-    const slides = [<div className={`${styles['source-slide1']} ${styles['source-slides']}`}></div>,
-                    <div className={`${styles['source-slide2']} ${styles['source-slides']}`}></div>,
-                    <div className={`${styles['source-slide3']} ${styles['source-slides']}`}></div>];
+    const slides = [<div className={`${styles['source-slide1']} ${styles['source-slides']}`}>
+        <video 
+        src={dominadasVideo}
+        autoPlay
+        muted
+        loop
+        className={styles['videos']}/>
+    </div>,
+    <div className={`${styles['source-slide2']} ${styles['source-slides']}`}>
+        <video 
+        src={deadliftVideo}
+        autoPlay
+        muted
+        loop
+        className={styles['videos']}/>
+    </div>,
+    <div className={`${styles['source-slide3']} ${styles['source-slides']}`}>
+        <video 
+        src={squatVideo}
+        autoPlay
+        muted
+        loop
+        className={styles['videos']}/>
+    </div>];
 
     useEffect(() => {
         const interval = setInterval(() => {

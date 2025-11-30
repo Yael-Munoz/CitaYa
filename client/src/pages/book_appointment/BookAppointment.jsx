@@ -9,6 +9,8 @@ import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import Modal from 'react-modal';
 import { apiFetch } from '../../utils/apiFetch';
+import { API_BASE_URL } from '../../config/apiConfig';
+
 
 Modal.setAppElement('#root');
 
@@ -28,7 +30,7 @@ function BookAppointment() {
   const initialView = isMobile ? 'timeGridWeek' : 'dayGridMonth';
 
   useEffect(() => {
-    apiFetch('http://localhost:3000/pro/events', {
+    apiFetch(API_BASE_URL + '/pro/events', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include'
@@ -74,7 +76,7 @@ function BookAppointment() {
       };
 
       try {
-        const res = await apiFetch('http://localhost:3000/pro/add-event', {
+        const res = await apiFetch(API_BASE_URL + '/pro/add-event', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(newEvent)
@@ -120,7 +122,7 @@ function BookAppointment() {
 
   const handleDeleteEvent = () => {
     if (selectedEvent) {
-      apiFetch('http://localhost:3000/dashboard/delete-event', {
+      apiFetch(API_BASE_URL + '/dashboard/delete-event', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: selectedEvent.id })

@@ -8,6 +8,7 @@ import '../../styles/DatePickerCustom.css';
 import { es } from 'date-fns/locale';
 import { useNavigate } from 'react-router-dom';
 import { apiFetch } from '../../utils/apiFetch';
+import { API_BASE_URL } from '../../config/apiConfig';
 
 function ClientDashboard() {
   Modal.setAppElement('#root');
@@ -26,7 +27,7 @@ function ClientDashboard() {
 
   // Load client profile
   useEffect(() => {
-    apiFetch('http://localhost:3000/dashboard', {
+    apiFetch(API_BASE_URL + '/dashboard', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include'
@@ -42,7 +43,7 @@ function ClientDashboard() {
 
   // Load client events
   useEffect(() => {
-    apiFetch('http://localhost:3000/client/events', {
+    apiFetch(API_BASE_URL + '/client/events', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include'
@@ -64,7 +65,7 @@ function ClientDashboard() {
   }
 
   function handleLogout() {
-    fetch('http://localhost:3000/client/log-out', {
+    fetch(API_BASE_URL + '/client/log-out', {
       method: 'POST',
       credentials: 'include'
     })
@@ -79,7 +80,7 @@ function ClientDashboard() {
 
   const handleDeleteEvent = async (id) => {
     try {
-      const res = await apiFetch('http://localhost:3000/dashboard/delete-event', {
+      const res = await apiFetch(API_BASE_URL + '/dashboard/delete-event', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -117,7 +118,7 @@ function ClientDashboard() {
       return;
     }
 
-    apiFetch('http://localhost:3000/client/confirmar-cita', {
+    apiFetch(API_BASE_URL + '/client/confirmar-cita', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
