@@ -33,5 +33,5 @@ server.use('/client', clientRoute);
 server.use('/pro', proRoute);
 
 server.listen(3000, () => {
-    console.log('Server is listening on http://localhost:3000');
+    console.log('Server is listening');
 });
