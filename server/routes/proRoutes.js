@@ -60,6 +60,11 @@ router.get('/events', async (req, res) => {
     try {
         const decoded = jwt.verify(token, process.env.JWT_TOKEN);
         const proId = decoded._id;
+        const role = decoded.role;
+        
+        if(role !== 'pro') {
+            return res.status(403).json({role});
+        }
 
         const events = await Event.find({ proId }).populate('clientId', 'username phone');
 
