@@ -67,7 +67,7 @@ function Login(){
                 return;
             }
             else {
-                console.log('Login Successful', data);
+                //console.log('Login Successful', data);
                 navigate('/dashboard');
             }
         })
