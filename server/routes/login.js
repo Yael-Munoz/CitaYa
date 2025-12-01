@@ -45,15 +45,17 @@ router.post('/', async (req, res) => {
 
                 res.cookie('accessToken', accessToken, {
                     httpOnly: true,
-                    sameSite: 'strict',
-                    maxAge: 15 * 60 * 1000
+                    sameSite: 'none',
+                    maxAge: 15 * 60 * 1000,
+                    secure: true
                 });
-                
+
 
                 res.cookie('refreshToken', refreshToken, {
                     httpOnly: true,
-                    sameSite: 'strict',
-                    maxAge: 60 * 60 * 1000
+                    sameSite: 'none',
+                    maxAge: 60 * 60 * 1000,
+                    secure: true
                 });
 
                 console.log('User logged in!');
