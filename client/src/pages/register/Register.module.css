@@ -1,12 +1,19 @@
+
+
 .register-contenedor-de-pagina {
-  width: 100vw;
-  height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: Montserrat;
   flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 3rem;
+  font-family: sans-serif;
 }
+
+.logo{
+  display: block;
+  margin: 0 auto 1rem auto;
+}
+
 
 .pregunta-base {
   transform: translateY(0) scale(1);
@@ -20,7 +27,7 @@
 }
 
 .register-pregunta-de-cuenta {
-  color: aliceblue;
+  color: #e7e7e7;
   font-size: 2.3em;
   text-align: center;
   text-shadow: 1px 1px 20px rgba(158, 158, 158, 0.479);
@@ -32,33 +39,61 @@
   justify-content: center;
 }
 
+.register-errors-message-active {
+  position: relative;
+  text-align: left;
+  display: block;             
+  margin-top: 4px;             
+  color: #e63946;             
+  font-size: 0.8rem;           
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  width: 100%;
+  
+  
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.register-errors-message-inactive {
+  opacity: 0;
+  transform: translateY(-5px);
+  height: 0;
+  margin: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+
 .register-cuenta-botones {
-  background-color: rgb(246, 255, 196);
-  color: black;
-  padding: 0.3em;
-  font-size: 1.7em;
-  margin: 0.5em 1em;
-  border: none;
-  border-radius: .3em;
+  background-color: #ffffff;
+  color: #333333;
+  padding: 0.5em 1em;
+  font-size: 1.2em;
+  margin: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .register-cuenta-botones:hover {
   transform: scale(1.05);
-  background-color: rgb(255, 240, 150);
+  background-color: #f0f0f0;
 }
 
-.register-patient-form,
+.register-client-form,
 .register-professional-form {
-  background-color: white;
-  border-radius: .5em;
-  padding: .7em;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1.2rem;
   animation: fadeInUp 0.6s ease forwards;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  width: 15em;
+  gap: 0.75rem;
+  width: 100%;
 }
 
 @keyframes fadeInUp {
@@ -72,45 +107,120 @@
   }
 }
 
-.contenedor-de-formas{
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    align-items: center;
+.contenedor-de-formas {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  width: 70%;
+  max-width: 25em;
 }
 
 .register-label {
-  font-size: 1.1em;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 0.15rem;
+  font-size: 1em;
 }
 
 .register-input {
-  border-bottom: 1px black solid;
-  border-top: none;
-  border-right: none;
-  border-left: none;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease;
 }
 
-.register-input:focus{
-    outline: none;
-    background-color: rgba(229, 229, 229, 0.836);
+.register-input:focus {
+  border-color: #6e6e6e;
+  outline: none;
+  background-color: #f5f5f5;
+}
+
+.submit-boton {
+  margin-top: 1rem;
+  padding: 0.6rem;
+  margin-bottom: 3em;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 0.95em;
+  animation: fadeInUp 0.6s ease forwards;
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 100%;
 
 }
 
-.submit-boton{
-    font-family: Montserrat;
-    border: none;
-    font-size: 1.7em;
+.submit-boton:active {
+  background-color: #7a7a7a;
+  color: #e0e0e0;
+}
+
+.img-wrapper{
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+img{
+  margin: 0 auto;
+  display: block;
+  width: clamp(180px, 60vw, 280px);
+  max-width: 100%;
+  height: auto;
+  border-radius: 48px;
+}
+
+@media (max-width: 768px) {
+  .register-contenedor-de-pagina {
+    padding: 2em 1em 0 1em;
+    height: auto;
+    min-height: 100vh;
+    
+  }
+
+  .contenedor-de-formas {
+    width: 90%;
+    max-width: none;
+  }
+
+  .register-client-form,
+  .register-professional-form {
+    padding: 1rem;
     width: 100%;
-    border-radius: .1em;
-    padding: .2em;
-    color: white;
-    font-weight: 600;
-    background-color: rgb(73, 73, 188);
-    animation: fadeInUp 0.6s ease forwards;
-}
+  }
 
-.submit-boton:active{
-    color: rgb(198, 198, 198);
-    background-color: rgb(51, 44, 179);
+  .register-pregunta-de-cuenta {
+    font-size: 1.6em;
+    padding: 0 1rem;
+  }
 
+  .register-cuenta-botones {
+    font-size: 1em;
+    padding: 0.5em 0.8em;
+    margin: 0.4em;
+  }
+
+  .submit-boton {
+    width: 100%;
+    font-size: 1em;
+  }
+
+  
+
+  img {
+    margin-left: 0;
+    width: 80%;
+    max-width: 300px;
+    border-radius: 32px;
+  }
+
+  .register-errors-message-active {
+    font-size: 0.75rem;
+  }
 }

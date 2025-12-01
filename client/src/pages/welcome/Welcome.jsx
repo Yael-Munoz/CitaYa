@@ -1,6 +1,14 @@
 import styles from './Welcome.module.css';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import NavCenter from '../../components/navbar-center/navbar-center.jsx';
+import Logo from '../../assets/welcome-page/logo-transparente.png'
+import Footer from '../../components/footer/Footer.jsx'
+
+import dominadasVideo from '../../assets/welcome-page/videos/dominadas-vertical.mp4';
+import squatVideo from '../../assets/welcome-page/videos/squat-vertical.mp4';
+import deadliftVideo from '../../assets/welcome-page/videos/pr-dl-vertical.mp4'
 
 
 function Welcome() {
@@ -8,14 +16,35 @@ function Welcome() {
     const navigate = useNavigate();
 
     const [currentSlide, setSlide] = useState(1);
-    const slides = [<div className={`${styles['source-slide1']} ${styles['source-slides']}`}></div>,
-                    <div className={`${styles['source-slide2']} ${styles['source-slides']}`}></div>,
-                    <div className={`${styles['source-slide3']} ${styles['source-slides']}`}></div>];
+    const slides = [<div className={`${styles['source-slide1']} ${styles['source-slides']}`}>
+        <video 
+        src={dominadasVideo}
+        autoPlay
+        muted
+        loop
+        className={styles['videos']}/>
+    </div>,
+    <div className={`${styles['source-slide2']} ${styles['source-slides']}`}>
+        <video 
+        src={deadliftVideo}
+        autoPlay
+        muted
+        loop
+        className={styles['videos']}/>
+    </div>,
+    <div className={`${styles['source-slide3']} ${styles['source-slides']}`}>
+        <video 
+        src={squatVideo}
+        autoPlay
+        muted
+        loop
+        className={styles['videos']}/>
+    </div>];
 
     useEffect(() => {
         const interval = setInterval(() => {
             setSlide((prev) => (prev + 1) % slides.length);
-        }, 6000);
+        }, 2500);
 
         return () => clearInterval(interval);
     }, [slides.length]);
@@ -29,26 +58,17 @@ function Welcome() {
         <>
 
         <div className={styles['source-fondo']}>
-
             <div className={styles['source-contenedor-de-pagina-completa']}>
-                <div className={styles['source-bloque1']}>
-                    <div className={styles['source-contenedor-barra-nav']}>
-                        <div className={styles['source-contenedor-nav-bar-izquierdo']}>
-                            <div className={styles['source-contenedor-nav-bar-izquierdo-logo']}></div>
-                            <p className={styles['source-contenedor-nav-bar-izquierdo-texto']}>CitaYa</p>
-                        </div>
-                        
-                        <div className={styles['source-contenedor-nav-bar-centro']}>
-                            <p className={styles['source-contenedor-nav-bar-centro-texto']}>Quienes somos?</p>
-                            <p className={styles['source-contenedor-nav-bar-centro-texto']}>Contactanos</p>
-                        </div>
-                        <div className={styles['source-boton-menu-desplegable']}></div>
-                    </div>
+                <NavCenter />
+                <div className={styles['source-bloque1']}>           
                     <div className={styles['source-contenedor-de-bienvenido']}>
-                        <h1 className={styles['source-texto-de-bienvenido']}>Bienvenido!</h1>
-                        <button className={styles['source-boton-de-inicio-de-sesion']}>Iniciar Sesion</button>
-                        <p className={styles['source-texto-de-cuenta-nueva']}>No tienes cuenta?</p>
-                        <button className={styles['source-boton-de-crear-cuenta']} onClick={() => navigate('/register')}>Crear cuenta</button>
+                        <img src={Logo} alt="Logo" className={styles['logo-img']} data-aos="fade-down"/>
+                        <p className={styles['source-texto-descripcion-de-bienvenido']} data-aos="fade-down" data-aos-delay="200">Bienvenido a CitaYa, el portal donde puedes organizar el tiempo a tu antojo</p>
+                        <div className={styles["contenedor-botones"]}data-aos="fade-down" data-aos-delay="300">
+                            <button className={styles['source-boton-de-inicio-de-sesion']} onClick={() => navigate('/login')}><i className={styles["fa-solid fa-right-to-bracket"]}></i> Iniciar Sesion</button>
+                            <p className={styles['source-texto-de-cuenta-nueva']}>¿No tienes cuenta?</p>
+                            <button className={styles['source-boton-de-crear-cuenta']} onClick={() => navigate('/register')}><i className={styles["fa-solid fa-user-plus"]}></i> Crear cuenta</button>
+                        </div>
                     </div>
                 </div>
                 <div className={styles['source-bloque2']}>
@@ -61,11 +81,14 @@ function Welcome() {
                     </div>
                     
                 </div>
+
             </div>
 
         </div>
-        
+        <Footer />
+
         </>
+        
     );
 }
 
