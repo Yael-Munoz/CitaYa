@@ -32,42 +32,45 @@ function BookAppointment() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    apiFetch(API_BASE_URL + '/pro/events', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include'
-    })
-      .then(async (res) => {
-        if (!res.ok) throw new Error('Unauthorized');
-        const data = await res.json();
+  apiFetch(API_BASE_URL + '/pro/events', {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include'
+  })
+    .then(async (res) => {
+      if (!res.ok) throw new Error();
+      const data = await res.json();
 
-        setRole(res.role);
+      if (data.role) {
+        setRole(data.role);
+        console.log(data.role);
 
-        if(role !== 'pro') {
+        if (data.role !== 'pro') {
           throw new Error('Unauthorized');
         }
 
-        const formatted = data.map(event => ({
-          id: event._id,
-          title: event.title || 'Cita',
-          start: event.start,
-          end: event.end,
-          extendedProps: { 
-            description: event.description,
-            clientPhone: event.clientPhone || 'N/A',
-            clientUsername: event.clientId?.username || 'Cliente'
-          }
-        }));
+        return;
+      }
 
-        setEvents(formatted);
-        setLoading(true);
-      })
-      .catch(error => {
-        navigate('/');
-        console.log(error);
-
-      });
-  }, []);
+      const formatted = data.map(event => ({
+        id: event._id,
+        title: event.title || 'Cita',
+        start: event.start,
+        end: event.end,
+        extendedProps: { 
+          description: event.description,
+          clientPhone: event.clientPhone || 'N/A',
+          clientUsername: event.clientId?.username || 'Cliente'
+        }
+      }));
+      setEvents(formatted);
+      setLoading(true);
+    })
+    .catch(error => {
+      navigate('/');
+      console.log(error);
+    });
+}, []);
 
   const handleDateSelect = (selectInfo) => {
     setSelectedInfo(selectInfo);
