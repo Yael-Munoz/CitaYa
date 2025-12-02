@@ -8,6 +8,7 @@
   font-family: Montserrat;
   height: 90vh;
   flex-direction: column;
+
 }
 
 .contenedor-hoja-logo{
@@ -55,7 +56,7 @@
   padding: 0.75rem;
   border: 1px solid #ccc;
   border-radius: 8px;
-  font-size: 1rem;
+  font-size: 16px;
   transition: border-color 0.3s ease;
 }
 
