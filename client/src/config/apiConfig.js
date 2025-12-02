@@ -1,1 +1,1 @@
-export const API_BASE_URL = import.meta.env.VITE_SERVER_URL || "https://citayamx.onrender.com";
+export const API_BASE_URL = "https://citayamx.com/api";
