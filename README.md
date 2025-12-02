@@ -26,7 +26,7 @@ Authentication uses access/refresh JWTs stored in HTTP-only cookies. The backend
 ## Access the App
 
 **Deployed Application:**
-[https://www.citayamx.com](citayamx.com)
+[citayamx.com]
 
 No cloning or local setup required for reviewers.
 
