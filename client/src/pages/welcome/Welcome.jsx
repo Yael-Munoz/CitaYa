@@ -22,6 +22,8 @@ function Welcome() {
         autoPlay
         muted
         loop
+        playsInline
+        preload='auto'
         className={styles['videos']}/>
     </div>,
     <div className={`${styles['source-slide2']} ${styles['source-slides']}`}>
@@ -30,6 +32,8 @@ function Welcome() {
         autoPlay
         muted
         loop
+        playsInline
+        preload='auto'
         className={styles['videos']}/>
     </div>,
     <div className={`${styles['source-slide3']} ${styles['source-slides']}`}>
@@ -38,6 +42,8 @@ function Welcome() {
         autoPlay
         muted
         loop
+        playsInline
+        preload='auto'
         className={styles['videos']}/>
     </div>];
 
