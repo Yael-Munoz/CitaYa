@@ -11,6 +11,7 @@ import squatVideo from '../../assets/welcome-page/videos/squat-vertical.mp4';
 import deadliftVideo from '../../assets/welcome-page/videos/pr-dl-vertical.mp4'
 
 
+
 function Welcome() {
 
     const navigate = useNavigate();
