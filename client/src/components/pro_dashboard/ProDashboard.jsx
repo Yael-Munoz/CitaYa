@@ -119,7 +119,7 @@ function ProDashboard() {
               className={styles['pro-dashboard-btn']}
               onClick={() => navigate('/book-appointment')}
             >
-              Agendar nueva cita
+              <i className="fa-solid fa-calendar"></i> Agendar nueva cita
             </button>
 
             {/*<button
@@ -131,7 +131,7 @@ function ProDashboard() {
           </div>
 
           <button className={styles['pro-logout-btn']} onClick={handleLogout}>
-            Cerrar sesión
+            <i className="fa-solid fa-arrow-right-from-bracket"></i> Cerrar sesión
           </button>
         </div>
       </div>
