@@ -17,7 +17,7 @@ require('dotenv').config();
 connectDB();
 
 server.use(cors({
-    origin: process.env.CLIENT_URL,
+    origin: ['https://citayamx.com', 'http://localhost:5173'],
     credentials: true
 }));
 

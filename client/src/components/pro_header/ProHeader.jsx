@@ -1,12 +1,18 @@
 import styles from './ProHeader.module.css'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
+import Logo from '../../assets/logo-transparente.png'
 
 
 function ProHeader() {
 
     
     const [menuDisplay, setMenuDisplay] = useState(false);
+    const TodayDate = new Date().toLocaleDateString("es-ES", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+    });
 
 
     return(
@@ -18,7 +24,10 @@ function ProHeader() {
             
 
             <nav className={styles['header-nav-links']}>
-                <div className={styles['header-logo']}>CitaYa</div>
+                <div className={styles['logo-date']}>
+                    <img className={styles['header-logo']} src={Logo} alt= 'logo'></img>
+                    <div className={styles['date']}>Hoy: {TodayDate}</div>
+                </div>
                 <Link className={styles['header-texto']} to='/dashboard'>Dashboard</Link>
                 <Link className={styles['header-texto']} to='/book-appointment'>Calendario</Link>
                 <div className={styles['header-menu']}onClick={() => setMenuDisplay(!menuDisplay)}>
@@ -32,9 +41,8 @@ function ProHeader() {
         
         <div className={`${styles['menu-desplegable']} 
         ${menuDisplay ? styles['menu-abierto'] : ''}`}>
-            <div className={styles['menu-logo']}>Logo</div>
             <button className={styles['boton-cerrar-menu']} onClick={() => setMenuDisplay(false)}>X</button>
-            <Link href='#'>Contactanos</Link>
+            <h2>Menú</h2>
             <Link to='/dashboard'>Dashboard</Link>
             <Link to='/book-appointment'>Calendario</Link>
         </div>
