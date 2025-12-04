@@ -62,6 +62,8 @@ router.get('/events', async (req, res) => {
         const proId = decoded._id;
         const role = decoded.role;
         
+        console.log(role);
+        
         if(role !== 'pro') {
             return res.status(403).json({role});
         }

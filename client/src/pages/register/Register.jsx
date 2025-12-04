@@ -80,7 +80,7 @@ function Register() {
         }
         
 
-        fetch('http://localhost:3000/register', {
+        fetch(API_BASE_URL + '/register', {
             method: 'POST',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify(ClientData)

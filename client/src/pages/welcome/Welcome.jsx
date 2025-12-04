@@ -11,6 +11,7 @@ import squatVideo from '../../assets/welcome-page/videos/squat-vertical.mp4';
 import deadliftVideo from '../../assets/welcome-page/videos/pr-dl-vertical.mp4'
 
 
+
 function Welcome() {
 
     const navigate = useNavigate();
@@ -22,6 +23,8 @@ function Welcome() {
         autoPlay
         muted
         loop
+        playsInline
+        preload='auto'
         className={styles['videos']}/>
     </div>,
     <div className={`${styles['source-slide2']} ${styles['source-slides']}`}>
@@ -30,6 +33,8 @@ function Welcome() {
         autoPlay
         muted
         loop
+        playsInline
+        preload='auto'
         className={styles['videos']}/>
     </div>,
     <div className={`${styles['source-slide3']} ${styles['source-slides']}`}>
@@ -38,6 +43,8 @@ function Welcome() {
         autoPlay
         muted
         loop
+        playsInline
+        preload='auto'
         className={styles['videos']}/>
     </div>];
 
