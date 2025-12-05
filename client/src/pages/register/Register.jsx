@@ -229,8 +229,10 @@ function Register() {
                         
                         
                     </div>
-
-                    {isLoading ? <div className={styles['account-creation-active']}>Se esta creando su cuenta!</div> : <div className={styles['account-creation-inactive']}></div>}
+                    <div className={styles['contenedor-de-mensaje-de-creacion-de-cuenta']}>
+                        {isLoading ? <div className={styles['account-creation-active']}>Se esta creando su cuenta!</div> : <div className={styles['account-creation-inactive']}></div>}
+                    </div>
+                    
 
                 </div>
 

@@ -89,6 +89,11 @@
   box-shadow: 0 0 20px rgba(196, 197, 107, 0.4);
 }
 
+.contenedor-de-mensaje-de-creacion-de-cuenta{
+  display: flex;
+  justify-content: center;
+}
+
 /* Logo */
 .logo-img {
   background-color: rgba(255,255,255);
