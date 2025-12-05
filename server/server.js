@@ -18,7 +18,7 @@ const server = express();
 connectDB();
 
 server.use(cors({
-  origin: process.env.CLIENT_URL || 'https://citayamx.com', 
+  origin: [process.env.CLIENT_URL || 'https://citayamx.com', 'http://localhost:5173'], 
   credentials: true, 
 }));
 
