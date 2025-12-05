@@ -18,6 +18,8 @@ function Register() {
     const params = new URLSearchParams(location.search);
     const typeFromURL = params.get("type");
 
+    const [isLoading, setIsLoading] = useState(false);
+
     useEffect(() => {
         if (typeFromURL) {
             setAccountType(typeFromURL);
@@ -97,6 +99,7 @@ function Register() {
         })
         .then(data => {
             //console.log('Server response: ', data);
+            setIsLoading(true);
             navigate('/');
         })
         
@@ -175,6 +178,7 @@ function Register() {
         })
         .then((data) => {
         //console.log('Server response:', data);
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
         navigate('/');        
         })
         .catch((error) => {
@@ -212,6 +216,8 @@ function Register() {
                         
                         
                     </div>
+
+                    {isLoading ? <div className={styles['account-creation-active']}>Se esta creando su cuenta!</div> : <div className={styles['account-creation-inactive']}></div>}
 
                 </div>
 

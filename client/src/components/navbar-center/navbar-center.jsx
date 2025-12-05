@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './navbar-center.module.css';
 import { useState } from 'react';
-import logoCalendario from "../../assets/navbar-center/logo-calendario.png"
+import logoCalendario from "../../assets/navbar-center/logo-calendario.png";
 
 function NavCenter() {
   const [menuDisplay, setMenuDisplay] = useState(false);
@@ -9,13 +9,16 @@ function NavCenter() {
   return (
     <div className={styles['source-contenedor-barra-nav']}>
       <div className={styles['source-contenedor-barra-nav-interno']}>
-        {/* Logo + Nombre */}
-        <Link to="/" className={styles['source-contenedor-nav-bar-izquierdo']}>
-          <img src={logoCalendario} alt="logoCalendario" className={styles['img-logo-calendario']} />
-          <p className={styles['source-contenedor-nav-bar-izquierdo-texto']}>CitaYa</p>
-        </Link>
+        
+        {/* Left: Logo */}
+        <div className={styles['navbar-left']}>
+          <Link to="/" className={styles['source-contenedor-nav-bar-izquierdo']}>
+            <img src={logoCalendario} alt="logoCalendario" className={styles['img-logo-calendario']} />
+            <p className={styles['source-contenedor-nav-bar-izquierdo-texto']}>CitaYa</p>
+          </Link>
+        </div>
 
-        {/* Enlaces normales (solo en escritorio) */}
+        {/* Center: Links (desktop only) */}
         <div className={styles['source-contenedor-nav-bar-centro']}>
           <Link to="/services" className={styles['source-contenedor-nav-bar-centro-texto']}>
             Servicios
@@ -26,31 +29,29 @@ function NavCenter() {
           <Link to="/contact" className={styles['source-contenedor-nav-bar-centro-texto']}>
             Contáctanos
           </Link>
-          
         </div>
 
-        <div className={styles['contenedor-botones-login-register']}>
-            <Link to="/login" className={styles['source-boton-login']}>
-            <i className={styles["fa-solid fa-arrow-right-to-bracket"]}></i> Iniciar sesión
+        {/* Right: Buttons + Hamburger */}
+        <div className={styles['navbar-right']}>
+          <Link to="/login" className={styles['source-boton-login']}>
+            <i className="fa-solid fa-arrow-right-to-bracket"></i> Iniciar sesión
           </Link>
           <Link to="/register" className={styles['source-boton-register']}>
-              <i className={styles["fa-solid fa-user-plus"]}></i> Registrate
+            <i className="fa-solid fa-user-plus"></i> Registrate
           </Link>
-        </div>
-        
 
-        {/* Botón hamburguesa (solo en móvil) */}
-        <div
-          className={styles['source-boton-menu-desplegable']}
-          onClick={() => setMenuDisplay(!menuDisplay)}
+          {/* Hamburger menu for mobile */}
+          <div
+            className={styles['source-boton-menu-desplegable']}
+            onClick={() => setMenuDisplay(!menuDisplay)}
           >
-          <i className={styles["fa-solid fa-bars"]}></i>
+            <i className="fa-solid fa-bars"></i>
+          </div>
         </div>
 
       </div>
 
-
-      {/* Menú desplegable (solo en móvil) */}
+      {/* Mobile dropdown menu */}
       {menuDisplay && (
         <div className={styles['source-menu-movil']}>
           <Link to="/services">Servicios</Link>

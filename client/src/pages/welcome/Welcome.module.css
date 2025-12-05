@@ -9,23 +9,6 @@
 .source-bloque1 {
   width: 100%;
   padding-bottom: 3rem;
-  
-}
-
-.source-boton-menu-desplegable {
-  background-color: none;
-  height: 30px;
-  width: 30px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.source-boton-menu-desplegable i {
-  color: #000000;
-  font-size: 1.5rem;
-  display: flex;
-  justify-content: center;
-  border-radius: 30px;
-  margin-top: 3px;
 }
 
 .source-contenedor-de-bienvenido {
@@ -43,13 +26,6 @@
   transition: background-color 0.3s ease;
 }
 
-.source-texto-de-bienvenido {
-  display: flex;
-  flex-direction: column;
-  font-size: 4rem;
-  color: rgb(255, 255, 255);
-}
-
 .source-texto-descripcion-de-bienvenido {
   margin-bottom: 3rem;
   font-size: 2rem;
@@ -58,56 +34,6 @@
   background-color: rgba(0, 0, 0, 0.15);
   padding: 15px;
   border-radius: 15px;
-}
-
-.contenedor-botones {
-  align-items: center;
-  text-align: center;
-}
-
-.source-boton-de-inicio-de-sesion,
-.source-boton-de-crear-cuenta {
-  color: #ffffff;
-  background-color: var(--gray-color);
-  font-size: 1.5em;
-  border: none;
-  border-radius: 3px;
-  padding: 0.4em 0.6em;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  z-index: 0;
-}
-
-.source-boton-de-inicio-de-sesion::before,
-.source-boton-de-crear-cuenta::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 100%;
-  border-radius: 3px;
-  z-index: -1;
-  transition: width .4s ease;
-}
-
-.source-boton-de-inicio-de-sesion::before {
-  background-color: var(--dark-primary);
-}
-.source-boton-de-crear-cuenta::before {
-  background-color: var(--dark-secondary);
-}
-
-.source-boton-de-inicio-de-sesion:hover::before,
-.source-boton-de-crear-cuenta:hover::before {
-  width: 100%;
-}
-
-.source-texto-de-cuenta-nueva {
-  color: #ffffff;
-  font-size: 1.2em;
-  font-weight: 500;
 }
 
 .source-bloque2 {
@@ -169,7 +95,6 @@
   border-radius: 1.25rem;
   display: block;
   margin: 0 auto 1rem auto;
-
 }
 
 /* 📱 Responsive adjustments */
@@ -189,9 +114,12 @@
     margin-top: 4rem;
   }
 
+  .source-bloque2 {
+    top: 1.5rem;
+  }
+
   .source-slideshow {
     flex-direction: column;
-    margin-top: 30rem;
     gap: 1.5rem;
   }
 
@@ -203,15 +131,6 @@
 }
 
 @media (max-width: 480px) {
-  .source-texto-de-bienvenido {
-    font-size: 1.6em;
-  }
-
-  .source-boton-de-inicio-de-sesion,
-  .source-boton-de-crear-cuenta {
-    font-size: 1em;
-  }
-
   .source-contenedor-de-bienvenido {
     width: 100%;
   }
