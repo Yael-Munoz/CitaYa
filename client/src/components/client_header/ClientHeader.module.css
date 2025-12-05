@@ -20,6 +20,24 @@
   color: black;
 }
 
+.logo-date{
+  display: flex;
+  flex-direction: column;
+}
+
+.header-logo{
+  background-color: transparent;
+  width: 6rem;
+  height: auto;
+}
+
+.date{
+  font-size: 12px;
+  margin-left:5rem;
+}
+
+
+
 .header-menu {
   background-color: none;
   width: 2.5rem;
@@ -29,7 +47,7 @@
   align-items: center;
   font-size: 1.5rem;
   cursor: pointer;
-  color: white;
+  color: rgb(255, 255, 255);
   border-radius: 0.3rem;
 }
 
@@ -39,8 +57,8 @@
   right: -100%;
   width: 75%;
   height: 100vh;
-  background-color: #5e5e5e;
-  color: white;
+  background-color: var(--dark-primary);
+  color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,7 +66,6 @@
   gap: 1.5rem;
   transition: right 0.3s ease-in-out;
   z-index: 999;
-  border: 1px solid black;
   box-shadow: 3px 3px black;
 }
 
@@ -88,11 +105,12 @@
   text-align: center;
 }
 
+.menu-des-texto{
+  color: rgb(255, 255, 255);
+}
+
 
 @media (max-width: 450px) {
-  .header-contenedor {
-    width: 100%;
-  }
 
   .header-texto {
     display: none;
@@ -102,6 +120,30 @@
     display: flex; /* mostrar el botón solo en móvil */
   }
 
+  .logo-date{
+    display: block;
+  }
 
+  .date{
+    margin-left: auto;
+  }
 
+}
+
+@media (max-width: 800px){
+    .header-texto {
+    display: none;
+  }
+
+  .header-menu {
+    display: flex; /* mostrar el botón solo en móvil */
+  }
+
+  .logo-date{
+    display: block;
+  }
+
+  .date{
+    margin-left: auto;
+  }
 }
