@@ -55,6 +55,7 @@ function Register() {
 
     const handleSubmitClient = (e) => {
         e.preventDefault();
+        setIsLoading(true);
 
 
         setErrors(['', '', '', '', '', '']);
@@ -74,10 +75,12 @@ function Register() {
 
         if(!username || username.length < 3 || username.length > 16) {
             setErrorAtIndex(0, 'El usuario es obligatorio y tiene que ser de 3 a 16 caracteres');
+            setIsLoading(false);
             return;
         }
         if( !password || !confirmPassword || password !== confirmPassword) {
             setErrorAtIndex(1, "Las contraseñas son obligatorias y deben coincidir");
+            setIsLoading(false);
             return;
         }
         
@@ -90,21 +93,23 @@ function Register() {
         .then(res => {
             if(!res.ok) {
                 return res.json().then(data => {
+                    setIsLoading(false);
                     throw data;
                 });
             }
             else{
+                setIsLoading(false);
                 return res.json();
             }
         })
         .then(data => {
             //console.log('Server response: ', data);
-            setIsLoading(true);
             navigate('/');
         })
         
         .catch(error => {
             //console.log(error);
+            setIsLoading(false);
             setErrors(['Usuario ya existe!']);
         });
 
@@ -112,6 +117,7 @@ function Register() {
 
     const handleSubmitPro = (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
 
     setErrors(['', '', '', '', '', '']);
@@ -129,26 +135,31 @@ function Register() {
 
     if (!name || name.length < 3 || name.length > 25) {
         setErrorAtIndex(0, 'El nombre debe tener entre 3 y 25 caracteres');
+        setIsLoading(false);
         return;
     }
 
     if (!parsedPhone || parsedPhone.length < 12 || parsedPhone.length > 13) {
         setErrorAtIndex(1, 'Ingrese un número telefónico válido');
+        setIsLoading(false);
         return;
     }
 
     if (!email || !emailRegex.test(email)) {
         setErrorAtIndex(2, 'Ingrese un correo válido');
+        setIsLoading(false);
         return;
     }
 
     if (!username || username.length < 3 || username.length > 16) {
         setErrorAtIndex(3, 'El usuario debe tener entre 3 y 16 caracteres');
+        setIsLoading(false);
         return;
     }
 
     if (!password || !confirmPassword || password !== confirmPassword) {
         setErrorAtIndex(4, 'Las contraseñas deben coincidir');
+        setIsLoading(false);
         return;
     }
 
@@ -169,19 +180,21 @@ function Register() {
     })
         .then((res) => {
         if (!res.ok) {
+            setIsLoading(false);
             return res.json().then((data) => {
             throw data; 
             });
         } else {
+            setIsLoading(false);
             return res.json();
         }
         })
         .then((data) => {
         //console.log('Server response:', data);
-        //////////////////////////////////////////////////////////////////////////////////////////////////////
         navigate('/');        
         })
         .catch((error) => {
+            setIsLoading(false);
             console.log(ProData);
         console.error('Error:', error);
         if(error.message.includes('Username already exists')){
