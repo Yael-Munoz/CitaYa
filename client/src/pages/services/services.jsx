@@ -47,14 +47,14 @@ function Services() {
             <h3>Dentistas</h3>
             <p>Odontología preventiva, estética y tratamientos especializados.</p>
           </div>
-          <div className={styles['servicio-card-barbero']} data-aos="fade-up" data-aos-delay="200">
+          <div className={styles['servicio-card-barbero']}>
             <div className={styles['img-wrapper-barbero']}>
               <img src={barbero} alt="barbero" className={styles['servicio-img']} />
             </div>
             <h3>Barberos</h3>
             <p>Estilo personalizado, cortes modernos y cuidado de la barba.</p>
           </div>
-          <div className={styles['servicio-card-nutriologo']} data-aos="fade-up" data-aos-delay="300">
+          <div className={styles['servicio-card-nutriologo']}>
             <div className={styles['img-wrapper-nutriologo']}>
               <img src={nutriologo} alt="nutriologo" className={styles['servicio-img']} />
             </div>
@@ -63,7 +63,7 @@ function Services() {
           </div>
         </section>
 
-        <section className ={styles['cta-cli']} data-aos="fade-down" data-aos-delay="400">
+        <section className ={styles['cta-cli']}>
           <div className={styles['img-wrapper-cli']}>
             <img src={cli} alt="cli" className={styles['servicio-img-cli']} />
           </div>
@@ -76,7 +76,7 @@ function Services() {
           </div>
         </section>
 
-        <section className={styles['cta-pro']} data-aos="fade-down" data-aos-delay="100">
+        <section className={styles['cta-pro']}>
           <div className={styles['img-wrapper-pro']}>
             <img src={pro} alt="pro" className={styles['servicio-img-pro']} />
           </div>

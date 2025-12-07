@@ -31,7 +31,7 @@ function AboutUs() {
           </div>
 
 
-          <div className={styles['more-info-container']} data-aos="slide-left">         
+          <div className={styles['more-info-container']}>         
             <div className={styles['more-info-image']}>
               <img src ={check} alt="more-info"/>
             </div>
