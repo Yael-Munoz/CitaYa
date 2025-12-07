@@ -29,7 +29,7 @@ function Contact() {
 
                     </div>
 
-                    <div className={styles["contact-section"]}data-aos="fade-in" data-aos-delay="100">
+                    <div className={styles["contact-section"]}>
                         <h3>¿Tienes dudas o sugerencias?</h3>
                         <p>Escríbenos a <a href="mailto:soporte@tusitio.com">citaya@outlook.com</a> o envíanos un mensaje directo por WhatsApp.</p>
 
