@@ -1,6 +1,11 @@
 
 # CitaYa – MERN Scheduling Platform
 
+> ⚠️ **Important — Deployment Notice**
+>
+> This project is deployed on free tiers of **Vercel** (client) and **Render** (server).  
+> The backend may require a brief cold-start delay on first load.
+
 CitaYa is a full-stack MERN application that enables two types of users—**Cliente** and **Pro**—to coordinate appointments through role-specific dashboards and integrated calendars. Users register, log in, search each other by username, and create bookings in a secure, mobile-first environment.
 
 Authentication uses access/refresh JWTs stored in HTTP-only cookies. The backend enforces protected routes, bcrypt hashing, token verification, and environment-based configuration.
