@@ -5,6 +5,7 @@
 >
 > This project is deployed on free tiers of **Vercel** (client) and **Render** (server).  
 > The backend may require a brief cold-start delay on first load.
+> This project is also still a DEMO version.
 
 CitaYa is a full-stack MERN application that enables two types of users—**Cliente** and **Pro**—to coordinate appointments through role-specific dashboards and integrated calendars. Users register, log in, search each other by username, and create bookings in a secure, mobile-first environment.
 
