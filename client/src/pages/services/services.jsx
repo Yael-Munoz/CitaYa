@@ -15,10 +15,6 @@ import Footer from '../../components/footer/Footer.jsx'
 function Services() {
   const navigate = useNavigate();
 
-    useEffect(() => {
-    AOS.refresh();
-  }, []);
-
   return (
     <>
     <div className={styles['source-fondo']}>
@@ -33,14 +29,14 @@ function Services() {
         </section>
 
         <section className={styles['servicios-grid']}>
-          <div className={styles['servicio-card-doctor']} data-aos="fade-up">
+          <div className={styles['servicio-card-doctor']}>
             <div className={styles['img-wrapper-doctor']}>
               <img src={doctor} alt="doctor" className={styles['servicio-img']} />
             </div>
             <h3>Doctores</h3>
             <p>Consulta médica general, especialistas y seguimiento clínico.</p>
           </div>
-          <div className={styles['servicio-card-dentista']} data-aos="fade-up" data-aos-delay="100">
+          <div className={styles['servicio-card-dentista']}>
             <div className={styles['img-wrapper-dentista']}>
               <img src={dentista} alt="dentista" className={styles['servicio-img']} />
             </div>

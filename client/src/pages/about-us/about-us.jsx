@@ -16,7 +16,7 @@ function AboutUs() {
       <div className={styles['source-contenedor-de-pagina-completa']}>
         <NavCenter />
         <section className={styles['about-section']}>
-          <div className={styles ["about-us"]} data-aos="slide-right">
+          <div className={styles ["about-us"]}>
               <div className={styles ["about-text"]}>
                 <h1 className={styles['titulo']}>Sobre Nosotros</h1>
                 <p className={styles['descripcion']}>
