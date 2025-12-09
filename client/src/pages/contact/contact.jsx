@@ -14,7 +14,7 @@ function Contact() {
             <div className={styles["source-fondo"]}>
                 <div className={styles["contenedor-pagina-completa"]}>
                     <NavCenter />
-                    <div className={styles["hero-section"]} data-aos="fade-in">
+                    <div className={styles["hero-section"]}>
                         <div className={styles["hero-text"]}>
                             <h2>Ponte en contacto con nosotros</h2>
                             <p>Siempre trataremos de atenderte a la brevedad posible, abajo te dejamos nuestros medios
