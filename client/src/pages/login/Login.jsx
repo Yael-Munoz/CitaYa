@@ -8,7 +8,6 @@ import { API_BASE_URL } from '../../config/apiConfig';
 function Login(){
 
     const [showPassword, setShowPassword] = useState(false);
-    const [loading, setLoading] = useState(false); 
     const navigate = useNavigate();
 
     const usernameRef = useRef(null);
@@ -17,12 +16,14 @@ function Login(){
     const [errors, setErrors] = useState(['', '']);
 
     function setErrorAtIndex(index, message) {
-        setErrors(prev => {
-            const copy = [...prev];
-            copy[index] = message;
-            return copy;
-        })
+            setErrors(prev => {
+                const copy = [...prev];
+                copy[index] = message;
+                return copy;
+            })
     }
+
+
 
     function handleSubmitLogin(e) {
         e.preventDefault();
@@ -32,16 +33,16 @@ function Login(){
         const username = usernameRef.current.value;
         const password = passwordRef.current.value;
 
-        if(!username) {
+        //console.log(username, password);
+
+        if(!username || '') {
             setErrorAtIndex(0, 'El usuario es inexistente!');
             return;
         }
-        if(!password) {
+        if(!password || '') {
             setErrorAtIndex(1, 'Revisa la contraseña!');
             return;
         }
-
-        setLoading(true);
 
         const userData = {
             username,
@@ -57,6 +58,7 @@ function Login(){
         .then(async (res) => {
             const data = await res.json();
             if(!res.ok) {
+                //console.log('Login Failed: ', data);
                 if(data.message === 'User not found') {
                     setErrorAtIndex(0, 'No se encontro ningun usuario');
                     return;
@@ -65,21 +67,21 @@ function Login(){
                 return;
             }
             else {
+                //console.log('Login Successful', data);
                 navigate('/dashboard');
             }
         })
         .catch(error => {
-            console.error(error);
-        })
-        .finally(() => {
-            setLoading(false); 
+            //console.log(error);
         });
     }
 
+    
     return(
         <>
+
         <div className={styles['contenedor-de-hoja']}>
-            <Link to="/"><img src={Logo} className={styles['contenedor-hoja-logo']} alt="Logo"/></Link>
+            <Link to="/"><img src ={Logo} className={styles['contenedor-hoja-logo']} alt="Logo"/></Link>
             <h1 className={styles['titulo']}>Iniciar Sesión</h1>
             <div className={styles['contenedor-de-login-y-boton']}>
                 <div className={styles['contenedor-de-login']}>
@@ -92,7 +94,6 @@ function Login(){
                             ref={usernameRef} 
                             className={styles['input']} 
                             type='text' 
-                            disabled={loading}
                             placeholder='Ingrese el usuario que desea tener'/>
 
                         <label className={styles['label']}>Contraseña:</label>
@@ -102,7 +103,6 @@ function Login(){
                             ref={passwordRef}
                             className={styles['input']}
                             type={showPassword ? 'text' : 'password'}
-                            disabled={loading}
                             placeholder='Ingrese su contraseña'
                             id='password'
                         />
@@ -110,7 +110,6 @@ function Login(){
                             type='button'
                             className={styles['show-pass']}
                             onClick={() => setShowPassword(!showPassword)}
-                            disabled={loading}
                         >
                             <i className={`fa-solid ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
                         </button>
@@ -118,33 +117,23 @@ function Login(){
 
                     </form>
 
-                    <button 
-                        className={styles['submit-boton']} 
-                        type='submit' 
-                        form='iniciar-sesion-forma'
-                        disabled={loading}
-                    >
-                        {loading ? (
-                            <span className={styles['spinner']}></span>
-                        ) : (
-                            <>
-                                <i className="fa-solid fa-right-to-bracket"></i> Iniciar Sesion
-                            </>
-                        )}
-                    </button>
+                    <button className={styles['submit-boton']} type='submit' form='iniciar-sesion-forma'><i className="fa-solid fa-right-to-bracket"></i> Iniciar Sesion</button>
 
                     <div className="login-register">
                         <p className={styles['label']}>¿No tienes cuenta?</p>
-                        <button className={styles['register-button']} onClick={() => navigate('/register')} disabled={loading}>
-                            <i className="fa-solid fa-user-plus"></i> Crear cuenta
-                        </button>
+                        <button className={styles['register-button']} onClick={() => navigate('/register')}><i className="fa-solid fa-user-plus"></i> Crear cuenta</button>
                     </div>
                     
             </div>
             </div>
+            
+            
         </div>
+        
+        
+        
         </>
     );
 }
 
-export default Login;
+export default Login
